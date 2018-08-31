@@ -413,6 +413,17 @@ Take some time to install and familiarize yourself with all of the methods liste
 
 ### JavaScript Syntax
 
+#### Recommend Readings
+
+We will spend a month learning JavaScript, and there is no one best way to do it.
+The more you read and experiment the better.  The following chapters/pages give a good overview:
+
+* [Chapter 1. Basic JavaScript](http://speakingjs.com/es5/ch01.html) of [Speaking JS (ES5)](http://speakingjs.com/es5).
+* [MDN JavaScript Introduction Tutorial](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript#Functions)
+* [Chapter 1. Values, Types and Operators](https://eloquentjavascript.net/2nd_edition/01_values.html) and [Chapter 2. Program Structure](https://eloquentjavascript.net/2nd_edition/02_program_structure.html) of [Eloquent JavaScript (2nd Ed.)](https://eloquentjavascript.net/2nd_edition/).  NOTE: the [third edition](https://eloquentjavascript.net/) covers ES6, which you can also read if you like, but be aware that it uses more modern syntax.
+
+#### Important Ideas
+
 * Like C, JavaScript is Case-Sensitive: `customerCount` is not the same thing as `CustomerCount` or `customercount`
 * Name things using `camelCase` (first letter lowercase, subsequent words start with uppercase) vs. `snake_case`.
 * Semicolons are optional in JavaScript, but highly recommended.  We'll expect you to use them in this course, and using them will make working in C++, Java, CSS, etc. much easier, since you have to use them there.
@@ -471,7 +482,7 @@ console.log(seasonName, year);
     * [`Number`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript#Numbers) - a double-precision 64-bit floating point number.  Using `Number` you can work with both Integers and Floats.  There are also some special `Number` types, [`Infinity`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity) and [`NaN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN).
     * [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript#Strings) - a sequence of Unicode characters.  JavaScript supports both single (`'...'`) and double (`"..."`) quotes when defining a `String`.
     * `Boolean` - a value of `true` or `false`. We'll also see how JavaScript supports so-called *truthy* and *falsy* values that are not pure `Boolean`s.
-    * [`Object`], which includes [`Function`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript#Functions), [`Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array), [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date), and many more. - JavaScript supports object-oriented programming, and uses objects and functions as first-class members of the language.
+    * `Object`, which includes [`Function`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript#Functions), [`Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array), [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date), and many more. - JavaScript supports object-oriented programming, and uses objects and functions as first-class members of the language.
     * [`null`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null) - a value that means "this is intentionally nothing" vs. `undefined`
     * [`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined) - a special value that indicates a value has never been defined.
 
@@ -529,7 +540,7 @@ We could also have written it like this, using [`Math.PI`](https://developer.moz
 var radius = 4.2;                       // radius is a Number
 var area = Math.PI * radius * radius;   // calculate area from radius
 
-console.log("Area = " + area + "\n");   // print area to the console
+console.log("Area", area);              // print area to the console
 ```
 
 
