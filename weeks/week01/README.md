@@ -561,8 +561,8 @@ console.log("Area", area);              // print area to the console
 |`*=`     | Assignment with multiplication | `a *= 7` same as `a = a * 7`|
 |`/=`     | Assignment with division | `a /= 7` same as `a = a / 7`|
 |`&&`     | Logical `AND` | `if(x > 3 && x < 10)` both must be `true`|
-|`||`     | Logical `OR` | `if(x === 3 || x === 10)` only one must be `true`|
-|`|`      | Bitwise `OR` | `3.1345|0` gives `3` as an integer|
+|`\|\|`     | Logical `OR` | `if(x === 3 \|\| x === 10)` only one must be `true`|
+|`\|`      | Bitwise `OR` | `3.1345\|0` gives `3` as an integer|
 |`!`      | Logical `NOT` | `if(!(x === 2))` negates an expression |
 |`==`     | Equal | `1 == 1` but also `1 == "1"` due to type coercion|
 |`===`    | Strict Equal | `1 === 1` but  `1 === "1"` is not `true` due to types. Prefer `===`|
