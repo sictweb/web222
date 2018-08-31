@@ -26,7 +26,8 @@ transmit data between clients and servers.  The web is a subset of the Internet.
 
 The web isn't owned or controlled by any single company, organization, or government.
 Instead, it is defined as a set of [open standards](https://en.wikipedia.org/wiki/Web_standards),
-which everyone building and using the web relies upon.
+which everyone building and using the web relies upon.  Some examples of these
+standards include [HTML](https://html.spec.whatwg.org/multipage/), [HTTP](https://tools.ietf.org/html/rfc7230), [SVG](https://www.w3.org/TR/SVG11/), and many more.
 
 ### HTTP Requests and Responses
 
@@ -61,9 +62,9 @@ This includes things like spaces, non-ASCII characters, Unicode, etc.
 **NOTE*: we'll discuss this again later, but be aware that the Web Platform provides a number of APIs (i.e., functions) you can call from JavaScript to help construct, parse, encode/decode, and work with URLs:
 
 * [`URL()`](https://developer.mozilla.org/en-US/docs/Web/API/URL)
-* [`encodeURIComponent()`] - use on components (i.e., parts of) a URL vs. the whole thing (https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent)
+* [`encodeURIComponent()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent) 
 * [`decodeURIComponent()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent)
-* [`encodeURI()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI) - use on full URLs vs. portions thereof
+* [`encodeURI()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI)
 * [`decodeURI()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURI)
 
 ```js
@@ -310,7 +311,7 @@ The web allows users to access and run remote applications *without* needing to 
 
 The web works on *every* computing platform.  You can access and use the web on desktop and mobile computers, on TVs and smartwatches, on Windows and Mac, in e-Readers and video game consoles.  The web works everywhere, and learning how to develop software for the web extends your reach into all those platforms.
 
-### Front-End Web Development: HTML5, CSS, JavaScript
+### Front-End Web Development: HTML5, CSS, JavaScript, and friends
 
 When we talk about programming for the web in a browser, we often refer to this as
 *Front-End Web Development*.  This is in contrast to server-side, or *Back-End Development*.
@@ -337,3 +338,290 @@ or third-party technologies are also in play:
 The front-end web stack is also increasingly being used to build software outside
 the browser, both on desktop and mobile using things like [Electron](https://electronjs.org/) and [Progressive Web Apps (PWA)](https://developers.google.com/web/progressive-web-apps/).
 [Visual Studio Code](https://code.visualstudio.com/), for example, is written using web technologies and runs on Electron, which is one of the reasons it works across so many platforms.
+
+## Introduction to JavaScript
+
+The first front-end web technology we will learn is JavaScript.  JavaScript (often shortened to JS)
+is a lightweight, interpreted or JIT (i.e., Just In Time) compiled language mean to be
+embedded in host environments, for example, web browsers.
+
+JavaScript looks [similar to C/C++ or Java](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Introduction#JavaScript_and_the_ECMAScript_Specification#JavaScript_and_Java) in some of its syntax, but is quite different
+in philosophy.  For example, JavaScript is a dynamic scripting language supporting
+multiple programming styles, from object-oriented to imperative to functional.
+
+JavaScript is one of, if not the [most popular programming languages in the world](https://redmonk.com/sogrady/2018/08/10/language-rankings-6-18/), and has been for many years.
+Learning JavaScript well will be a tremendous asset to any software developer, since so
+much of the software we use is built using JS.
+
+> JavaScript's many versions: JavaScript is an evolving language, and you'll hear it [referred to by a number of names](https://medium.freecodecamp.org/whats-the-difference-between-javascript-and-ecmascript-cba48c73a2b5), including: ECMAScript (or ES), ES5, ES6, ES2015, ES2017, etc.  [ECMA is the European Computer Manufacturers Association, which is the standards body responsible for the JS language](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Introduction#JavaScript_and_the_ECMAScript_Specification). As the standard evolves, the specification goes through different versions, adding or changing features and syntax.  In this course we will primarily focus on ECMAScript 5 (ES5), which all browsers support.  We will also sometimes use newer features of the language from ECMAScript 6 (ES6), which most browsers support.  Language feature support across browsers is [maintained in this table](http://kangax.github.io/compat-table/es6/).
+
+### JavaScript Resources
+
+Throughout the coming weeks, we'll make use of a number of important online resources.
+They are listed here so you can make yourself aware of them, and begin to explore on your own.
+All programmers, no matter how experienced, have to return to these documents on
+a routine basis, so it's good to know about them.
+
+* [JavaScript on MDN](https://developer.mozilla.org/bm/docs/Web/JavaScript)
+    * [JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide)
+    * [JavaScript Reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference)
+* [Eloquent JavaScript](https://eloquentjavascript.net/)
+* [Speaking JavaScript (ES5)](http://speakingjs.com/es5/index.html)
+* [Exploring ES6](http://exploringjs.com/es6/index.html)
+
+### JavaScript Environments
+
+Unlike C, which is compiled to machine code, JavaScript is meant to be run within a host
+environment.  There are many possible environments, but we will focus on two:
+
+* Web Browsers, and their associated developer tools, primarily:
+    * [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/)
+    * [Firefox Developer Tools](https://developer.mozilla.org/en-US/docs/Tools)
+* [node.js](https://nodejs.org/), and its [command line REPL (Read-Eval-Print-Loop)](http://www.tutorialsteacher.com/nodejs/nodejs-console-repl)
+
+#### JavaScript Engines
+
+JavaScript is parsed, executed, and managed (i.e., memory, garbage collection, etc) by an [engine](https://en.wikipedia.org/wiki/JavaScript_engine) written in C/C++.
+There are a number of JavaScript engines available, the most common of which are:
+
+* [V8](https://developers.google.com/v8/), maintained an used by Google in Chrome and in node.js
+* [SpiderMonkey](https://developer.mozilla.org/en-US/docs/Mozilla/Projects/SpiderMonkey), maintained and used by Mozilla in Firefox
+* [ChakraCore](https://github.com/microsoft/chakracore), maintained and used by Microsoft in Edge
+* [JavaScriptCore](https://trac.webkit.org/wiki/JavaScriptCore), maintained and used by Apple in Safari
+
+These engines, much like car engines, are meant to be used within a larger context.  We will
+encounter them indirectly via web browsers and in node.js.
+
+It's not important to understand a lot about each of these engines at this point,
+other than to be aware that each has its own implementation of the ECMAScript standards, its own performance characteristics (i.e., some are faster at certain things), as well as its own set of bugs.  
+
+#### Running JavaScript Programs
+
+JavaScript statements can be stored in an external file with a `.js` file extension,
+or embedded within HTML code via the HTML `<script>` element.  As a developer, you also
+have a number of options for writing and executing JavaScript statements or files:
+
+1. From the command line via [node.js](https://nodejs.org/en/).  You'll learn more about node.js in subsequent courses, but we'll also use it sometimes in this course to quickly try test JavaScript expressions, and to run JavaScript programs outside the browser.
+
+2. Using [Firefox's Developer Tools](https://developer.mozilla.org/en-US/docs/Tools), and in particular the [Web Console](https://developer.mozilla.org/en-US/docs/Tools/Web_Console), [JavaScript Debugger](https://developer.mozilla.org/en-US/docs/Tools/Debugger), and [Scratchpad](https://developer.mozilla.org/en-US/docs/Tools/Scratchpad).
+
+3. Using [Chrome's DevTools](https://developers.google.com/web/tools/chrome-devtools/), and in particular the [Console](https://developers.google.com/web/tools/chrome-devtools/console/get-started) and [Sources Debugger](https://developers.google.com/web/tools/chrome-devtools/javascript/)
+
+4. Finally, we'll eventually write JavaScript that connects with HTML and CSS to create dynamic web pages and applications.
+
+Take some time to install and familiarize yourself with all of the methods listed above.
+
+### JavaScript Syntax
+
+* Like C, JavaScript is Case-Sensitive: `customerCount` is not the same thing as `CustomerCount` or `customercount`
+* Name things using `camelCase` (first letter lowercase, subsequent words start with uppercase) vs. `snake_case`.
+* Semicolons are optional in JavaScript, but highly recommended.  We'll expect you to use them in this course, and using them will make working in C++, Java, CSS, etc. much easier, since you have to use them there.
+
+* Comments work like C/C++, and can be single or multi-line
+
+```js
+// This is a single line comment. NOTE: the space between the // and first letter.
+
+/*
+ This is a multi-line comment,
+ and can be as long as you need.
+ */
+```
+
+* Whitespace: JavaScript will mostly ignore whitespace (spaces, tabs, newlines).  In this course we will expect you to use good indentation practices, and for your code to be clean and readable. 
+
+```js
+// This is poorly indented, and needs more whitespace
+function add(a,b ){
+if(!b){
+        return a;
+}else {
+return a+b;        
+}}
+
+// This is much more readable due to the use of whitespace
+function add(a, b) {
+    if(!b) {
+        return a; 
+    } else {
+        return a + b;
+    }
+}
+```
+
+* JavaScript statements: a JavaScript program typically consists of a series of statements. A statement is a single-line of instruction made up of objects, expressions, variables, and events/event handlers.
+* Block statement: a block statement, or compound statement, is a group of statements that are treated as a single entity and are grouped within curly brackets `{...}`. Opening and closing braces need to work in pairs. For example, if you use the left brace `{` to indicate the start of a block, then you must use the right brace `}` to end it. The same matching pairs applies to single `'......'` and double `"......."` quotes to designate text strings.
+
+* Variables are declared using the [`var` keyword](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var).  You must use the `var` keyword to precede a variable name, but you do not need to provide a type, since the initial value will set the type.
+
+> JavaScript version note: newer versions of JavaScript also support the [`let` and `const` keywords](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript#Functions#Variables) for variable declaration.  We will primarily use `var` in this course, but slowly start to add `let` and `const` as you become more familiar with the language.
+
+```js
+var year;
+var seasonName = "Summer";
+
+// Referring to and using syntax:
+year = 2018;
+console.log(seasonName, year);
+```
+
+* JavaScript Variables: variables must start with a letter (`a-zA-z`), underscore (`_`), or dollar sign (`$`).  They cannot be a [reserved (key) word](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords). Subsequent characters can be letters, numbers, underscores.
+
+* Data Types: JavaScript is a typeless language--you don't need to specify a type for your data (it will be inferred at runtime).  However, internally, the [following data types are used](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript#Overview):
+    * [`Number`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript#Numbers) - a double-precision 64-bit floating point number.  Using `Number` you can work with both Integers and Floats.  There are also some special `Number` types, [`Infinity`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity) and [`NaN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN).
+    * [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript#Strings) - a sequence of Unicode characters.  JavaScript supports both single (`'...'`) and double (`"..."`) quotes when defining a `String`.
+    * `Boolean` - a value of `true` or `false`. We'll also see how JavaScript supports so-called *truthy* and *falsy* values that are not pure `Boolean`s.
+    * [`Object`], which includes [`Function`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript#Functions), [`Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array), [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date), and many more. - JavaScript supports object-oriented programming, and uses objects and functions as first-class members of the language.
+    * [`null`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null) - a value that means "this is intentionally nothing" vs. `undefined`
+    * [`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined) - a special value that indicates a value has never been defined.
+
+|Declaration|Type|Value|
+|-----------|----|-----|
+|`var s1 = "some text";` |`String`|`"some text"`|
+|`var s2 = 'some text';` |`String`|`"some text"` |
+|`var s3 = '172';`       |`String`|`"172"`|
+|`var s4 = '172' + 4;`   |`String`|`"1724"` (concatenation vs. addition)|
+|`var n1 = 172;`         |`Number`|`172` (integer)|
+|`var n2 = 172.45;`      |`Number`|`172.45` (double-precision float)|
+|`var b1 = true;`        |`Boolean`| `true` |
+|`var b2 = false;`       |`Boolean`| `false`|
+|`var b3 = !b2;`         |`Boolean`| `true` |
+|`var c;`                |`undefined`| `undefined`|
+|`var d = null;`         |`null`|`null`|
+
+Consider a simple program from your C course, and how it would look in JavaScript
+
+```c
+ // Area of a Circle, based on https://scs.senecac.on.ca/~btp100/pages/content/input.html
+ // area.c
+
+ #include <stdio.h>               // for printf
+
+ int main(void)
+ {
+    const float pi = 3.14159f;   // pi is a constant float 
+    float radius = 4.2;          // radius is a float
+    float area;                  // area is a float
+
+    area = pi * radius * radius; // calculate area from radius
+
+    printf("Area = %f\n", area); // copy area to standard output
+
+    return 0;
+}
+```
+
+Now the same program in JavaScript:
+
+```js
+var pi = 3.14159;              // pi is a Number 
+var radius = 4.2;              // radius is a Number
+var area;                      // area is (currently) undefined
+
+area = pi * radius * radius;   // calculate area from radius
+
+console.log("Area = " + area + "\n");   // print area to the console
+```
+
+We could also have written it like this, using [`Math.PI`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/PI), which we'll learn about later:
+
+```js
+var radius = 4.2;                       // radius is a Number
+var area = Math.PI * radius * radius;   // calculate area from radius
+
+console.log("Area = " + area + "\n");   // print area to the console
+```
+
+
+Declaration syntax:
+Dynamic typing
+a JavaScript variable can have a different type in different parts of a program 
+Variables Example
+Special values
+Infinity
+Number data type
+e.g. console.log(12/0);
+NaN
+means "Not a Number"; Number data type
+null
+both a value and a data type
+undefined
+both a value and a data type
+e.g.  var x; 
+          console.log(x); 
+Expressions
+An expression is any valid set of literals, variables, operators, and expressions that evaluates to a single value. 
+The value may be a number, a string, or a logical value. 
+Two types of expressions:
+those that assign a value to a variable, e.g. x = 7 . 
+those that simply have a value, e.g., 3 + 4 simply evaluates to 7; it does not perform an assignment. 
+JavaScript has the following kinds of expressions:
+Arithmetic - evaluates to a number 
+String - evaluates to a character string 
+Logical - evaluates to true or false 
+Expressions - Ternary Operator
+A conditional expression can have one of two values based on a condition. The syntax:
+
+If the condition is true, the expression has the value of val1, Otherwise it has the value of val2.
+Arithmetic Operators
+Arithmetic Operators - Assigning Values
+Logical Operators
+Comparison Operators
+Other Operators
+The typeof operator (for variable or values):
+ possible return values:
+typeof "John"                         // Returns string 
+typeof 3.14                            // Returns number
+typeof false                           // Returns boolean
+typeof [1,2,3,4]                     // Returns object
+typeof {name:'John', age:34}  // Returns object
+
+The instanceof operator
+Used for objects
+Strings and Quotation Marks
+Literal strings can be denoted by either single or double quotes, which gives you some flexibility about how to handle awkward situations such as quotation marks inside a string:
+Concatenation of Strings
+The main operation on strings is the concatenation operator, +:
+Adding Strings and Numbers
+x =5+5;                console.log(x); // Output: 10 
+x="5"+"5"; console.log(x); // Output: 55 
+x=5+"5"; console.log(x); // Output: 55 
+x="5"+5; console.log(x); // Output: 55
+Example - Evaluating Expressions
+Programming Constructs
+JavaScript execution flow is determined using the following four (4) basic control structures:
+Sequential:  an instruction is executed when the previous one is finished.
+Conditional a logical condition is used to determine which instruction will be executed next - similar to the "if" and "switch" statements in C.
+Looping a series of instructions are repeatedly executed until some condition is satisfied - similar to the "for" and "while" statements in C.
+Transfer jump to a different part of the code - similar to calling a function in C.
+Construct (1) - Sequence
+Tasks are executed one after another in “sequence” – e.g.
+var a = 3;
+var b = 6;
+var c = a + b;
+
+console.log(c);
+Construct (2) - Selection
+Make decisions and perform single or multiple tasks based on the outcome of the decision (true or false).
+Types of conditional statements :
+if 
+if / else 
+switch / case 
+if-else Example 
+Switch-case Example 
+Construct (3) - Iteration
+Loop - an action that occurs again and again until a certain condition is met.
+Continuously check a condition and based on the outcome, either terminate the loop or repeat a set of statements. 
+Three basic types of loop structures:
+The for loop 
+The for / in loop
+The while loop 
+The do-while loop 
+for loop Example
+for in loop Example
+Iterates over the enumerable properties of an object, in arbitrary order. For each distinct property, statements can be executed.
+while & do…while loop Examples
+break and continue Statements
+break: breaks the loop and continue executing the code that follows after the loop (if any). 
+Thank you!
+ 
