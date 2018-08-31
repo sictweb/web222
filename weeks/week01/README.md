@@ -543,6 +543,39 @@ var area = Math.PI * radius * radius;   // calculate area from radius
 console.log("Area", area);              // print area to the console
 ```
 
+* Common [JavaScript Operators](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators) (there are more, but these are a good start):
+
+|Operator | Operation | Example |
+|---------|-----------|----------|
+|`+`      | Addition of `Number`s| `3 + 4` |
+|`+`      | Concatenation of `String`s| `"Hello " + "World"`|
+|`-`      | Subtraction of `Number`s| `x - y`|
+|`*`      | Multiplication of `Number`s| `3 * n`|
+|`/`      | Division of `Number`s| `2 / 4`|
+|`%`      | Modulo | `7 % 3` (gives 1 remainder)|
+|`++`     | Post/Pre Increment| `x++`, `++x`|
+|`--`     | Post/Pre Decrement| `x--`, `--x`| 
+|`=`      | Assignment | `a = b`|
+|`+=`     | Assignment with addition | `a += 7` same as `a = a + 7`. Can be used with `String`s too|
+|`-=`     | Assignment with subtraction | `a -= 7` same as `a = a - 7`|
+|`*=`     | Assignment with multiplication | `a *= 7` same as `a = a * 7`|
+|`/=`     | Assignment with division | `a /= 7` same as `a = a / 7`|
+|`&&`     | Logical `AND` | `if(x > 3 && x < 10)` both must be `true`|
+|`||`     | Logical `OR` | `if(x === 3 || x === 10)` only one must be `true`|
+|`|`      | Bitwise `OR` | `3.1345|0` gives `3` as an integer|
+|`!`      | Logical `NOT` | `if(!(x === 2))` negates an expression |
+|`==`     | Equal | `1 == 1` but also `1 == "1"` due to type coercion|
+|`===`    | Strict Equal | `1 === 1` but  `1 === "1"` is not `true` due to types. Prefer `===`|
+|`!=`     | Not Equal | `1 != 2`, with type coercion|
+|`!==`    | Strict Not Equal | `1 !== "1"`. Prefer `!==`|
+|`>`      | Greater Than | `7 > 3` |
+|`>=`     | Greater Than Or Equal | `7 >=7` and `7 >= 3`|
+|`<`      | Less Than | `3 < 10`|
+|`<=`     | Less Than Or Equal | `3 < 10` and `3 <=3` |
+|`typeof` | Type Of | `typeof "Hello"` gives `'string'`, `typeof 6` gives `'number'`|
+| `cond ? a : b` | Ternary | `status = (age >= 18) ? 'adult' : 'minor';` |
+
+
 
 Declaration syntax:
 Dynamic typing
@@ -574,20 +607,7 @@ Expressions - Ternary Operator
 A conditional expression can have one of two values based on a condition. The syntax:
 
 If the condition is true, the expression has the value of val1, Otherwise it has the value of val2.
-Arithmetic Operators
-Arithmetic Operators - Assigning Values
-Logical Operators
-Comparison Operators
-Other Operators
-The typeof operator (for variable or values):
- possible return values:
-typeof "John"                         // Returns string 
-typeof 3.14                            // Returns number
-typeof false                           // Returns boolean
-typeof [1,2,3,4]                     // Returns object
-typeof {name:'John', age:34}  // Returns object
 
-The instanceof operator
 Used for objects
 Strings and Quotation Marks
 Literal strings can be denoted by either single or double quotes, which gives you some flexibility about how to handle awkward situations such as quotation marks inside a string:
