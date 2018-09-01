@@ -2,6 +2,18 @@
 
 ## Internet Architecture
 
+### Preface
+
+The web is the most ubiquitous computing platform in the world.  As a developer, learning the web
+takes time.  There are hundreds of languages, libraries, frameworks, and tools to be learned, some old, some built yesterday, and all being mixed together at once.
+
+The fundamental unit of the web is the hyperlink--the web is interconnected. These weekly
+notes provide numerous links to external resources, books, blogs, and sample code.  To get
+good at the web, you need to be curious and you need to go exploring, you need to try things.
+
+Make sure you follow the links below as you read, and begin to create your own web of knowledge
+and experience.  No one resource can begin to cover the breadth and depth of web development.
+
 ### Overview
 
 * [How does the Internet work?](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/How_does_the_Internet_work)
@@ -20,7 +32,11 @@ The web runs on-top of TCP/IP networks using a number of communication protocols
 There are many more as well (SMTP, FTP, POP, IMAP, SSH, etc).
 
 We often use the terms "Web" and "Internet" interchangeably, however, they aren't
-the same.  The *World Wide Web* (WWW) runs on top of the Internet using HTTP, and
+the same.
+
+![Tim Berners-Lee (left) invented the web, and Vint Cert (right) invented the internet](https://pbs.twimg.com/media/Dl8QP8WU4AIk6ap.jpg)
+
+The *World Wide Web* (WWW) runs on top of the Internet using HTTP, and
 allows us to access web services, request resources (i.e., pages, images), and
 transmit data between clients and servers.  The web is a subset of the Internet.
 
