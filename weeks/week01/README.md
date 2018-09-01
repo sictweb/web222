@@ -1,18 +1,18 @@
 # WEB222 - Week 1
 
-## Internet Architecture
-
-### Preface
+## Preface
 
 The web is the most ubiquitous computing platform in the world.  As a developer, learning the web
 takes time.  There are hundreds of languages, libraries, frameworks, and tools to be learned, some old, some built yesterday, and all being mixed together at once.
 
-The fundamental unit of the web is the hyperlink--the web is interconnected. These weekly
+The fundamental unit of the web is the [hyperlink](https://en.wikipedia.org/wiki/Hyperlink)--the web is interconnected. These weekly
 notes provide numerous links to external resources, books, blogs, and sample code.  To get
 good at the web, you need to be curious and you need to go exploring, you need to try things.
 
 Make sure you follow the links below as you read, and begin to create your own web of knowledge
 and experience.  No one resource can begin to cover the breadth and depth of web development.
+
+## Internet Architecture
 
 ### Overview
 
@@ -75,7 +75,7 @@ the resource.  In the URL given above we have:
 URLs can only contain a limited set of characters, and anything outside that set has to be *encoded*.
 This includes things like spaces, non-ASCII characters, Unicode, etc.
 
-**NOTE*: we'll discuss this again later, but be aware that the Web Platform provides a number of APIs (i.e., functions) you can call from JavaScript to help construct, parse, encode/decode, and work with URLs:
+*NOTE*: we'll discuss this again later, but be aware that the Web Platform provides a number of APIs (i.e., functions) you can call from JavaScript to help construct, parse, encode/decode, and work with URLs:
 
 * [`URL()`](https://developer.mozilla.org/en-US/docs/Web/API/URL)
 * [`encodeURIComponent()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent) 
@@ -498,7 +498,7 @@ console.log(seasonName, year);
 
 * JavaScript Variables: variables must start with a letter (`a-zA-z`), underscore (`_`), or dollar sign (`$`).  They cannot be a [reserved (key) word](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords). Subsequent characters can be letters, numbers, underscores.
 
-* NOTE: If you forget to use the `var` keyword, JavaScript will still allow you to use a variable, and simply create a *global variable*.  We often refer to this as "leaking a global," and it should always be avoided:
+*NOTE*: If you forget to use the `var` keyword, JavaScript will still allow you to use a variable, and simply create a *global variable*.  We often refer to this as "leaking a global," and it should always be avoided:
 
 ```js
 var a = 6;      // GOOD: a is declared with var
@@ -637,7 +637,7 @@ var d = f();                          // f() evaluates to 10/2, or the Number 5
 * JavaScript execution flow is determined using the following four (4) basic control structures:
     * Sequential: an instruction is executed when the previous one is finished.
     * Conditional: a logical condition is used to [determine which instruction will be executed next](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/conditionals) - similar to the `if` and `switch` statements in C (which JavaScript also has).
-    * Looping: a series of [instructions are repeatedly executed](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Looping_code) until some condition is satisfied - similar to the `for` and `while` statements in C (which JavaScript also has).  There are many different types of loops in JavaScript: for example [`for` loops](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Looping_code#The_standard_for_loop) and [`while` loops], as well as ways to [`break`](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Looping_code#Exiting_loops_with_break) out of loops or skip iterations with [`continue`](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Looping_code#Skipping_iterations_with_continue)(https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Looping_code#while_and_do_..._while).  We'll cover other types as we learn about `Object` and `Array`.
+    * Looping: a series of [instructions are repeatedly executed](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Looping_code) until some condition is satisfied - similar to the `for` and `while` statements in C (which JavaScript also has).  There are many different types of loops in JavaScript: for example [`for` loops](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Looping_code#The_standard_for_loop) and [`while` loops](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Looping_code#while_and_do_..._while), as well as ways to [`break`](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Looping_code#Exiting_loops_with_break) out of loops or skip iterations with [`continue`](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Looping_code#Skipping_iterations_with_continue).  We'll cover other types as we learn about `Object` and `Array`.
     * Transfer: [jump to, or invoke](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Functions) a different part of the code - similar to calling a function in C.
 
 ```js
