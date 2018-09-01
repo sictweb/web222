@@ -185,7 +185,7 @@ In the response above, we see a number of interesting things:
 * `200 OK` - tells us that the requested resource was successful located and returned.
 * Info about the `Date`, when the response `Expires`, whether to cache it (`Cache-Control`) on the client
 * The `Content-Language` is English, and the `Content-Type` is `text`, and more specifically, `html` (a web page) using [UTF8 text encoding](https://en.wikipedia.org/wiki/UTF-8).
-* That the `Server` is running Apache, OpenSSL and PHP, as well as the versions being used
+* That the web `Server` is running [Apache](https://httpd.apache.org/), [OpenSSL](https://www.openssl.org/), and [PHP](http://php.net/), as well as the versions being used
 * Finally some non-standard `X-...` style headers are included, which are extra, user-defined bits of data, for example, that Drupal version 7 was used to create the document.
 
 After these headers we have a blank line, followed by the body of our response: the actual HTML document.
@@ -346,8 +346,8 @@ is a lightweight, interpreted or JIT (i.e., Just In Time) compiled language mean
 embedded in host environments, for example, web browsers.
 
 JavaScript looks [similar to C/C++ or Java](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Introduction#JavaScript_and_the_ECMAScript_Specification#JavaScript_and_Java) in some of its syntax, but is quite different
-in philosophy.  For example, JavaScript is a dynamic scripting language supporting
-multiple programming styles, from object-oriented to imperative to functional.
+in philosophy; it is more closely related to [Scheme](https://en.wikipedia.org/wiki/Scheme_(programming_language)) than C. For example, JavaScript is a dynamic scripting language supporting
+multiple programming styles, from [object-oriented](https://en.wikipedia.org/wiki/Object-oriented_programming) to [imperative](https://en.wikipedia.org/wiki/Imperative_programming) to [functional](https://en.wikipedia.org/wiki/Functional_programming).
 
 JavaScript is one of, if not the [most popular programming languages in the world](https://redmonk.com/sogrady/2018/08/10/language-rankings-6-18/), and has been for many years.
 Learning JavaScript well will be a tremendous asset to any software developer, since so
@@ -372,12 +372,14 @@ a routine basis, so it's good to know about them.
 ### JavaScript Environments
 
 Unlike C, which is compiled to machine code, JavaScript is meant to be run within a host
-environment.  There are many possible environments, but we will focus on two:
+environment.  There are many possible environments, but we will focus on the following:
 
 * Web Browsers, and their associated developer tools, primarily:
     * [Chrome DevTools](https://developers.google.com/web/tools/chrome-devtools/)
     * [Firefox Developer Tools](https://developer.mozilla.org/en-US/docs/Tools)
 * [node.js](https://nodejs.org/), and its [command line REPL (Read-Eval-Print-Loop)](http://www.tutorialsteacher.com/nodejs/nodejs-console-repl)
+
+If you haven't done so already, you should install all of the above.
 
 #### JavaScript Engines
 
@@ -393,7 +395,7 @@ These engines, much like car engines, are meant to be used within a larger conte
 encounter them indirectly via web browsers and in node.js.
 
 It's not important to understand a lot about each of these engines at this point,
-other than to be aware that each has its own implementation of the ECMAScript standards, its own performance characteristics (i.e., some are faster at certain things), as well as its own set of bugs.  
+other than to be aware that each has its own implementation of the ECMAScript standards, its own performance characteristics (i.e., some are faster at certain things), as well as its own set of bugs.
 
 #### Running JavaScript Programs
 
@@ -463,6 +465,8 @@ function add(a, b) {
 * JavaScript statements: a JavaScript program typically consists of a series of statements. A statement is a single-line of instruction made up of objects, expressions, variables, and events/event handlers.
 * Block statement: a block statement, or compound statement, is a group of statements that are treated as a single entity and are grouped within curly brackets `{...}`. Opening and closing braces need to work in pairs. For example, if you use the left brace `{` to indicate the start of a block, then you must use the right brace `}` to end it. The same matching pairs applies to single `'......'` and double `"......."` quotes to designate text strings.
 
+* [Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions) are one of the primary building blocks of JavaScript.  A function defines a subprogram that can be called by other parts of your code.  JavaScript treats functions like other built-in types, and they can be stored in variables passed to functions, returned from functions or generated at run-time.  Learning how to write code in terms of functions will be one of your primary goals as you get used to JavaScript.
+
 * Variables are declared using the [`var` keyword](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var).  You must use the `var` keyword to precede a variable name, but you do not need to provide a type, since the initial value will set the type.
 
 > JavaScript version note: newer versions of JavaScript also support the [`let` and `const` keywords](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript#Functions#Variables) for variable declaration.  We will primarily use `var` in this course, but slowly start to add `let` and `const` as you become more familiar with the language.
@@ -477,6 +481,13 @@ console.log(seasonName, year);
 ```
 
 * JavaScript Variables: variables must start with a letter (`a-zA-z`), underscore (`_`), or dollar sign (`$`).  They cannot be a [reserved (key) word](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords). Subsequent characters can be letters, numbers, underscores.
+
+* NOTE: If you forget to use the `var` keyword, JavaScript will still allow you to use a variable, and simply create a *global variable*.  We often refer to this as "leaking a global," and it should always be avoided:
+
+```js
+var a = 6;      // GOOD: a is declared with var
+b = 7;          // BAD: b is used without declaration, and is now a global
+```
 
 * Data Types: JavaScript is a typeless language--you don't need to specify a type for your data (it will be inferred at runtime).  However, internally, the [following data types are used](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript#Overview):
     * [`Number`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript#Numbers) - a double-precision 64-bit floating point number.  Using `Number` you can work with both Integers and Floats.  There are also some special `Number` types, [`Infinity`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity) and [`NaN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN).
@@ -525,11 +536,11 @@ Consider a simple program from your C course, and how it would look in JavaScrip
 Now the same program in JavaScript:
 
 ```js
-var pi = 3.14159;              // pi is a Number 
-var radius = 4.2;              // radius is a Number
-var area;                      // area is (currently) undefined
+var pi = 3.14159;                       // pi is a Number 
+var radius = 4.2;                       // radius is a Number
+var area;                               // area is (currently) undefined
 
-area = pi * radius * radius;   // calculate area from radius
+area = pi * radius * radius;            // calculate area from radius
 
 console.log("Area = " + area + "\n");   // print area to the console
 ```
@@ -555,14 +566,15 @@ console.log("Area", area);              // print area to the console
 |`%`      | Modulo | `7 % 3` (gives 1 remainder)|
 |`++`     | Post/Pre Increment| `x++`, `++x`|
 |`--`     | Post/Pre Decrement| `x--`, `--x`| 
-|`=`      | Assignment | `a = b`|
-|`+=`     | Assignment with addition | `a += 7` same as `a = a + 7`. Can be used with `String`s too|
+|`=`      | Assignment | `a = 6`|
+|`+=`     | Assignment with addition | `a += 7` same as `a = a + 7`. Can be used to join `String`s too|
 |`-=`     | Assignment with subtraction | `a -= 7` same as `a = a - 7`|
 |`*=`     | Assignment with multiplication | `a *= 7` same as `a = a * 7`|
 |`/=`     | Assignment with division | `a /= 7` same as `a = a / 7`|
 |`&&`     | Logical `AND` | `if(x > 3 && x < 10)` both must be `true`|
-|`\|\|`     | Logical `OR` | `if(x === 3 \|\| x === 10)` only one must be `true`|
-|`\|`      | Bitwise `OR` | `3.1345\|0` gives `3` as an integer|
+|`()`     | Call/Create | `()` invokes a function, `f()` means invoke/call function stored in variable `f`|
+|`\|\|`   | Logical `OR` | `if(x === 3 \|\| x === 10)` only one must be `true`|
+|`\|`     | Bitwise `OR` | `3.1345\|0` gives `3` as an integer|
 |`!`      | Logical `NOT` | `if(!(x === 2))` negates an expression |
 |`==`     | Equal | `1 == 1` but also `1 == "1"` due to type coercion|
 |`===`    | Strict Equal | `1 === 1` but  `1 === "1"` is not `true` due to types. Prefer `===`|
@@ -575,84 +587,118 @@ console.log("Area", area);              // print area to the console
 |`typeof` | Type Of | `typeof "Hello"` gives `'string'`, `typeof 6` gives `'number'`|
 | `cond ? a : b` | Ternary | `status = (age >= 18) ? 'adult' : 'minor';` |
 
+> JavaScript version note: you may encounter `=>` in JavaScript code, which looks very similar to `<=` or `>=`.  If you see `=>` it is an [arrow function](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Arrow_functions), which is new ES6 syntax for declaring a function expression.  We will slowly introduce this syntax, especially in later courses.
 
+* JavaScript is dynamic, and variables can change value *and* type at runtime:
 
-Declaration syntax:
-Dynamic typing
-a JavaScript variable can have a different type in different parts of a program 
-Variables Example
-Special values
-Infinity
-Number data type
-e.g. console.log(12/0);
-NaN
-means "Not a Number"; Number data type
-null
-both a value and a data type
-undefined
-both a value and a data type
-e.g.  var x; 
-          console.log(x); 
-Expressions
-An expression is any valid set of literals, variables, operators, and expressions that evaluates to a single value. 
-The value may be a number, a string, or a logical value. 
-Two types of expressions:
-those that assign a value to a variable, e.g. x = 7 . 
-those that simply have a value, e.g., 3 + 4 simply evaluates to 7; it does not perform an assignment. 
-JavaScript has the following kinds of expressions:
-Arithmetic - evaluates to a number 
-String - evaluates to a character string 
-Logical - evaluates to true or false 
-Expressions - Ternary Operator
-A conditional expression can have one of two values based on a condition. The syntax:
+```js
+var a;             // undefined
+a = 6;             // 6, Number
+a++;               // 7, Number
+a--;               // 6, Number
+a += 3;            // 9, Number
+a = "Value=" + a;  // "Value=9", String
+a = !!a;           // true, Boolean
+a = null;          // null
+```
 
-If the condition is true, the expression has the value of val1, Otherwise it has the value of val2.
+* JavaScript is a [garbage collected language](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management).  Unlike C, memory automatically gets freed at runtime when variables are not longer in scope or reachable.  We still need to be careful not to leak memory (i.e., hold onto data longer than necessary, or forever) and block the garbage collector from doing its job.
 
-Used for objects
-Strings and Quotation Marks
-Literal strings can be denoted by either single or double quotes, which gives you some flexibility about how to handle awkward situations such as quotation marks inside a string:
-Concatenation of Strings
-The main operation on strings is the concatenation operator, +:
-Adding Strings and Numbers
-x =5+5;                console.log(x); // Output: 10 
-x="5"+"5"; console.log(x); // Output: 55 
-x=5+"5"; console.log(x); // Output: 55 
-x="5"+5; console.log(x); // Output: 55
-Example - Evaluating Expressions
-Programming Constructs
-JavaScript execution flow is determined using the following four (4) basic control structures:
-Sequential:  an instruction is executed when the previous one is finished.
-Conditional a logical condition is used to determine which instruction will be executed next - similar to the "if" and "switch" statements in C.
-Looping a series of instructions are repeatedly executed until some condition is satisfied - similar to the "for" and "while" statements in C.
-Transfer jump to a different part of the code - similar to calling a function in C.
-Construct (1) - Sequence
-Tasks are executed one after another in “sequence” – e.g.
+* Strings: JavaScript doesn't distinguish between a single `char` and a multi-character `String`--everything is a `String`.  You [define a `String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) using either single (`'...'`) or double (`"..."`) quotes.  Make sure you use one or the other, but don't mix them in a single program, so as to avoid confusion.  
+
+* JavaScript version note: newer versions of ECMAScript also allow for the use of [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).  Instead of `'` or `"`, a template literal uses \` (backticks), and you can also [interpolate expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Expression_interpolation).
+
+* A JavaScript [expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Expressions) is any code (e.g., literals, variables, operators, and expressions) that evaluates to a single value. The value may be a `Number`, `String`, an `Object`, or a logical value.
+
+```js
+var a = 10 /2;                        // arithmetic expression
+var b = !(10 / 2);                    // logical expression evaluates to false
+var c = "10 " + "/" + " 2";           // string, evaluates to "10 / 2"
+var f = function() { return 10 / 2;}; // function expression, f can now be called via the () operator
+var d = f();                          // f() evaluates to 10/2, or the Number 5
+```
+
+* JavaScript execution flow is determined using the following four (4) basic control structures:
+    * Sequential: an instruction is executed when the previous one is finished.
+    * Conditional: a logical condition is used to [determine which instruction will be executed next](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/conditionals) - similar to the `if` and `switch` statements in C (which JavaScript also has).
+    * Looping: a series of [instructions are repeatedly executed](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Looping_code) until some condition is satisfied - similar to the `for` and `while` statements in C (which JavaScript also has).  There are many different types of loops in JavaScript: for example [`for` loops](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Looping_code#The_standard_for_loop) and [`while` loops], as well as ways to [`break`](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Looping_code#Exiting_loops_with_break) out of loops or skip iterations with [`continue`](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Looping_code#Skipping_iterations_with_continue)(https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Looping_code#while_and_do_..._while).  We'll cover other types as we learn about `Object` and `Array`.
+    * Transfer: [jump to, or invoke](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Building_blocks/Functions) a different part of the code - similar to calling a function in C.
+
+```js
+/**
+ * 1. Sequence example: each statement is executed one after the other
+ **/
 var a = 3;
 var b = 6;
 var c = a + b;
 
-console.log(c);
-Construct (2) - Selection
-Make decisions and perform single or multiple tasks based on the outcome of the decision (true or false).
-Types of conditional statements :
-if 
-if / else 
-switch / case 
-if-else Example 
-Switch-case Example 
-Construct (3) - Iteration
-Loop - an action that occurs again and again until a certain condition is met.
-Continuously check a condition and based on the outcome, either terminate the loop or repeat a set of statements. 
-Three basic types of loop structures:
-The for loop 
-The for / in loop
-The while loop 
-The do-while loop 
-for loop Example
-for in loop Example
-Iterates over the enumerable properties of an object, in arbitrary order. For each distinct property, statements can be executed.
-while & do…while loop Examples
-break and continue Statements
-break: breaks the loop and continue executing the code that follows after the loop (if any). 
-Thank you!
- 
+
+/**
+ * 2. Conditional examples: a decision is made based on the evaluation of an expression,
+ * and a code path (or branch) taken.
+ **/
+var grade;
+var mark = 86;
+
+if (mark >= 90) {
+    grade = 'A+';
+} else if (mark >= 80) {
+    grade = 'A';
+} else if (mark >= 70) {
+    grade = 'B';
+} else if (mark >= 60) {
+    grade = 'C';
+} else if (mark >= 50) {
+    grade = 'D';
+} else { 
+    grade='F';
+}
+
+switch(grade) {
+    case 'A+':
+        // do these steps if grade is A+
+        break;
+    case 'A':
+        // do these steps if grade is A
+        break;
+    case 'B':
+        // do these steps if grade is B
+        break;
+    case 'C':
+        // do these steps if grade is C
+        break;
+    case 'D':
+        // do these steps if grade is D
+        break;
+    default:
+        // do these steps in any other case
+        break;
+}
+
+
+/**
+ * 3. Looping example: a set of statements are repeated
+ **/
+
+var total = 0;
+for(var i = 1; i < 11; i++) {
+    total += i;
+    console.log("i", i, "total", total);
+}
+
+
+/**
+ * 4. Transfer example: a set of statements are repeated
+ **/
+
+function add(a, b) {        // declaring the add function
+    if(!b) {                // check if the b argument exists/has a value
+        return a;           // if not, simply return the value of argument a
+    }
+    return a + b;           // otherwise, return the two arguments added together
+}
+
+var total;
+total = add(56);            // invoking the add function with a single argument
+total = add(total, 92);     // invoking the add function with two arguments
+```
