@@ -11,7 +11,7 @@ The WEB222 course content is here:
 | Week | Major Topics |
 |------|--------------|
 |1     | Course introduction, [Internet architecture and Introduction to JavaScript](weeks/week01/README.md) |
-|2     | JavaScript functions, Built-ins/globals, JavaScript scope and closures |
+|2     | [JavaScript functions, Built-ins/globals, JavaScript scope and closures](weeks/week02/README.md) |
 |3     | Built-in Objects, `String`, `Array`, `RegExp` |
 |4     | More Built-in Objects: `Date`, `Math`, User-defined objects, Prototypal inheritance |
 |5     | Introduction to HTML5, Document structure, elements |
