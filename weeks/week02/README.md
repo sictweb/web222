@@ -161,11 +161,134 @@ decodeURIComponent()
 encodeURI()
 encodeURIComponent()
 
+Most of JavaScripts "standard library" comes in the form of *methods* on global objects
+vs. global functions.  A *method* is a function that is bound to a variable belonging
+to an object, also known as a *property*.
+
+
+[console.*](https://developer.mozilla.org/en-US/docs/Web/API/console).  There are
+quite a few worth learning, but here are some to get you started:
+
+* [`console.log()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/log), [`console.warn()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/warn), and [`console.error`](https://developer.mozilla.org/en-US/docs/Web/API/Console/error)
+* [``]()
+* [`console.assert()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/assert)
+* [`console.count()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)
+* [`console.dir()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/dir)
+
 Math.* (Math.abs, Math.max, Math.min, Math.random, Math.round)
 JSON.* (JSON.parse, JSON.stringify)
 Date.* (Date.now, getTime, getMonth, getDay, ...)
 
+Some global functions exist for historical reasons, but should be avoided for performance,
+usability, and/or security reasons:
+
+`eval()` dangerous to parse and run user-defined strings
+`prompt()` and `alert()` synchronous calls that block the UI thread.
+
+
 ## Scope
+
+JavaScript variables are *declared* with the `var` keyword (or `let`, `const` in es6).  We often
+*assign* a value when we *declare* it, though we don't have to do both at once:
+
+```js
+var x;      // declared, no assignment (value is `undefined`)
+x = 7;      // assignment of previously declared variable
+var y = x;  // declaration and assignment combined
+```
+
+A variables always has a *scope*, which is the location(s) in the code where it
+is usable.  Consider the variables `total` and `value`, as well as the
+`add` function below:
+
+```js
+var total = 7;                    // global variable, accessible everywhere
+
+function add(n) {
+    var value = total + n;        // local variable, accessible within `add` function only 
+    return value;
+}
+
+console.log("Total is", total);   // Works, because `total` is in the same scope
+console.log("Value is", value);   // `undefined`, since `value` isn't defined in this scope
+console.log("New Total", add(16)) // Works, because `add` is defined in the same scope
+```
+
+Unlike most programming languages, which use *block scope*, JavaScript variables
+have *function scope*:
+
+```c
+int main()
+{
+  {
+      int x = 10;       // x is declared with block scope
+  }
+  {
+      printf("%d", x);  // Error: x is not accessible here
+  }
+  return 0;
+}
+```
+
+Now in JavaScript:
+
+```js
+function main() {
+    {
+        var x = 10;     // x is declared in a block, but is scoped to `main`
+    }
+    {
+        console.log(x); // works, because `x` is accessible everywhere in `main`
+    }
+}
+```
+
+In many languages, we are told to declare variables when we need them.  However,
+in JavaScript we tend to define our variables at the top of our functions.  We
+don't strictly need to do this, due to *hoisting*.  JavaScript will *hoist* or
+raise all variable declarations it finds in a function to the top of their
+scope:
+
+```js
+function f() {
+    var y = x + 1;
+    var x = 2;
+}
+```
+
+At runtime, this will be transformed into the following:
+
+```js
+function f() {
+    var x;          // declaration is hoisted (but not assignment) to the top
+
+    var y = x + 1;  // `NaN`, since `undefined` + 1 can't be resolved
+    x = 2;          // note: `x` is not declared above, only the assignment is now here
+```
+
+This also happens when we forget to declare a local variable:
+
+```js
+function f() {
+    x = 2;          // `x` is assigned a value, but not declared 
+    return x + 1;
+}
+```
+
+At runtime, this will be transformed into the following:
+
+```js
+var x;              // `x` is not found in the scope of `f`, so it becomes global
+
+function f() {
+    x = 2;
+    return x + 1;
+}
+```
+
+The previous example introduces another important concept with JavaScript scopes, namely,
+that scopes can be *nested* within one another.
+
 
 Hoisting - "moving to the beginning of a scope".  Function declarations are hoisted completely.  You can call a function *before* you declare it.
 
@@ -183,12 +306,58 @@ In general, declare and define things *before* you need them.
 
 ## Closures
 
+Anonymous functions
+
+Closures make it possible to *associate* some *data* (i.e., the environment) with a
+function that can then operate on that data.  We see similar strategies in pure
+object-oriented languages, where data (properties) can be associated with an object,
+and functions (methods) can then operate on that data.  Closures play a somewhat
+similar role, however, they are more lightweight and allow for dynamic (i.e., runtime)
+associations.
+
+By connecting data and functionality, closures help to reduce global variables, provide
+ways to "hide" data, allow a mechanism for creating private "methods", avoid overwriting
+other variables in unexpected ways. 
+
+
 
 TODO:
 
+Make sure I've covered what a global variable is, why to avoid
+
+Cover how to invoke/call a function
+
 Dealing with missing arguments, applying default values with ||
-Call Stack, Debugging
+Call Stack, [Stack Trace](https://developer.mozilla.org/en-US/docs/Web/API/console#Stack_traces), Debugging
 
 
+Closures
 
 [Immediately-Invoked Function Expression (IIFE)](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression) to avoid global variables, simulate block scope, choose or generate implementations at runtime (e.g., polyfill)
+
+## Practice Exercises
+
+For each of the following, write a function that takes the given arguments, and returns
+or produces (e.g., `console.log`) the given result.
+
+1. Given `r` (radius) of a circle, calculate the area of a circle (A = π * r * r).
+1. Simulate rolling a dice using `random()`.  The function should allow the caller to specify any number of sides, but default to 6 if no side count is given: `roll()` (assume 6 sided, return random number between 1 and 6) vs. `roll(50)` (50 sided, return number between 1 and 50).
+1. Write a function that converts values in Celcius to Farenheit: `convert(0)` should return `"32 F"`.
+1. Modify your solution to the previous function to allow a second argument: `"F"` or `"C"`, and use that to determine what the scale of the value is, converting to the opposite: `convert(122, "F")` should return `"50 C"`. 
+1.  Function taking any number of arguments (`Number`s), returning `true` if they are all less than 50: `isUnder50(1, 2, 3, 5, 4, 65)` should return `false`.
+1. Function allowing any number of arguments (`Number`s), returning their sum: `sum(1, 2, 3)` should return `6`.
+1. Function allowing any number of arguments of any type, returns `true` only if none of the arguments is falsy. `allExist(true, true, 1)` should return `true`, but `allExist(1, "1", 0)` should return `false`.
+1. Function to create a JavaScript library name generator: `generateName("dog")` should return `"dog.js"`
+1. Function to check if a number is a multiple of 3 (returns `true` or `false`)
+1. Check if a number is between two other numbers, being inclusive if the final argument is true: `checkBetween(66, 1, 50, true)` should return `false`.
+1. Function to calculate the HST (13%) on a purchase amount
+1. Function to subtract a discount % from a total.  If no % is given, return the original value.
+1. Function that takes a number of seconds as a `Number`, returning a `String` formatted like `"X Days, Y Hours, Z Minutes"` rounded to the nearest minute.
+1. Modify your solution above to only include units that make sense: `"1 Minute"` vs. `"3 Hours, 5 Minutes"` vs. `"1 Day, 1 Hour, 56 Minutes"` etc
+1. Function that takes any number of arguments (`Number`s), and returns them in reverse order, concatenated together as a String: `flip(1, 2, 3)` should return `"321"`
+1. Function that takes two `Number`s and returns their sum as an `Integer` value (i.e., no decimal portion): `intSum(1.6, 3.333333)` should return `4`
+1. Function that returns the number of matches found for the first argument in the remaining arguments: `findMatches(66, 1, 345, 2334, 66, 67, 66)` should return `2`
+1. Function to log all arguments larger than `255`: `showOutsideByteRange(1, 5, 233, 255, 256, 0)` should log `256` to the `console`
+1. Function that takes a `String` and returns its value properly encoded for use in a URL. `prepareString("hello world")` should return `"hello%20world"`
+1. Using the previous function, write an enclosing function that takes any number of `String` arguments and returns them in encoded form, concatenated together like so: `"?...&...&..."` where "..." are the encoded strings.  `buildQueryString("hello world", "goodnight moon")` should return `"?hello%20world&goodnight%20moon"`
+1. Function that takes a `Function` followed by any number of `Number`s, and applies the function to all the numbers, returning the total: `applyFn(function(x) { return x * x;}, 1, 2, 3)` should return 14.
