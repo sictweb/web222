@@ -5,8 +5,7 @@ to the [course outline](https://ict.senecacollege.ca/course/web222?q=course/web2
 
 ## Weekly outline
 
-The WEB222 course content is here:
-[WEB222 course content](https://sictweb.github.io/web222/)
+The WEB222 course content is here available at [https://web222.ca](https://web222.ca).
 
 | Week | Major Topics |
 |------|--------------|
@@ -27,9 +26,9 @@ The WEB222 course content is here:
 
 Organized by week. Each "week" page has a README file that describes that week's code examples.
 
-You can browse the code online.
+You can [browse the code online](https://github.com/sictweb/web222).
 
-You can also download the repository as a zip file.
+You can also [download the repository as a zip file](https://github.com/sictweb/web222/archive/master.zip).
 
 Or, you can clone the repository to your own computer.
 
