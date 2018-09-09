@@ -561,10 +561,8 @@ function f() {
 ```
 
 The previous example introduces another important concept with JavaScript scopes, namely,
-that scopes can be *nested* within one another.
-
-
-Hoisting - "moving to the beginning of a scope".  Function declarations are hoisted completely.  You can call a function *before* you declare it.
+that scopes can be *nested* within one another.  Hoisting is moving variable declarations to the beginning of a scope.  For example, function declarations are hoisted completely, which means
+we can call a function *before* we declare it.
 
 ```js
 f(); // this will work, as f's declaration gets hoisted
@@ -578,9 +576,127 @@ var g = function() {};
 
 In general, declare and define things *before* you need them.
 
+### Overwriting Variables in Child Scopes
+
+Since variables have function scope, and because functions can be nested, we have to be
+careful when naming our variables and arguments so as to not overwrite a variable in a parent
+scope.  Or, we can use this to temporarily do exactly that.  In both cases, we need to understand
+how nested scopes work.  Consider the the following code, where a variable named `x` is used
+in three different scopes.  What will be printed to the `console` when `child` is called?
+
+```js
+var x = 1;
+
+function parent() {
+    var x = 2;
+
+    function child(x) {
+        console.log(x);
+    }
+
+    child(3);
+}
+```
+
+The first declaration of `x` creates a global variable (i.e., available in every scope).
+Then, in `parent` we re-declare `x`, creating a new local variable, which overwrites (or hides)
+the global variable `x` in this scope (i.e., within the body of `parent`).  Next, we define
+yet another scope for `child`, which also uses `x` as the name of its only argument (essentially
+another local variable).  When we do `child(3)`, we are binding the value `3` to the `x`
+argument defined for the scope of `child`, and in so doing yet again overwriting the parent `x`.
+In the end, the console will show `3`.
+
+We can do this in error as well, and cause unexpected behaviour:
+
+```js
+var total = 100;
+
+function increase(n) {
+    var total += n;
+}
+
+increase(50);
+console.log(total);
+```
+
+Here we expect to see `150` but instead will get `100` on the `console.`  The problem is
+that we have redefined, and thus overwritten `total` inside the `increase` function.  During 
+the call to `increase`, the new local variable `total` will be used, and then go out of scope.
+After the function completes, the original global variable `total` will again be used.
+
 ## Closures
 
-Anonymous functions
+A closure is a function that has *closed over* a scope, retaining it even after it would
+otherwise disappear through the normal rules of execution.  In the following function, the
+variable `x` goes out of scope as soon as the function finishes executing:
+
+```js
+function f() {
+    var x = 7;
+    return x * 2;
+    // After this return, and f completes, `x` will no longer be available.
+}
+```
+
+In JavaScript, functions have access not only to their own local variables, but also
+to any functions in their parents' scope.  That is, if a function is used (referenced)
+but not declared in a function, JavaScript will visit the parent scope to find the variable.
+This can happen for any number of child/parent levels up to the global level.
+
+The following is an example of this, and probably one you've seen before:
+
+```js
+var x = 7;
+
+function f() {
+    return x * 2;  // `x` not declared here, JS will look in the parent scope (global)
+}
+```
+
+Consider this example:
+
+```js
+function parent() {
+    var x = 7;
+
+    function child() {
+        return x * 2;
+    }
+
+    return child();
+}
+```
+
+Here `x` is used in `child`, but declared in `parent`.  The `child` function has access
+to all variables in its own scope, plus those in the `parent` scope.  This nesting of scopes
+relies on JavaScript's function scope rules, and allows us to share data.
+
+Sometimes we need to capture data in a parent scope, and retain it for a longer period of time
+than would otherwise be granted for a given invocation.  Consider this example:
+
+```js
+function createAccumulator(value) {
+    return function(n) {
+        value += n;
+        return value;
+    };
+}
+
+var add = createAccumulator(10);
+add(1)   // returns 11
+add(2)   // returns 13
+```
+
+Here the `createAccumulator` function takes an argument `value`, the initial value to use
+for an accumulator function.  It returns an anonymous function which takes a value `n` (a `Number`)
+and adds it to the `value` before returning it.  The `add` function is created by invoking
+`createAccumulator` with the initial `value` of `10`.  The function that is returned by `createAccumulator` has access to `value` in its parent's scope.  Normally, `value` would be
+destroyed as soon as `createAccumulator` finished executing.  However, we have created a *closure*
+to capture the variable `value` in a scope that is now attached to the function we're creating and
+returning.  As long as the returned function exists (i.e., as long as `add` holds on to it), the
+variable `value` will continue to exist in our child function's scope: the variables that existed
+when this function was created continue to live on like a memory, attached to the lifetime of
+the returned function.  
 
 Closures make it possible to *associate* some *data* (i.e., the environment) with a
 function that can then operate on that data.  We see similar strategies in pure
@@ -593,18 +709,34 @@ By connecting data and functionality, closures help to reduce global variables, 
 ways to "hide" data, allow a mechanism for creating private "methods", avoid overwriting
 other variables in unexpected ways. 
 
+As we go further with JavaScript and web programming, we will encounter many instances
+where closures can be used to manage variable lifetimes, and associated functions with
+specific objects.  For now, be aware of their existence, and know that it is an advanced
+concept that will take some time to fully master.  This is only our first exposure to it.
 
+Another way we'll see closures used, is in conjunction with [Immediately-Invoked Function Expressions (IIFE)](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression).  Consider
+the following rewrite of the code above:
 
-TODO:
+```js
+var add = (function(value) {
+    return function(n) {
+        value += n;
+        return value;
+    };
+})(10);
 
-Make sure I've covered what a global variable is, why to avoid
+add(1)   // returns 11
+add(2)   // returns 13
+```
 
-Call Stack, [Stack Trace](https://developer.mozilla.org/en-US/docs/Web/API/console#Stack_traces), Debugging
+Here we've declared `add` to be the value of invoking the anonymous function expression
+written between the first `(...)` parentheses.  In essence, we have created a function
+that gets executed immediately, and which returns another function that we will use
+going forward in our program.
 
-
-Closures
-
-[Immediately-Invoked Function Expression (IIFE)](https://en.wikipedia.org/wiki/Immediately-invoked_function_expression) to avoid global variables, simulate block scope, choose or generate implementations at runtime (e.g., polyfill)
+This is an technique to be aware of at this point, but not one you need to master
+right away.  We'll see it used, and use it ourselves, in later weeks to to avoid global variables,
+simulate block scope in JavaScript, and to choose or generate function implementations at runtime (e.g., [polyfill](https://remysharp.com/2010/10/08/what-is-a-polyfill)).
 
 ## Practice Exercises
 
