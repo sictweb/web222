@@ -45,6 +45,8 @@ JavaScript has many built-in functions, which we'll get to below; however, it al
 allows you to write your own and/or use ones written by other developers (libraries, frameworks).
 These user-defined functions can take a number of forms.
 
+#### Function Declarations
+
 The first is the *function declaration*, which looks like this:
 
 ```js
@@ -66,6 +68,8 @@ function add(a, b) {
 Here the `function` keyword initiates a *function declaration*, followed by a
 *name*, a *parameter list* in round parenthesis, and the function's *body* surrounded
 by curly braces.  There is no semi-colon after the function body.
+
+#### Function Expressions
 
 The second way to create a function is using a *function expression*.  Recall that
 expressions evaluate to a value: a function expression evaluates to a `function` Object.
@@ -90,6 +94,8 @@ var add = function add(a, b) {
 
 > JavaScript version note: newer versions of JavaScript also include the new `=>` notation, which denotes an [Arrow Function](https://eloquentjavascript.net/03_functions.html#h_/G0LSjQxoo).  When you see `var add = (a, b) => a + b;` it is short-hand for `var add = function(a, b) { return a + b; }`, where `=>` replaces the `function` keyword and comes *after* the parameter list, and the `return` keyword is optional when functions return a single value).  Arrow functions also introduce some new semantics for the `this` keyword, which we'll address later.
 
+#### Parameters and `arguments`
+
 Function definitions in both cases take parameter lists, which can be empty, single, or multiple
 in length.  Just as with variable declaration, no type information is given:
 
@@ -103,6 +109,132 @@ function singleParam(oneParameter) {
 function multipleParams(one, two, three, four) {
 }
 ```
+
+A function can *accept* any number of arguments when it is called, including none.  This would
+break in many other languages, but not JavaScript:
+
+```js
+function(a) {
+    console.log(a);
+}
+
+a("correct");          // logs "correct"
+a("also", "correct");  // logs "also"
+a();                   // logs undefined
+```
+
+Because we can invoke a function with any number of arguments, we have to write our functions
+carefully, and test things before we make assumptions.  How can we deal with a caller
+sending 2 vs. 10 values to our function?
+
+One way we do this is using the built-in [`arguments` Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments).
+Every function has an implicit `arguments` variable available to it, which is an array-like
+object containing all the arguments passed to the function.  We can use `arguments.length` to 
+obtain the actual number of arguments passed to the function at runtime, and use array index
+notation (e.g., `arguments[0]`) to access an argument:
+
+```js
+function(a) {
+    console.log(arguments.length, a, arguments[0]);
+}
+
+a("correct");          // 1, "correct", "correct"
+a("also", "correct");  // 2, "also", "also"
+a();                   // 0, undefined, undefined
+```
+
+We can use a loop to access all arguments, no matter the number passed:
+
+```js
+function sum() {
+    var count = arguments.length;
+    var total = 0;
+    for(var i = 0; i < count; i++) {
+        total += arguments[i];
+    }
+    return total;
+}
+
+sum(1);          // 1
+sum(1, 2);       // 3
+sum(1, 2, 3, 4); // 10
+```
+
+You may have wondered previously how `console.log()` can work with one, two, three, or
+more arguments.  The answer is that all JavaScript functions work this way, and you can use it
+to "overload" your functions with different argument patterns, making them useful
+in more than one scenario.
+
+#### Dealing with Optional and Missing Arguments
+
+Because we *can* change the number of arguments we pass to a function at runtime, we
+also have to deal with missing data, or optional parameters.  Consider the case of
+a function to calculate a player's score in a video game.  In some cases we may want to
+double a value, for example, as a bonus for doing some action a third time in a row:
+
+```js
+function updateScore(currentScore, value, bonus) {
+    return bonus ? currentScore + value * bonus : currentScore + value;
+}
+
+updateScore(10, 3);
+updateScore(10, 3);
+updateScore(10, 3, 2);
+```
+
+Here we call `updateScore` three different times, sometimes with 2 arguments, and
+once with 3.  Our `updateScore` function has been written so it will work in both cases.
+We've used a [conditional ternary operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) to
+decide whether or not to add an extra bonus score.  When we say `bonus ? ... : ...` we are
+checking to see if the `bonus` argument is *truthy* or *falsy*--did the caller provide a value for it?
+If they did, we do one thing, if not, we do another.
+
+Here's another common way you'll see code like this written, using a default value:
+
+```js
+function updateScore(currentScore, value, bonus) {
+    // See if `bonus` is truthy (has a value or is undefined) and use it, or default to 1
+    bonus = bonus || 1;
+    return currentScore + value * bonus;
+}
+```
+
+In this case, before we use the value of `bonus`, we do an extra check to see if it
+actually has a value or not.  If it does, we use that value as is; but if it doesn't, we
+instead assign it a value of `1`.  Then, our calculation will always work, since multiplying
+the value by `1` will be the same as not using a bonus.
+
+The idiom `bonus = bonus || 1` is very common in JavaScript.  It uses the
+[Logical Or Operator `||`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_Operators#Logical_OR_()) to test whether `bonus` evaluates to a value or not, and prefers that value if possible
+to the fallback default of `1`.  We could also have written it out using an `if` statements like these:
+
+```js
+function updateScore(currentScore, value, bonus) {
+    if(bonus) {
+        return currentScore + value * bonus;
+    }
+    return currentScore + value;
+}
+
+function updateScore(currentScore, value, bonus) {
+    if(!bonus) {
+        bonus = 1;
+    }
+    return currentScore + value * bonus;
+}
+```
+
+JavaScript programmers tend to use the `bonus = bonus || 1` pattern because it is
+less repetitive, using less code, and therefore less likely to introduce bugs.  We could
+shorten it even further to this:
+
+```js
+function updateScore(currentScore, value, bonus) {
+    return currentScore + value * (bonus || 1);
+}
+```
+
+#### Return Value
 
 Functions always *return* a value, whether implicitly or explicitly. If the `return`
 keyword is used, the expression following it is returned from the function.  If
@@ -129,11 +261,71 @@ function explicitReturn2() {
 }
 ```
 
+#### Function Naming
 
-naming
-parameter vs. argument, `arguments` keyword, `arguments.length` and `arguments[i]`, implicit (`undefined)` vs. explicit return
-pass by value (primitives) vs. pass by reference (objects like `Array`, `Function`, etc)
-binding functions to variables
+Functions are typically named using the same rules we learned for naming any
+variable: `camelCase` and using the set of valid letters, numbers, etc. and avoiding
+language keywords.
+
+Function declarations always give a name to the function, while function expressions
+often omit it, using a variable name instead:
+
+```js
+// Name goes after the `function` keyword in a declaration
+function validateUser() {
+    ...
+}
+
+// Name is used only at the level of the bound variable, function is anonymous
+var validateUser = function() {
+    ...
+};
+
+// Name is repeated, which is correct but not common. Used with recursive functions
+var validateUser = function validateUser() {
+    ...
+};
+
+// Names are different, which is also correct, but not common as it can lead to confusion
+var validateUser = function validate() {
+    // the validate name is only accessible here, within the function body
+    ...
+};
+```
+
+Because JavaScript allows us to bind function objects (i.e., result of function expressions)
+to variables, it is common to create functions without names, but immediately pass them
+to functions as arguments.  The only way to use this function is via the argument name:
+
+```js
+// The parameter `fn` will be a function, and `n` a number
+function execute(fn, n) {
+    // Call the function referred to by the argument (i.e, variable) `fn`, passing `n` as its argument
+    return fn(n);
+}
+
+// 1. Call the `execute` function, passing an anonymous function, which squares its argument, and the value 3
+execute(function(n) {
+    return n * n;
+}, 3);
+
+
+// 2. Same thing as above, but with different formatting
+execute(function(n) { return n * n;}, 3);
+
+// 3. Using ES6 Arrow Function syntax
+execute((n) => n * n, 3);
+
+var doubleIt = function(num) {
+    return num * 2;
+}
+
+// 4. Again call `execute`, but this time pass `doubleIt` as the function argument
+execute(doubleIt, 3); 
+```
+
+We can also use functions declared via function declarations used this way, and 
+bind them to variables:
 
 ```js
 function greeting(greeting, name) {
@@ -147,44 +339,126 @@ console.log(greeting("Hello", "Steven"));
 console.log(sayHi("Hi", "Kim"));
 ```
 
-execution operator, functions aren't executed until they are called.
+JavaScript treats functions like other languages treat numbers or booleans, and lets
+you use them as values.  This is a very powerful feature, but can cause some confusion
+as you get started with JavaScript.
+
+#### Invoking Functions, the Execution Operator
+
+In many of the examples above, we've been invoking (calling, running, executing) functions
+but haven't said much about it.  We invoke a function by using the `()` operator:
+
+```js
+var f = function() { console.log('f was invoked'); };
+f();
+```
+
+In the code above, `f` is a variable that is assigned the value returned by 
+a function expression.  This means `f` is a regular variable, and we can use it 
+like any other variable.  For example, we could create another variable and share
+its value:
+
+```js
+var f = function() { console.log('f was invoked'); };
+var f2 = f;
+f();       // invokes the function
+f2();      // also invokes the function
+```
+
+Both `f` and `f2` refer to the the same function object.  What is the difference
+between saying `f` vs. `f()`?  in the line `var f2 = f;`?  When we write `f()`
+we are really saying, "Get the value of `f` (the function referred to) and invoke it."  However,
+when we write `f` (without `()`), we are saying, "Get the value of `f` (the function referred to)"
+so that we can do something with it (assign it to another variable, pass it to a function, etc).
+
+The same thing is true of function declarations, which also produce `function` Objects:
+
+```js
+function f() { console.log('f was invoked'); };
+var f2 = f;
+f2();      // also invokes the function
+```
+
+The distinction between referring to a function object via its bound variable name (`f`) vs
+invoking that same function (`f()`) is important, because JavaScript programs treat functions
+as *data*, just as you would a `Number`.  Consider the following:
+
+```js
+function checkUserName(userName, customValidationFn) {
+    // If `customValidationFn` exists, and is a function, use that to validate `userName`
+    if(customValidationFn && typeof customValidationFn === 'function') {
+        return customValidationFn(userName);
+    }
+    // Otherwise, use a default validation function
+    return defaultValidationFn(userName);
+}
+```
+
+Here the `checkUser` function takes two arguments: the first a `String` for a username;
+the second an optional (i.e., may not exist) function to use when validating this username.
+Depending on whether or not we are passed a function for `customValidationFn`, we will either
+use it, or use a default validation function (defined somewhere else).
+
+Notice the line `if(customValidationFn && typeof customValidationFn === 'function') {` where
+`customValidationFn` is used as like any other variable (no invocation), to check if it has
+a value, and if its value is actually a function.  Only then is it invoked.
+
+It's important to remember that JavaScript functions aren't executed until they are called
+via the invocation operator, and may also be used as values without being called. 
+
+
+
+
+
+
 
 
 
 
 ### Built-in/Global Functions
 
-`parseInt`, `parseFloat`
-`isNaN()`, `isFinite()`
-decodeURI()
-decodeURIComponent()
-encodeURI()
-encodeURIComponent()
+JavaScript provides a number of [built-in global functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects#Function_properties) for working with its data types, for example:
+
+* [`parseInt()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt)
+* [`parseFloat()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseFloat)
+* [`isNaN()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isNaN)
+* [`isFinite()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/isFinite)
+* [`decodeURI()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURI)
+* [`decodeURIComponent()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent)
+* [`encodeURI()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI)
+* [`encodeURIComponent()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent)
+
+There are also global functions that exist for historical reasons, but should be avoided for performance,
+usability, and/or security reasons:
+
+* [`eval()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval) dangerous to parse and run user-defined strings
+* [`prompt()`](https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt) and [`alert()`](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) synchronous calls that block the UI thread.
 
 Most of JavaScripts "standard library" comes in the form of *methods* on global objects
 vs. global functions.  A *method* is a function that is bound to a variable belonging
-to an object, also known as a *property*.
+to an object, also known as a *property*.  We'll be covering these in more depth later, but
+here are some examples
 
-
-[console.*](https://developer.mozilla.org/en-US/docs/Web/API/console).  There are
+* [`console.*`](https://developer.mozilla.org/en-US/docs/Web/API/console).  There are
 quite a few worth learning, but here are some to get you started:
-
-* [`console.log()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/log), [`console.warn()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/warn), and [`console.error`](https://developer.mozilla.org/en-US/docs/Web/API/Console/error)
-* [``]()
-* [`console.assert()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/assert)
-* [`console.count()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)
-* [`console.dir()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/dir)
-
-Math.* (Math.abs, Math.max, Math.min, Math.random, Math.round)
-JSON.* (JSON.parse, JSON.stringify)
-Date.* (Date.now, getTime, getMonth, getDay, ...)
-
-Some global functions exist for historical reasons, but should be avoided for performance,
-usability, and/or security reasons:
-
-`eval()` dangerous to parse and run user-defined strings
-`prompt()` and `alert()` synchronous calls that block the UI thread.
-
+    * [`console.log()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/log), [`console.warn()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/warn), and [`console.error`](https://developer.mozilla.org/en-US/docs/Web/API/Console/error)
+    * [`console.assert()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/assert)
+    * [`console.count()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)
+    * [`console.dir()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/dir)
+* [`Math.*`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math)
+    * [`Math.abs()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/abs)
+    * [`Math.max()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/max)
+    * [`Math.min()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/min)
+    * [`Math.random()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/random)
+    * [`Math.round()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/round)
+* [`Date.*`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date)
+    * [`Date.now()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/now)
+    * [`Date.getTime()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getTime)
+    * [`Date.getMonth()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getMonth)
+    * [`Date.getDay()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date/getDay)
+* [`JSON.*`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON)
+    * [`JSON.parse()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse)
+    * [`JSON.stringify()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
 
 ## Scope
 
@@ -325,9 +599,6 @@ TODO:
 
 Make sure I've covered what a global variable is, why to avoid
 
-Cover how to invoke/call a function
-
-Dealing with missing arguments, applying default values with ||
 Call Stack, [Stack Trace](https://developer.mozilla.org/en-US/docs/Web/API/console#Stack_traces), Debugging
 
 
