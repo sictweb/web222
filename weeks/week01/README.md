@@ -298,11 +298,11 @@ in order to make sure the experience is good for as many people as possible.
 
 The web is also constantly evolving, as new standards are written, APIs and features added
 to the web platform, and older technologies retired.  A good way to stay on top of what
-does and doesn't work in a particular browser is to use https://caniuse.com/.  This
-is a service that keeps track of web platform features, and which browsers do and don't
+does and doesn't work in a particular browser is to use [https://caniuse.com/](https://caniuse.com/).
+This is a service that keeps track of web platform features, and which browsers do and don't
 implement it.
 
-For example, you can look at the [`URL()`] API we discussed previously at https://caniuse.com/#feat=url.
+For example, you can look at the [`URL()`](https://developer.mozilla.org/en-US/docs/Web/API/URL) API we discussed previously at [https://caniuse.com/#feat=url](https://caniuse.com/#feat=url).
 Notice that it's widely supported (green) in most browsers (88.47% at the time of writing), but not supported (red) in some older browsers like Internet Explorer.
 
 Because the web is so big, so complicated, so old, and used by so many people for so many different
