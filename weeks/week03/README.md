@@ -6,9 +6,7 @@
 * [SpeakingJS, Chapter 18. Arrays](speakingjs.com/es5/ch18.html)
 * [SpeakingJS, Chapter 19. Regular Expressions](speakingjs.com/es5/ch19.html)
 
-## [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
-
-### Introduction to Objects and Object-Oriented Programming
+## Introduction to Objects and Object-Oriented Programming
 
 In languages like C, we are used to thinking about data types separately from the functions
 that operate upon them.  We declare variables to hold data in memory, and call functions passing them
@@ -65,6 +63,8 @@ easily create and work with text in our programs.
 Also, because we work with strings at a higher level of abstraction (i.e., not as arrays of `char`),
 JavaScript deals with memory management for us, allowing our strings to grow or shrink at runtime.
 
+## JavaScript's [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String)
+
 ### Declaring JavaScript Strings
 
 Here are a few examples of how you can declare a `String` in JavaScript, first using a
@@ -104,12 +104,12 @@ the various [functionality](https://developer.mozilla.org/en-US/docs/Web/JavaScr
 * [`s.charAt(1)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt) - returns the character at the given position (UTF-16 code unit).  We can also use `s[1]` and use an index notation to get a particular character from the string.
 * [`s.concat()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/concat) - returns a new string created by concatenating the original with the given arguments.
  * [`s.includes("tex")`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) - returns `true` if the search string is found within the string, otherwise `false` if not found.
-* [`s.startsWith("some")`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith)
-* [`s.endsWith("text")`] - returns `true` if the string starts with the given substring, otherwise `false`.(https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith) - returns `true` if the string ends with the given substring, otherwise `false`.
+* [`s.startsWith("some")`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith) - returns `true` if the string starts with the given substring, otherwise `false`.
+* [`s.endsWith("text")`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith) - returns `true` if the string ends with the given substring, otherwise `false`.
 * [`s.match(regex)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match) - tries to match a regular expression against the string, returning the matches.  See discussion of RegExp below.
-* [`s.replace(regex, "replacement")](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) - returns a new string with occurrence(s) of a matched RegExp replaced by the replacement text.  See discussion of RegExp below.
+* [`s.replace(regex, "replacement")`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) - returns a new string with occurrence(s) of a matched RegExp replaced by the replacement text.  See discussion of RegExp below.
 * [`s.slice(2, 3)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) - returns a new string extracted (sliced) from within the original string.  A beginning index and (optional) end index mark the position of the slice.
-* [`s.split(" ")`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split) - returns an Array (see discussion below) of substrings by splitting the original string based on the given separator (`String` or `RegExp`).
+* [`s.split()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split) - returns an Array (see discussion below) of substrings by splitting the original string based on the given separator (`String` or `RegExp`).
 * [`s.toLowerCase()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase) - returns a new string with all characters converted to lower case.
 * [`s.toUpperCase()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toUpperCase) - returns a new string with all characters converted to upper case.
 * [`s.trim()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/trim) - returns a new string with leading and trailing whitespace removed.
@@ -122,7 +122,9 @@ var s = "The value is " + (1 * 6);
 var templateVersion = `The value is ${1*6}` 
 ```
 
-## [`Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+## JavaScript's [`Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
+
+An [`Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) is an `Object` with various [properties and methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array#Array_instances) we can use for working with lists in JavaScript.
 
 ### Declaring JavaScript Arrays
 
@@ -142,7 +144,7 @@ var len = arr.length; // len is 3
 var item0 = arr[0]; // item0 is 1
 ```
 
-Unlike languages like C, a JavaScript `Array` can contain any type of data, including mixed types:
+Unlike languages such as C, a JavaScript `Array` can contain any type of data, including mixed types:
 
 ```js
 var list = [0, "1", "two", true];
@@ -157,9 +159,7 @@ arr[5] = 56;   // element 5 now contains 56, and arr's length is now 6
 
 > NOTE: a JavaScript `Array` is really a **map**, which is a data structure that associates values with unique keys (often called a key-value pair).  JavaScript arrays are a special kind of map that uses numbers for the keys, which makes them look and behave very much like arrays in other languages.  We will encounter this **map** structure again when we look at how to create `Object`s.
 
-### String Properties and Methods
-
-An [`Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array) is an `Object` with various [properties and methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array#Array_instances) we can use for working with lists in JavaScript.  For example:
+### `Array` Properties and Methods
 
 * [`arr.length`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/length) - a property that tells us the number of elements in the array.
 
@@ -170,7 +170,7 @@ An [`Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/G
 
 #### Methods that do not modify the original array
 
-* [`arr.concat([4, 5], 6`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) - returns a new array with the original array joined together with other arrays or values provided.
+* [`arr.concat([4, 5], 6)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/concat) - returns a new array with the original array joined together with other arrays or values provided.
 * [`arr.includes(element)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/includes) - returns `true` if the array includes the given element, otherwise `false`.
 * [`arr.indexOf(element)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/indexOf) - returns the index of the given element in the array, if it exists, otherwise `-1` (meaning not found).
 * [`arr.join("\n")`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/join) - returns a string created by joining (concatenating) all elements in the array with the given delimiter (`String`).
@@ -180,7 +180,9 @@ An [`Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/G
 * [`arr.forEach()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) - calls the provided function on each element in the array.
 * [`arr.map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) - creates and returns a new array constructed by calling the provided function on each element of the original array.
 
-## [`RegExp`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
+There are more [`Array` methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array#Array_instances) you can learn as you progress with JavaScript, but these will get you started.
+
+## JavaScript's [`RegExp`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
 
 A regular expression is a special string that describes a pattern to be used for matching or searching within other strings.  They are also known as a *regex* or *regexp*, and in JavaScript we refer to `RegExp` when we mean the built-in `Object` type for creating and working with regular expressions.
 
@@ -195,7 +197,7 @@ ls *.txt
 
 Here we ask for a listing of all files whose filename *ends with* the extension `.txt`.  The `*` has a special meaning: *any character, and any number of characters*.  Both `a.txt` and `file123.txt` would be matched against this pattern, since both end with `.txt`.
 
-Regular expressions take the idea of defining patterns using characters like `*`, and extend it into a more powerful pattern matching language.  Here's an example of a regular expression that could be used to match both common spellings of the word "colour" (and "color"):
+Regular expressions take the idea of defining patterns using characters like `*`, and extend it into a more powerful pattern matching language.  Here's an example of a regular expression that could be used to match both common spellings of the word `"colour"` and `"color"`:
 
 ```js
 colou?r
@@ -212,7 +214,7 @@ The `\d` means a digit (0-9) and the `{1,3}` portion means *at least one, and at
 
 There are many [special characters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#Using_special_characters) to learn with regular expressions, which we'll slowly introduce.
 
-### Declaring JavaScript RegExp
+### Declaring JavaScript `RegExp`
 
 Like `String` or `Array`, we can declare a `RegExp` using either a literal or the `RegExp` constructor:
 
@@ -232,6 +234,14 @@ var regex2 = new RegExp("pattern", "gi"); // same thing using the constructor in
 ```
 
 ### Understanding Regular Expression Patterns
+
+Regular expressions are dense, and often easier to write than to read.  It's helpful to use
+various tools to help you as you experiment with patterns, and try to understand and debug
+your own regular expressions:
+
+* [regexr.com](https://regexr.com/)
+* [Regulex](https://jex.im/regulex)
+* [regexpal.com](https://www.regexpal.com/)
 
 #### Matching Specific Characters
 
@@ -263,7 +273,8 @@ and define *how many* times a pattern or match can/must occur.  We do this by ad
 
 * `+` is similar to `*` but means *one or more*. `vroo+m` would match `"vroom"` but also `"vroooooooom"` and `"vroooooooooooooooooooooooooooooooom"`
 
-* We can limit the number of matches to an exact number using `{n}`, which means *match exactly `n` times*. `vroo{3}m` would only match `"vroooom"`.  We can further specify that we want a match to happen  *`n` or more times* using `{n,}`, or use `{n,m}` to indicate we want to match *at least `n` times and no more than `m` times: `\w{8,16}` would match 8 to 16 word characters, `"ABCD1234"` or `"zA5YncUI24T_3GHO"`  
+* We can limit the number of matches to an exact number using `{n}`, which means *match exactly `n` times*. `vroo{3}m` would only match `"vroooom"`.  We can further specify that we want a match to happen  *match `n` or more times* using `{n,}`, or use `{n,m}` to indicate we want to match *at least `n` times and no more than `m` times: `\w{8,16}` would match 8 to 16 word characters, `"ABCD1234"` or `"zA5YncUI24T_3GHO"`
+
 #### Define Positional Match Parameters or Alternatives
 
 Normally the patterns we define are used to look *anywhere* within a string.  However, sometimes
@@ -295,7 +306,7 @@ There are other [methods you can call](https://developer.mozilla.org/en-US/docs/
 
 1. Write a function `log` that takes an `Array` of `String`s and displays them on the `console`.
 2. An application uses an `Array` as a Stack (LIFO) to keep track of items in a user's shopping history.  Every time they browse to an item, you want to `addItemToHistory(item)`.  How would you implement this?
-3. Write a function `buildArray` that takes a two `Number`s, and returns an `Array` filled with all numbers between the given number: `buildArray(5, 10)` should return `[5, 6, 7, 8, 9, 10]`
+3. Write a function `buildArray` that takes two `Number`s, and returns an `Array` filled with all numbers between the given number: `buildArray(5, 10)` should return `[5, 6, 7, 8, 9, 10]`
 4. Write a function `addDollars` that takes an `Array` of `Number`s and uses the array's `map()` method to create and return a new `Array` with each element having a `$` added to the front: `addDollars([1, 2, 3, 4])` should return `['$1', '$2', '$3', '$4']`
 5. Write a function `tidy` that takes an `Array` of `String`s and uses the array's `map()` method to create and return a new `Array` with each element having all leading/trailing whitespace removed: `tidy(['     hello', '   world     '])` should return `['hello', 'world']`.
 6. Write a function `measure` which takes an `Array` of `String`s and uses the array's `forEach()` method to determine the size of each string in the array, returning the total: `measure(['a', 'bc'])` should return `3`. Bonus: try to rewrite your code using the `Array`'s [`reduce()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/Reduce) method.
@@ -306,15 +317,16 @@ There are other [methods you can call](https://developer.mozilla.org/en-US/docs/
 11. A `String` named `addresses` contains a list of street addresses.  Some of the addresses use short forms: `"St."` instead of `"Street"` and `"Rd"` instead of `"Road"`.  Using `String` methods, convert all these short forms to their full versions.
 12. Room booking codes must take the following form: room number (`1-305`) followed by `-` followed by the month as a number (`1-12`) followed by the day as a number (`1-31`).  For example, all of the following are valid: `"1-1-1"`, `"250-10-3"`, `"66-12-12"`.  Write a `RegExp` to check whether a room booking code is valid or not, which allows any of the valid forms.
 13. Write a function that takes a `String` and checks whether or not it begins with one of `"Mr."`, `"Mrs."`, or `"Ms."`.  Return `true` if it does, otherwise `false`. Bonus: try writing your solution using regular `String` methods *and* again as a `RegExp`.
-* Write a function that takes a password `String`, and validates it according to the following rules: must be between 8-32 characters in length; must contain one Capital Letter; must contain one Number; must contain one Symbol (`!@#$%^&*-+{}`).  Return `true` if the given password is valid, otherwise `false`.
+14. Write a function that takes a password `String`, and validates it according to the following rules: must be between 8-32 characters in length; must contain one Capital Letter; must contain one Number; must contain one Symbol (`!@#$%^&*-+{}`).  Return `true` if the given password is valid, otherwise `false`.
+15. Write a `RegExp` for a Canadian Postal Code, for example `"M3J 3M6"`.  Allow spaces or no spaces, capitals or lower case.
 
-## A Larger Problem:
+## A Larger Problem Combining Everything:
 
 You are asked to write JavaScript code to process a `String` which is in the form of a [Comma-Separated Values (CSV)](https://en.wikipedia.org/wiki/Comma-separated_values) formatted data dump of user information.  The data might look something like this:
 
 ```csv
 "0134134", "John Smith", "555-567-2341", "62 inches"\n
-"0134135", "June Lee", "5554126347", "149 cm"\n
+"0134135", "June    Lee", "5554126347", "149 cm"\n
 "0134136", "     Kim Thomas       ", "5324126347", "138cm"\n
 ```
 
