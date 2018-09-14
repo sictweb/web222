@@ -86,11 +86,12 @@ var add = function add(a, b) {
     return a + b;
 };
 ```
- A few things to note:
 
- * The function's *name* is often omitted.  Instead we return an anonymous function and bind it to a variable.  We'll access it again via the variable name later.  In the case of recursive functions, we sometimes include it to make it easier for functions to call themselves.  You'll see it done both ways.
- * We *did* use a semi-colon at the end of our function expression.  We do this to signify the end of our assignment statement `var add = ... ;`.
- * In general, *function declarations* are likely a better choice (when you can choose) due to subtle errors introduced with declaration order and hosting (see below); however, both are used widely and are useful.
+A few things to note:
+
+* The function's *name* is often omitted.  Instead we return an *anonymous function* and bind it to a variable.  We'll access it again via the variable name later.  In the case of recursive functions, we sometimes include it to make it easier for functions to call themselves.  You'll see it done both ways.
+* We *did* use a semi-colon at the end of our function expression.  We do this to signify the end of our assignment statement `var add = ... ;`.
+* In general, *function declarations* are likely a better choice (when you can choose) due to subtle errors introduced with declaration order and hosting (see below); however, both are used widely and are useful.
 
 > JavaScript version note: newer versions of JavaScript also include the new `=>` notation, which denotes an [Arrow Function](https://eloquentjavascript.net/03_functions.html#h_/G0LSjQxoo).  When you see `var add = (a, b) => a + b;` it is short-hand for `var add = function(a, b) { return a + b; }`, where `=>` replaces the `function` keyword and comes *after* the parameter list, and the `return` keyword is optional when functions return a single value).  Arrow functions also introduce some new semantics for the `this` keyword, which we'll address later.
 
@@ -165,6 +166,18 @@ more arguments.  The answer is that all JavaScript functions work this way, and 
 to "overload" your functions with different argument patterns, making them useful
 in more than one scenario.
 
+> JavaScript version note: in newer versions of JavaScript, we can also use [Rest Parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters), which allow us to specify that all final arguments to a function, no matter how many, should appear within the function as an `Array`.  There are [some advantages](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters#Difference_between_rest_parameters_and_the_arguments_object) to *not* using `arguments`, which rest parameters provide. We can convert the example above to:
+
+```js
+function sum(...numbers) {
+    var total = 0;
+    for(var i = 0; i < numbers.length; i++) {
+        total += numbers[i];
+    }
+    return total;
+}
+```
+
 #### Dealing with Optional and Missing Arguments
 
 Because we *can* change the number of arguments we pass to a function at runtime, we
@@ -231,6 +244,14 @@ shorten it even further to this:
 ```js
 function updateScore(currentScore, value, bonus) {
     return currentScore + value * (bonus || 1);
+}
+```
+
+> JavaScript version note: newer versions of JavaScript also support [Default Parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters), which allows us to specify a default value for any named parameter when declared.  This frees us from having to check for, and set default values in the function body.  Using default parameters, we could convert our code above to this:
+
+```js
+function updateScore(currentScore, value, bonus = 1) {
+    return currentScore + value * bonus;
 }
 ```
 
@@ -343,6 +364,40 @@ JavaScript treats functions like other languages treat numbers or booleans, and 
 you use them as values.  This is a very powerful feature, but can cause some confusion
 as you get started with JavaScript.
 
+You might ask why we would ever choose to define functions using variables.  One common reason is to swap function implementations at runtime, depending on the state of the program.  Consider the following code for displaying the user interface depending on whether the user is logged in or not:
+
+```js
+// Display partial UI for guests and non-authenticated users, hiding some features
+function showUnauthenticatedUI() {
+    ...
+}
+
+// Display full UI for authenticated users
+function showAuthenticatedUI() {
+    ...
+}
+
+// We will never call showUnauthenticatedUI or showAauthenticatedUI directly.
+// Instead, we will use showUI to hold a reference to one or the other,
+// and default to the unauthenticated version at first (i.e., until the user logs in).
+var showUI = showUnauthenticatedUI;
+
+...
+
+// Later in the program, when a user logs in, we can swap the implemenation
+// without touching any of our UI code.
+function authenticate(user) {
+    ...
+    showUI = showAuthenticatedUI;
+}
+
+...
+
+// Whenever we need to refresh/display the UI, we can always safely call
+// whichever function is currently bound to `showUI`.
+showUI();
+```
+
 #### Invoking Functions, the Execution Operator
 
 In many of the examples above, we've been invoking (calling, running, executing) functions
@@ -366,7 +421,7 @@ f2();      // also invokes the function
 ```
 
 Both `f` and `f2` refer to the the same function object.  What is the difference
-between saying `f` vs. `f()`?  in the line `var f2 = f;`?  When we write `f()`
+between saying `f` vs. `f()` in the line `var f2 = f;`?  When we write `f()`
 we are really saying, "Get the value of `f` (the function referred to) and invoke it."  However,
 when we write `f` (without `()`), we are saying, "Get the value of `f` (the function referred to)"
 so that we can do something with it (assign it to another variable, pass it to a function, etc).
@@ -394,14 +449,13 @@ function checkUserName(userName, customValidationFn) {
 }
 ```
 
-Here the `checkUser` function takes two arguments: the first a `String` for a username;
+Here the `checkUserName` function takes two arguments: the first a `String` for a username;
 the second an optional (i.e., may not exist) function to use when validating this username.
 Depending on whether or not we are passed a function for `customValidationFn`, we will either
 use it, or use a default validation function (defined somewhere else).
 
 Notice the line `if(customValidationFn && typeof customValidationFn === 'function') {` where
-`customValidationFn` is used as like any other variable (no invocation), to check if it has
-a value, and if its value is actually a function.  Only then is it invoked.
+`customValidationFn` is used like any other variable (accessing the value it refers to vs. doing an invocation), to check if it has a value, and if its value is actually a function.  Only then is it save to invoke it.
 
 It's important to remember that JavaScript functions aren't executed until they are called
 via the invocation operator, and may also be used as values without being called. 
@@ -441,7 +495,7 @@ here are some examples
 
 * [`console.*`](https://developer.mozilla.org/en-US/docs/Web/API/console).  There are
 quite a few worth learning, but here are some to get you started:
-    * [`console.log()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/log), [`console.warn()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/warn), and [`console.error`](https://developer.mozilla.org/en-US/docs/Web/API/Console/error)
+    * [`console.log()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/log), [`console.warn()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/warn), and [`console.error()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/error)
     * [`console.assert()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/assert)
     * [`console.count()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/count)
     * [`console.dir()`](https://developer.mozilla.org/en-US/docs/Web/API/Console/dir)
@@ -471,7 +525,7 @@ x = 7;      // assignment of previously declared variable
 var y = x;  // declaration and assignment combined
 ```
 
-A variables always has a *scope*, which is the location(s) in the code where it
+A variable always has a *scope*, which is the location(s) in the code where it
 is usable.  Consider the variables `total` and `value`, as well as the
 `add` function below:
 
@@ -734,7 +788,7 @@ written between the first `(...)` parentheses.  In essence, we have created a fu
 that gets executed immediately, and which returns another function that we will use
 going forward in our program.
 
-This is an technique to be aware of at this point, but not one you need to master
+This is an advanced technique to be aware of at this point, but not one you need to master
 right away.  We'll see it used, and use it ourselves, in later weeks to to avoid global variables,
 simulate block scope in JavaScript, and to choose or generate function implementations at runtime (e.g., [polyfill](https://remysharp.com/2010/10/08/what-is-a-polyfill)).
 
