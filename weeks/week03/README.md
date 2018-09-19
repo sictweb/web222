@@ -339,3 +339,5 @@ Write a series of functions to accomplish the following, building a larger progr
 5. Check if the `Height` field has `"cm"` at the end.  If it does, strip that out, convert the number to inches, and turn it into a `String` in the form `"xx inches"`.  For example: `"152 cm"` should become `"59 inches"`.  
 6. After doing all of the above steps, create a new record with `ID`, `Name`, `Area Code`, `Height In Inches` and separate them with commas
 7. Combine all these processed records into a new CSV formatted string, with rows separated by `\n`.
+
+A sample solution is provided in [example.js](weeks/week03/example.js).
