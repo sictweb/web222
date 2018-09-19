@@ -325,9 +325,9 @@ There are other [methods you can call](https://developer.mozilla.org/en-US/docs/
 You are asked to write JavaScript code to process a `String` which is in the form of a [Comma-Separated Values (CSV)](https://en.wikipedia.org/wiki/Comma-separated_values) formatted data dump of user information.  The data might look something like this:
 
 ```csv
-"0134134","John Smith","555-567-2341","62 inches"\n
-"0134135"   ,    "June    Lee"    ,  "5554126347" ,        "149 cm"\n
-"0134136",  "     Kim Thomas       ", "5324126347", "138cm"\n
+0134134,John Smith,555-567-2341,62 inches
+0134135   ,    June    Lee    ,  5554126347 ,        149 cm
+0134136,       Kim Thomas       , 5324126347, 138cm`
 ```
 
 Write a series of functions to accomplish the following, building a larger program as you go:
