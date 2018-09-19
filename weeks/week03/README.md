@@ -340,4 +340,4 @@ Write a series of functions to accomplish the following, building a larger progr
 6. After doing all of the above steps, create a new record with `ID`, `Name`, `Area Code`, `Height In Inches` and separate them with commas
 7. Combine all these processed records into a new CSV formatted string, with rows separated by `\n`.
 
-A sample solution is provided in [example.js](weeks/week03/example.js).
+A sample solution is provided in [example.js](example.js).
