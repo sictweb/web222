@@ -60,13 +60,13 @@ function formatName(name) {
 function findAreaCode(phoneNumber) {
     var phoneNumberRegex = /(\d{3})-?\d{3}-?\d{4}/;
     var matches = phoneNumber.match(phoneNumberRegex);
-    var areaCode = matches[1] || "No Area Code";
+    var areaCode = matches[1] || 'No Area Code';
     return areaCode;
 }
 
 function getHeightInInches(height) {
     // If the height is already in inches, we're done, and can return it back again.
-    if(height.endsWith("inches")) {
+    if(height.endsWith('inches')) {
         return height;
     }
 
@@ -74,7 +74,7 @@ function getHeightInInches(height) {
     // then convert to inches (with 2 decimal places) and add "inches" before returning.
     var heightCM = parseFloat(height);
     var heightInches = (heightCM * 0.39).toFixed(2);
-    return heightInches + " inches";
+    return heightInches + ' inches';
 }
 
 function processCSV(csv) {
