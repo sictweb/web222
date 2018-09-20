@@ -12,7 +12,7 @@ The WEB222 course content is here available at [https://web222.ca](https://web22
 |1     | Course introduction, [Internet architecture and Introduction to JavaScript](weeks/week01/README.md) |
 |2     | [JavaScript functions, Built-ins/globals, JavaScript scope and closures](weeks/week02/README.md) |
 |3     | [Intro to Objects, Built-in Objects `String`, `Array`, `RegExp`](weeks/week03/README.md) |
-|4     | More Built-in Objects: `Date`, `Math`, User-defined objects, Prototypal inheritance |
+|4     | [More Built-in Objects: `Date`, `Math`, User-defined objects, Prototypal inheritance](weeks/week04/README.md) |
 |5     | Introduction to HTML5, Document structure, elements |
 |6     | HTML lists, tables, media (images, audio, video), validation, scripts
 |7     | Document Object Model (DOM), Nodes, creating/modifying/querying the DOM, events |
