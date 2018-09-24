@@ -322,7 +322,7 @@ There are other [methods you can call](https://developer.mozilla.org/en-US/docs/
 
 ## A Larger Problem Combining Everything:
 
-You are asked to write JavaScript code to process a `String` which is in the form of a [Comma-Separated Values (CSV)](https://en.wikipedia.org/wiki/Comma-separated_values) formatted data dump of user information.  The data might look something like this:
+You are [asked to write JavaScript code](exercise.js) to process a `String` which is in the form of a [Comma-Separated Values (CSV)](https://en.wikipedia.org/wiki/Comma-separated_values) formatted data dump of user information.  The data might look something like this:
 
 ```csv
 0134134,John Smith,555-567-2341,62 inches
@@ -330,7 +330,7 @@ You are asked to write JavaScript code to process a `String` which is in the for
 0134136,       Kim Thomas       , 5324126347, 138cm`
 ```
 
-Write a series of functions to accomplish the following, building a larger program as you go:
+Write a series of functions to accomplish the following, building a larger program as you go.  You can begin with [exercise.js](exercise.js):
 
 1. Split the string into an `Array` of separate rows (i.e., an `Array` with rows separated by `\n`).  Bonus: how could we deal with data that includes both Unix (`\n`) and Windows (`\r\n`) line endings?
 2. Each row contains information user info: `ID`, `Name`, `Phone Number`, and `Height` info all separated by commas.  Split each row into an `Array` with all of its different fields.  You need to deal with extra and/or no whitespace between the commas.
@@ -340,4 +340,4 @@ Write a series of functions to accomplish the following, building a larger progr
 6. After doing all of the above steps, create a new record with `ID`, `Name`, `Area Code`, `Height In Inches` and separate them with commas
 7. Combine all these processed records into a new CSV formatted string, with rows separated by `\n`.
 
-A sample solution is provided in [example.js](example.js).
+A sample solution is provided in [solution.js](solution.js).
