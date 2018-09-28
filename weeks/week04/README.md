@@ -164,7 +164,7 @@ o.height = '35 inches';
 o.owner = '012341341';
 
 // Clear the value of `height`. We leave the `height` key, but get rid of the '35 inches' value
-o.value = null;
+o.height = null;
 
 // Completely remove the owner property from the object (both the key and its value)
 delete o.owner;
@@ -175,7 +175,7 @@ delete o.owner;
 ## Using Objects: creating sets to track arbitrary lists
 
 Another common use of `Object`s, and their unique property keys, is to keep track of a sets, for example
-to count an unknown number of items.  Consider the following program, which tracks how many times each
+to count or keep track of an unknown number of items.  Consider the following program, which tracks how many times each
 character appears within a `String`.  The code uses the `[]` operator to allow for the keys to be created
 and accessed via a variable (`char`).  Without an `Object` we would have to hard-code variables for each
 separate letter.
