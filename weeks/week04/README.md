@@ -578,3 +578,5 @@ var msg2 = new Message('I am learning how to use Objects in JavaScript');
 console.log(msg2.toMorse());
 console.log(msg2.toAlpha());
 ```
+
+You can download the [code above](example.js) as well as a [possible solution](solution.js).
