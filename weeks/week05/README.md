@@ -214,30 +214,7 @@ We create dynamic web content and applications through the use of scripting:
 
 ## Examples:
 
-<a>
-
-E-mail link 
-<a href="mailto:wsong@myseneca.on.ca">Email me</a>
-
-Phone link
-<a href="tel:+14164915050">+1 416 491 5050</a>
-
-Image link 
-<a href="http://www.senecacollege.ca/">
-   <img src="seneca-logo.png" alt="Seneca College" /> 
-</a>
-
-<a id="chapter-1"></a>
-
-<a href="#chapter-1"></a>
-
-download attribute when clicking on a link
-
-target attribute (_blank) to open in a new window/tab
-
-
-<img>
-
-<ul>
-
-<ol>
+* [Lists: ordered and unordered](list-example.html)
+* [Anchors: creating hyperlinks](anchor-example.html)
+* [Images: using img](img-example.html)
+* [Text: text sections](text-example.html)
