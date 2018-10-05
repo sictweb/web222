@@ -121,13 +121,13 @@ Here's a basic HTML5 web page:
 
 Let's break this down and look at what's happening.
 
-1. [`<!doctype html>](https://developer.mozilla.org/en-US/docs/Glossary/Doctype) tells the browser what kind of document this is, and how to interpret/render it
+1. [`<!doctype html>`](https://developer.mozilla.org/en-US/docs/Glossary/Doctype) tells the browser what kind of document this is, and how to interpret/render it
 2.  [`<html>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/html) the root element of our document: all other elements will be included with `<html>...</html>`.
 3. [`<head>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head) provides various information *about* the document as opposed to providing its content.  This is metadata that describes the document.
 4. [`<meta>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta) an example of some piece of metadata, in this case defining the [character set](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#Attributes) used in the document: [utf-8](https://en.wikipedia.org/wiki/UTF-8)
 5. [`<title>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title) an example of a specific (named) metadata element: the document's title, shown in the browser's title bar.  There are a number of specific named metadata elements like this.
-6. [`<body`>](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/body) the content of the document is contained within `<body>...</body>`.
-7. [`<!-- ... -->`] a comment, similar to using `/* ... */` in C or JavaScript
+6. [`<body>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/body) the content of the document is contained within `<body>...</body>`.
+7. `<!-- ... -->` a comment, similar to using `/* ... */` in C or JavaScript
 8. [`<h1>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/Heading_Elements) a heading element (there are headings 1 through 6), which is a title or sub-title in a document.
 
 Now let's try creating and loading this file in our browser:
@@ -181,7 +181,7 @@ provide clues to browsers, screen readers, and other software about how to prese
 
 We organize [content into "boxes,"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element#Text_content) some of which have unique layout characteristics.
 
-* [<`div`>](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div) - a generic container we use to attach CSS styles to a particular area of content
+* [`<div>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/div) - a generic container we use to attach CSS styles to a particular area of content
 * [`<ol>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ol) - an ordered list (1, 2, 3) of list items
 * [`<ul>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/ul) - an unordered list (bullets) of list items
 * [`<li>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/li) - a list item in an `<ul>` or `<ol>`
