@@ -2,9 +2,9 @@
 
 ## Suggested Readings
 
-* [HTML: HyperText Markup Language on MDN](https://developer.mozilla.org/en-US/docs/Web/HTML)
-* [HTML Basics](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/HTML_basics)
-* [Learning HTML: Guides and Tutorials](https://developer.mozilla.org/en-US/docs/Learn/HTML)
+* [HTML Tables (MDN)](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables)
+* [Images in HTML (MDN)](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Images_in_HTML)
+* [Video and Audio Content (MDN)](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Video_and_audio_content)
 * [HTML Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference)
 
 ## HTML Element Types: Block vs. Inline
@@ -73,7 +73,7 @@ In such cases we have two options:
 
 Sometimes our data is tabular in nature, and we need to present it in a grid.  A number of elements are used to create them:
 
-* [`<table>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table)
+* [`<table>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/table) - the root of a table in HTML
 * [`<caption>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/caption) - the optional title (or caption) of the table
 * [`<thead>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/thead) - row(s) at the top of the table (header row or rows)
 * [`<tbody>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tbody) - rows that form the main body of the table (the table's content rows)
@@ -83,7 +83,7 @@ We define rows and columns of data within the above using the following:
 
 * [`<tr>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/tr) - a single row in a table
 * [`<td>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/td) - a single cell (row/column intersection) that contains table data
-* [`<th>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th) - a header (e.g., a tile for a column) 
+* [`<th>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/th) - a header (e.g., a title for a column) 
 
 We can use the `rowspan` and `colspan` attributes to extend table elements beyond their usual bounds,
 for example: have an element span two columns (`colspan="2"`) or have a heading span 3 rows (`rowspan="3")`.
@@ -134,6 +134,10 @@ We specify the media source we want to use, and also how to present it to the us
 via different elements and attributes
 
 ```html
+<!-- External image URL, use full width of browser window -->
+<img src="https://images.unsplash.com/photo-1502720433255-614171a1835e?ixlib=rb-0.3.5&ixid=eyJhcHBfaWQiOjEyMDd9&s=344dfca9dc8cb137a4b1c2c711752bc5">
+
+<!-- Local file cat.jpg, limit to 400 pixels wide -->
 <img src="cat.jpg" alt="Picture of a cat" width="400">
 ```
 
@@ -157,6 +161,10 @@ We can also include sounds, music, or other audio:
 Including video is very similar to audio:
 
 ```html
+<!-- External Video File, MP4 file format, show controls -->
+<video src="http://commondatastorage.googleapis.com/gtv-videos-bucket/sample/BigBuckBunny.mp4" controls></video>
+
+<!-- Local video file in various formats, show with controls -->
 <video width="320" height="240" controls>
     <source src="video.mp4" type="video/mp4">
     <source src="video.ogg" type="video/ogg">
