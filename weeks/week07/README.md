@@ -53,7 +53,7 @@ Here are the nodes that would be created:
 
 ![DOM Nodes in our p example](images/p-node.png)
 
-In this diagram, the gray boxes represent element nodes, while the white boxes are text nodes.
+In this diagram, the gray, square boxes represent element nodes, while the white, rounded boxes are text nodes.
 
 When we load a web page in a web browser, we see its fully parsed and rendered form.
 The web browser *begins* with the initial content we provide in our HTML.  We can see the
@@ -103,30 +103,29 @@ to access and use the Objects, functions, and properties made available to us by
 As web programmers we use the DOM via JavaScript to accomplish a number of important tasks:
 
 1. Finding and getting references to elements in the page
-1. Inspecting and modifying elements and their content
 1. Creating, adding, and removing elements from the DOM tree
+1. Inspecting and modifying elements and their content
 1. Run code in response to events triggered by the user, browser, or other parts of our code
 
 Let's look at each one in turn.
 
-[`window`](https://developer.mozilla.org/en-US/docs/Web/API/Window)
-
-[`window.document`](https://developer.mozilla.org/en-US/docs/Web/API/Document)
-
 ### Finding elements in the DOM with JavaScript
 
-Our entry point to the DOM from JavaScript is via the global variable `window`.  Every
-web page runs in an environment created by the browser, and that environment includes
+Our entry point to the DOM from JavaScript is via the global variable [`window`](https://developer.mozilla.org/en-US/docs/Web/API/Window).
+Every web page runs in an environment created by the browser, and that environment includes
 a global variable named [`window`](https://developer.mozilla.org/en-US/docs/Glossary/Global_object#window_object_in_the_Browser),
 which is provided by the browser (i.e., we don't create it).
 
 There are hundreds of Objects, methods, and properties available to our JavaScript code
-via `window`.  One example is `document`, which is how we access the DOM in our code:
+via `window`.  One example is [`window.document`](https://developer.mozilla.org/en-US/docs/Web/API/Document),
+which is how we access the DOM in our code:
 
 ```js
 // Access the document object for our web page, which is in the current window
 var document = window.document;
 ```
+
+> NOTE: since properties like `document` are available on the global `window` object, it is common to simply write `document` instead of `window.document`, since the global object is implied if no other scope is given.
 
 Our document's tree of elements are now accessible to us, and we can access a number of 
 well-known elements by name, for example:
@@ -176,13 +175,20 @@ elements in our document:
     </script>
     ```
 * [`document.querySelectorAll(selectors)`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll) - similar to `document.querySelector(selectors`, but returns *all* elements that match the selectors as a [`NodeList`](https://developer.mozilla.org/en-US/docs/Web/API/NodeList):
-    ```js
-    // Get all <p> elements in the document as a list
-    var pElements = document.querySelectorAll('p');
-    // Loop through all returned <p> elements in our list
-    pElements.forEach(function(p) { 
-        // p is one of the returned <p> elements
-    });
+    ```html
+    <div id="menu">
+        <p class="formatted">Paragraph 1...</p>
+        <p class="formatted">Paragraph 2...</p>
+        <p class="formatted">Paragraph 3...</p>
+    </div>
+    <script>
+        // Get all <p> elements in the document as a list
+        var pElements = document.querySelectorAll('p');
+        // Loop through all returned <p> elements in our list
+        pElements.forEach(function(p) { 
+            // p is one of the returned <p> elements
+        });
+    </script>
     ```
 
 These four methods will work in any situation where you need to get a reference to
@@ -197,114 +203,167 @@ var elem = document.getElementById('demo');
 var elem = document.querySelector('#demo');
 ```
 
-### Inspecting, Modifying a DOM element with JavaScript
-
-Properties
-
-element.className
-element.id
-element.innerHTML
-element.parentNode
-element.nextSibling
-...
-
-
-Methods
-
-element.querySelector()
-element.querySelectorAll()
-
-element.removeChild(node) - removes the `node` from the `element`'s child list
-element.appendChild(node) - places `node` at the end of the `element`'s child list
-element.insertBefore(new, old) - places the `new` node in the `element`'s child list just before `old` child
-
-element.hasAttribute(name) - checks if the attribute `name` exists on this `element`
-element.getAttribute(name) - gets the value of the attribute `name` on this `element`
-element.setAttribute(name, value) - sets the `value` of the attribute `name` on this `element`
-element.removeAttribute(name) - removes the attribute `name` from this `element`
-
-```html
-<!-- The `hidden` attribute means this <div> won't be displayed until it's removed -->
-<div id="error-message" hidden>
-    <p>There was an error saving the document.  Please try again!</p>
-</div>
-<script>
-    // Try to save the file, and 
-    var error = saveFile(); 
-    if(error) {
-        var elem = document.querySelector('#error-message');
-        elem.removeAttribute('hidden');
-    }
-</script>
-```
-
-```js
-// Insert the user's picture (e.g., in response to hovering over a username)
-var profilePic = document.createElement('img');
-
-// Set attributes via getters/setters on the element vs. attributes
-profilePic.id = 'user-' + username;
-profilePic.height = 50;
-profilePic.src = './images/' + username + '-user-profile.jpg';
-
-// Insert the profile pic <img> into the document
-document.body.appendChild(profilePic);
-```
-
-```js
-// Use .innerHTML as a getter and setter to update some text
-var elem = document.querySelector('#text');
-
-elem.innerHTML = '<p>This is a paragraph</p>';
-elem.innerHTML = elem.innerHTML + '<p>This is another paragraph</p>';
-```
-
 ### Creating elements and Modifying the DOM with JavaScript
 
-document.createElement(name)
-document.createTextNode()
-document.createAttribute()
-document.createComment()
-parentNode.appendChild(node)
-parentNode.removeChild(node)
+In addition to searching through the DOM using JavaScript, we can also make changes to it.  The DOM provides a number
+of methods that allow use to create new content: 
 
+* [`document.createElement(name)`](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) - creates and returns a new element of the type specified by `name`.
+    ```js
+    var paragraphElement = document.createElement('p');
+    var imageElement = document.createElement('img');
+    ```
+* [`document.createTextNode()`](https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode) - creates a text node (the text within an element vs. the element itself).
+    ```js
+    var textNode = document.createTextNode('This is some text to show in an element');
+    ```
+
+These methods create the new nodes, but do not place them into the page.  To do that, we first need to find
+the correct position within the exsting DOM tree, and then add our new node.  We have to be clear *where* we want
+the new element to get placed in the DOM.
+
+For example, if we want to place a node at the end of the `<body>`, we could use `.appendChild()`:
 
 ```js
-// Create a new <h2> element
-var newHeading = document.createElement('h2');
-
-// Add some text to the <h2> element we just created.
-// Similar to doing <h2>This is a heading</h2>.
-var textNode = document.createTextNode('This is a heading');
-// Add the textNode to the heading's child list
-newHeading.appendChild(textNode);
-
-// Insert our heading into the document, at the end of <body>
-document.body.appendChild(newHeading);
+var paragraphElement = document.createElement('p');
+document.body.appendChild(paragraphElement);
 ```
 
+If we instead wanted to place it within an existing `<div id="content">`, we'd do this:
 
-```html
-<div id="demo"></div>
-<script>
-    // Create a <p> element
-    var pElem = document.createElement('p');
-
-    // Use .innerHTML to create text nodes inside our <p>...</p>
-    pElem.innerHTML = 'This is a paragraph.';
-
-    // Get a reference to our <div> with id = demo
-    var demoDiv = document.querySelector('#demo');
-
-    // Append our <p> element to the <div>
-    demoDiv.appendChild(pElem);
-</script>
+```js
+var paragraphElement = document.createElement('p');
+var contentDiv = document.querySelector('#content');
+contentDiv.appendChild(paragraphElement);
 ```
 
+Both examples work the same way: given a parent node (`document` or `<div id="content">`), add
+(append to the end of the list of children) our new element.
+
+We can also use `.insertBefore(new, old)` to accomplish something similar: add our new node before
+the `old` (existing) node in the DOM:
+
+```js
+var paragraphElement = document.createElement('p');
+var contentDiv = document.querySelector('#content');
+var firstDivParagraph = contentDiv.querySelector('p');
+contentDiv.insertBefore(paragraphElement, firstDivParagraph);
+```
+
+Removing a node is similar, and uses `removeChild()`:
+
+```js
+// Remove a loading spinner
+var loadingSpinner = document.querySelector('#loading-spinner');
+// Get a reference to the loading spinner's parent element
+var parent = loadingSpinner.parentNode;
+parent.removeChild(loadingSpinner);
+```
+
+### Examples
+
+1. Add a new heading to a document
+    ```js
+    // Create a new <h2> element
+    var newHeading = document.createElement('h2');
+
+    // Add some text to the <h2> element we just created.
+    // Similar to doing <h2>This is a heading</h2>.
+    var textNode = document.createTextNode('This is a heading');
+    // Add the textNode to the heading's child list
+    newHeading.appendChild(textNode);
+
+    // Insert our heading into the document, at the end of <body>
+    document.body.appendChild(newHeading);
+    ```
+1. Create a new paragraph and insert into the document
+    ```html
+    <div id="demo"></div>
+    <script>
+        // Create a <p> element
+        var pElem = document.createElement('p');
+
+        // Use .innerHTML to create text nodes inside our <p>...</p>
+        pElem.innerHTML = 'This is a paragraph.';
+
+        // Get a reference to our <div> with id = demo
+        var demoDiv = document.querySelector('#demo');
+
+        // Append our <p> element to the <div>
+        demoDiv.appendChild(pElem);
+    </script>
+    ```
+
+### Inspecting, Modifying a DOM element with JavaScript
+
+Once we have a reference to an element in JavaScript, we use a number of properties and methods to
+work with it.
+
+### [Element Properties](https://developer.mozilla.org/en-US/docs/Web/API/Element#Properties)
+
+* `element.id` - the `id` of the element.  For example: `<p id="intro"></p>` has an `id` of `"intro"`. 
+* `element.innerHTML` - gets or sets the markup contained within the element, which could be text, but could also include other HTML tags.
+* `element.parentNode` - gets a reference to the parent `node` of this element in the DOM.
+* `element.nextSibling` - gets a refernce to the sibling element of this element, if any.
+* `element.className` - gets or sets the value of the `class` attribute for the elmenet.
+
+### [Element Methods](https://developer.mozilla.org/en-US/docs/Web/API/Element#Methods)
+
+* `element.querySelector()` - same as `document.querySelector()`, but begins searching from `element` vs. `document`
+* `element.querySelectorAll()` - same as `document.querySelectorAll()`, but begins searching from `element` vs. `document`
+* `element.scrollIntoView()` - scrolls the page until the element is in view.
+
+* `element.hasAttribute(name)` - checks if the attribute `name` exists on this `element`
+* `element.getAttribute(name)` - gets the value of the attribute `name` on this `element`
+* `element.setAttribute(name, value)` - sets the `value` of the attribute `name` on this `element`
+* `element.removeAttribute(name)` - removes the attribute `name` from this `element`
+
+### Examples
+
+1. Reveal an error message in the page, by removing an element's `hidden` attribute
+    ```html
+    <!-- The `hidden` attribute means this <div> won't be displayed until it's removed -->
+    <div id="error-message" hidden>
+        <p>There was an error saving the document.  Please try again!</p>
+    </div>
+    <script>
+        // Try to save the file, and 
+        var error = saveFile(); 
+        if(error) {
+            var elem = document.querySelector('#error-message');
+            elem.removeAttribute('hidden');
+        }
+    </script>
+    ```
+1. Insert a user's profile picture into the page
+    ```js
+    // Insert the user's picture (e.g., in response to hovering over a username)
+    var profilePic = document.createElement('img');
+
+    // Set attributes via getters/setters on the element vs. attributes
+    profilePic.id = 'user-' + username;
+    profilePic.height = 50;
+    profilePic.src = './images/' + username + '-user-profile.jpg';
+
+    // Insert the profile pic <img> into the document
+    document.body.appendChild(profilePic);
+
+    // Make sure the new image is visible, or scroll until it is
+    profilePic.scrollIntoView();
+    ```
+1. Add new paragraph elements to a div
+    ```js
+    // Use .innerHTML as a getter and setter to update some text
+    var elem = document.querySelector('#text');
+
+    elem.innerHTML = '<p>This is a paragraph</p>';
+    elem.innerHTML = elem.innerHTML + '<p>This is another paragraph</p>';
+    ```
 
 ### Events
 
-The DOM relies heavily on a concept known as [event-driven programming](https://en.wikipedia.org/wiki/Event-driven_programming).  In event-driven programs,
+The DOM relies heavily on a concept known as [event-driven programming](https://en.wikipedia.org/wiki/Event-driven_programming).
+In event-driven programs,
 a main loop (aka the event loop), listens for, and processes events as they occur.
 Examples of events include things like user actions (clicking a button, moving the mouse,
 pressing a key, changing tabs in the browser), or browser or code initiated actions (timers,
@@ -387,45 +446,87 @@ In this second example, it's possible for the browser to call more than one func
 different parts of our code don't have to be combined into a single function.  Instead,
 we can keep things separate (saving logic vs. analytics logic).
 
+#### Common Events
 
+There are [many types of events we can listen for in the DOM](https://developer.mozilla.org/en-US/docs/Web/Events),
+some of which are very specialized to certain elements or Objects.  However, there some common ones we'll use quite often:
 
+* [`load`](https://developer.mozilla.org/en-US/docs/Web/Events/load) - fired when a resource has finished loading (e.g., a `window`, `img`)
+* [`beforeunload`](https://developer.mozilla.org/en-US/docs/Web/Events/beforeunload) - fired just before the window is about to be unloaded (closed)
+* [`focus`](https://developer.mozilla.org/en-US/docs/Web/Events/focus) - when the element receives focus (cursor input)
+* [`blur`](https://developer.mozilla.org/en-US/docs/Web/Events/blur) - when the element loses focus
+* [`click`](https://developer.mozilla.org/en-US/docs/Web/Events/click) - when the user single clicks on an element
+* [`dblclick`](https://developer.mozilla.org/en-US/docs/Web/Events/dblclick) - when the user double clicks on an element
+* [`contextmenu`](https://developer.mozilla.org/en-US/docs/Web/Events/contextmenu) - when the right mouse button is clicked
+* [`keypress`](https://developer.mozilla.org/en-US/docs/Web/Events/keypress) - when a key is pressed on the keyboard
+* [`change`](https://developer.mozilla.org/en-US/docs/Web/Events/change) - when the content of an element changes (e.g., an input element in a form)
+* [`mouseout`](https://developer.mozilla.org/en-US/docs/Web/Events/mouseout) - when the user moves the mouse outside the element
+* [`mouseover`](https://developer.mozilla.org/en-US/docs/Web/Events/mouseover) - when the user moves the mouse over top of the element
+* [`resize`](https://developer.mozilla.org/en-US/docs/Web/Events/resize) - when the element is resized
 
-`window.onload`
-`window.onbeforeunload` - just before the window is about to be unloaded
+All of the events desribed above can be used in either of the two ways we discussed above.
+For example, if we wanted to use the `mouseout` event on an element:
 
-`onfocus` - when the element receives focus (cursor input)
-`onblur` - when the element loses focus
-`element.onclick` - when the user single clicks on an element
-`element.ondblclick` - when the user double clicks on an element
-`element.onchange` - when the content of an element changes (e.g., an input element in a form)
-`onmouseout` - when the user moves the mouse outside the element
-`onmouseover` - when the user moves the mouse over top of the element
-`onresize` - when the element is resized
+```html
+<div id="map">...</div>
+<script>
+    var map = document.querySelector('map');
 
+    // Method 1: register a single event handler via the on* property
+    map.onmouseout = function(e) {
+        // do something here in response to the mouseout event on this div.
+    }
 
+    // Method 2: register one of perhaps many event handlers via addEventListener
+    map.addEventListener('mouseout', function(e) {
+        // do something here in response to the mouseout event on this div.
+    });
+</script>
+```
+
+## Timers
+
+It's also possible for us to write an event handler that happens in response to a timing event (delay) vs.
+a user or browser event.  Using these timing event handlers, we scheduling a task (function) to run after
+a certain period of time has elapsed:
 
 * `setTimeout(function, delayMS)` - schedule a task (`function`) to be run in the future (`delayMS` milliseconds from now).  Can be cancelled with `clearTimeout(timerID)`
 * `setInterval(function, delayMS)` - schedule a task (`function`) to be run in the future every `delayMS` milliseconds from now.  Function will be called repeatedly.  Can be cancelled with `clearInterval(timerID)`
 
 ```html
+<button id="btn-start">Start Timer</button> <button id="btn-end">End Timer</button>
 <p>The current date and time is <time id="current-date"></time></p>
 <script>
-    setInterval(function() {
-        var currentDate = document.querySelector('#current-date');
-        var now = new Date();
-        currentDate.innerHTML = now.toLocaleString();
-    }, 1000);
+    var startButton = document.querySelector('#btn-start');
+    var endButton = document.querySelector('#btn-end');
+    var timerId;
+
+    // When the user clicks Start, start our timer
+    startButton.onclick = function(e) {
+        // If the user clicks it more than once, ignore it once it's running
+        if(timerId) {
+            return;
+        }
+
+        timerId = setInterval(function() {
+            var currentDate = document.querySelector('#current-date');
+            var now = new Date();
+            currentDate.innerHTML = now.toLocaleString();
+        }, 1000);
+    };
+
+    endButton.onclick = function(e) {
+        // If the user clicks End when the timer isn't running, ignore it.
+        if(!timerId) {
+            return;
+        }
+
+        // Stop the timer
+        clearInterval(timerId);
+        timerId = null;
+    };
 </script>
 ```
-
-
-
-
-[`Node`](https://developer.mozilla.org/en-US/docs/Web/API/Node)
-[`NodeList`](https://developer.mozilla.org/en-US/docs/Web/API/NodeList) - an array of elements
-
-
-
 
 ## DOM Programming Exercise
 
