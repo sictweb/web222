@@ -1,12 +1,5 @@
 # WEB222 - Week 7
 
-## Suggested Readings
-
-* [HTML Tables (MDN)](https://developer.mozilla.org/en-US/docs/Learn/HTML/Tables)
-* [Images in HTML (MDN)](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Images_in_HTML)
-* [Video and Audio Content (MDN)](https://developer.mozilla.org/en-US/docs/Learn/HTML/Multimedia_and_embedding/Video_and_audio_content)
-* [HTML Reference](https://developer.mozilla.org/en-US/docs/Web/HTML/Reference)
-
 ## From HTML to the DOM
 
 Web pages rely on HTML for their initial structure and content.  We write web pages using HTML,
@@ -20,7 +13,7 @@ The DOM Tree is a living version of our HTML.
 <html>
     <head>
         <title>This is a Document!</title>
-        <meta charset="UTF-8">
+        <meta charset="utf-8">
     </head>
     <body>
         <h1>Welcome!</h1>
@@ -213,7 +206,7 @@ of methods that allow use to create new content:
     var paragraphElement = document.createElement('p');
     var imageElement = document.createElement('img');
     ```
-* [`document.createTextNode()`](https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode) - creates a text node (the text within an element vs. the element itself).
+* [`document.createTextNode(text)`](https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode) - creates a text node (the text within an element vs. the element itself).
     ```js
     var textNode = document.createTextNode('This is some text to show in an element');
     ```
@@ -382,7 +375,7 @@ action to occur.  DOM events have a `name` we use to refer to them in code.
 
 We can register a DOM event handler for a given event in one of two ways: 
 
-1. `element.onevent`
+1. `element.onevent = function(e) {...};`
 1. `element.addEventListener('event', function(e) {...})`
 
 In both cases above, we need an HTML element.  Elements in the DOM can trigger one or more
@@ -493,9 +486,12 @@ a certain period of time has elapsed:
 * `setTimeout(function, delayMS)` - schedule a task (`function`) to be run in the future (`delayMS` milliseconds from now).  Can be cancelled with `clearTimeout(timerID)`
 * `setInterval(function, delayMS)` - schedule a task (`function`) to be run in the future every `delayMS` milliseconds from now.  Function will be called repeatedly.  Can be cancelled with `clearInterval(timerID)`
 
+Here's an example of using an `interval` to update a web page with the current date and time every 1 second.
+
 ```html
-<button id="btn-start">Start Timer</button> <button id="btn-end">End Timer</button>
-<p>The current date and time is <time id="current-date"></time></p>
+<p hidden>The current date and time is <time id="current-date"></time></p>
+<button id="btn-start">Start Timer</button>
+<button id="btn-end">End Timer</button>
 <script>
     var startButton = document.querySelector('#btn-start');
     var endButton = document.querySelector('#btn-end');
@@ -508,8 +504,11 @@ a certain period of time has elapsed:
             return;
         }
 
+        var currentDate = document.querySelector('#current-date');
+        currentDate.removeAttribute('hidden');
+
+        // Start our timer to update every 1000ms (1s), showing the current date/time.
         timerId = setInterval(function() {
-            var currentDate = document.querySelector('#current-date');
             var now = new Date();
             currentDate.innerHTML = now.toLocaleString();
         }, 1000);
