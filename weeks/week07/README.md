@@ -561,7 +561,7 @@ Some events also provide specialized (i.e., derived from `Event`) `event` Object
 with extra data on them related to the context of the event.  For example, a [`MouseEvent`](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent)
 gives extra detail whenever a click, mouse move, etc. event occurs:
 
-```js
+```html
 <div id="position"></div>
 <script>
     document.body.addEventListener('click', function(e) {
