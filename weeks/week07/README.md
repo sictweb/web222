@@ -357,9 +357,10 @@ work with it.
 
 The DOM relies heavily on a concept known as [event-driven programming](https://en.wikipedia.org/wiki/Event-driven_programming).
 In event-driven programs,
-a main loop (aka the event loop), listens for, and processes events as they occur.
+a main loop (aka the *event loop*), processes events as they occur.
+
 Examples of events include things like user actions (clicking a button, moving the mouse,
-pressing a key, changing tabs in the browser), or browser or code initiated actions (timers,
+pressing a key, changing tabs in the browser), or browser/code initiated actions (timers,
 messages from background processes, reports from sensors).
 
 Instead of writing a program in a strict order, we write functions that should be called
@@ -369,19 +370,54 @@ event handler for a given event, when it occurs the browser will simply ignore i
 if one or more event handlers are registered to listen for this event, the browser will
 call each event handler's function in turn.
 
-DOM programming is typically done by writing many functions that will happen in response
+> You can think of events like light switches, and event handlers like light fixtures: flipping a light switch on or off triggers an action in the light fixture, or possibly in multiple light fixtures at once.  The lights handle the event of the light switch being flipped.
+
+DOM programming is typically done by writing many functions that execute in response
 to events in the browser.  We register our event handlers to indicate that we want a particular
 action to occur.  DOM events have a `name` we use to refer to them in code.
 
 We can register a DOM event handler for a given event in one of two ways: 
 
 1. `element.onevent = function(e) {...};`
-1. `element.addEventListener('event', function(e) {...})`
+1. `element.addEventListener('event', function(e) {...})` and `element.removEventListener('event', function(e) {...})`
 
-In both cases above, we need an HTML element.  Elements in the DOM can trigger one or more
-events, and we must know the name of the event we want to handle.  In the first method above,
-a single event handler is registered.  In the second, we can add as many individual event
-handlers as we wish.
+In both cases above, we first need an HTML element.  Events are emitted to a *target* element.
+Elements in the DOM can trigger one or more events, and we must know the name of the event we want
+to handle.
+
+In the first method above, `element.onevent = function(e) {...};`, a single event handler is registered
+for the `event` event connected with the target element `element`.  For example, `document.body.onclick = function(e) {...};`,
+indicates we want to register an event handler for the `click` event on the `document.body` element (i.e., `<body>...</body>`).
+
+In the second method above, use `addEventListener()` to add as many individual, separate event handlers as we need.
+Whereas `element.onclick = function(e) {...};` binds a single event handler (function) to the `click` event for `element`,
+using `element.addEventListener('click', function(e) {...});` *adds* a new event handler (function) to any that might already
+exist.
+
+Consider the following code:
+
+```js
+var body = document.body;
+
+function handleClick(e) {
+    // Process the click event
+}
+
+function handleClick2(e) {
+    // Another click handler
+}
+
+body.onclick = handleClick;
+body.onclick = handleClick2;
+// There is only 1 click event handler on body: handleClick2 has replaced handleClick.
+
+body.addEventListener('click', handleClick);
+body.addEventListener('click', handleClick2);
+// There are now multiple, unique click handlers bound to the body's click event.
+```
+
+Because `addEventListener()` is more versatile than the older `onevent` properties, you are
+encouraged to use it in most cases.
 
 Here's an example of the first method, where we only need a single event handler.
 In the following case, a web page has a Save button, and we want to save the user's
@@ -392,6 +428,10 @@ work when she clicks it.
 <script>
     // Get a reference to our Save <button>
     var saveBtn = document.querySelector('#btn-save');
+
+    function save() {
+        // Save the user's work
+    }
 
     // Register a single event handler on the save button's click event
     saveBtn.onclick = function(e) {
@@ -457,7 +497,7 @@ some of which are very specialized to certain elements or Objects.  However, the
 * [`mouseover`](https://developer.mozilla.org/en-US/docs/Web/Events/mouseover) - when the user moves the mouse over top of the element
 * [`resize`](https://developer.mozilla.org/en-US/docs/Web/Events/resize) - when the element is resized
 
-All of the events desribed above can be used in either of the two ways we discussed above.
+All of the events described above can be used in either of the two ways we discussed above.
 For example, if we wanted to use the `mouseout` event on an element:
 
 ```html
@@ -477,7 +517,65 @@ For example, if we wanted to use the `mouseout` event on an element:
 </script>
 ```
 
-## Timers
+#### The [`Event` Object](https://developer.mozilla.org/en-US/docs/Web/API/Event) 
+
+In the example code above, you may have noticed that our event handler functions often looked like this:
+
+```js
+element.onclick = function(e) {
+    // e is an instance of the Event object
+}
+```
+
+The single `e` argument is an instance of the [`Event` Object](https://developer.mozilla.org/en-US/docs/Web/API/Event).
+The `e` or `event` is provided to our event handler function in order to pass information about the event, and to give
+us a chance to alter what happens next.
+
+For example, we can get a reference to the element to which the event was dispatched using
+[`e.target`](https://developer.mozilla.org/en-US/docs/Web/API/Event/target).  We can also instruct
+the browser to prevent the "default" action from happening as a result of this event using
+[`e.preventDefault()`](https://developer.mozilla.org/en-US/docs/Web/API/Event/preventDefault), or
+stop the event from continuing to *bubble* up the DOM (i.e., rise up the DOM tree nodes, triggering
+other event handlers along the way) using [`e.stopPropagation()](https://developer.mozilla.org/en-US/docs/Web/API/Event/stopPropagation).
+
+Here's an example showing how to use these:
+
+```html
+<button id="btn">Click Me</button>
+<script>
+    document.querySelector('#btn').addEventListener('click', function(e) {
+        // Prevent this event from doing anything more, we'll handle it all here.
+        e.preventDefault();
+        e.stopPropagation();
+
+        // Get a reference to the <button> element
+        var btn = e.target;
+        
+        // Change the text of the button
+        btn.innerHTML = "You clicked Me!"
+    });
+</script>
+```
+
+Some events also provide specialized (i.e., derived from `Event`) `event` Objects
+with extra data on them related to the context of the event.  For example, a [`MouseEvent`](https://developer.mozilla.org/en-US/docs/Web/API/MouseEvent)
+gives extra detail whenever a click, mouse move, etc. event occurs:
+
+```js
+<div id="position"></div>
+<script>
+    document.body.addEventListener('click', function(e) {
+        // Get extra info about this mouse event so we know where the pointer was
+        var x = e.screenX;
+        var y = e.screenY;
+
+        // Display co-ordinates where the mouse was clicked: "Position (300, 342)"
+        document.querySelector('#position').innerHTML = `Position (${x}, ${y})`
+    });
+</script>
+```
+
+### Timers
 
 It's also possible for us to write an event handler that happens in response to a timing event (delay) vs.
 a user or browser event.  Using these timing event handlers, we scheduling a task (function) to run after
