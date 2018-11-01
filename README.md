@@ -16,7 +16,7 @@ The WEB222 course content is here available at [https://web222.ca](https://web22
 |5     | [Introduction to HTML5, Document structure, elements](weeks/week05/README.md) |
 |6     | [More HTML Elements, tables, media (images, audio, video), scripts, HTML Validation](weeks/week06/README.md) |
 |7     | [Document Object Model (DOM), Nodes, creating/modifying/querying the DOM, events](weeks/week07/README.md) |
-|8     | Introduction to CSS, selectors, web colors, units, properties and values, fonts, updating CSS using the DOM |
+|8     | [Introduction to CSS, selectors, web colors, units, properties and values, fonts, updating CSS using the DOM](weeks/week08/README.md) |
 |9     | CSS box model, backgrounds, display and positioning, navigation, menus |
 |10    | Introduction to HTML5 forms, `<input>` elements, styling using CSS |
 |11    | Client-side validation using HTML5 features and JavaScript |
