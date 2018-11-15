@@ -1,0 +1,157 @@
+/**
+* Add some fonts from Google Fonts
+*
+* Raleway - https://fonts.google.com/specimen/Raleway
+* Open Sans - https://fonts.google.com/specimen/Open+Sans
+* Font Awesome (for brand icons) https://fontawesome.com/
+*/
+@import url('https://fonts.googleapis.com/css?family=Open+Sans');
+@import url('https://fonts.googleapis.com/css?family=Raleway');
+@import url('https://use.fontawesome.com/releases/v5.5.0/css/all.css');
+
+/**
+* Style our root elements with some defaults
+*/
+html, body {
+    font-family: "Open Sans", sans-serif;
+    background-color: white;
+    padding: 0;
+    margin: 0;
+}
+
+/**
+* Page Heading
+*/
+.page-heading {
+    font-family: "Raleway", sans-serif;
+    padding: 2em;
+    color: white;
+    text-align: center;
+    /* Linear Gradient generated with https://cssgradient.io/swatches/ */
+    background: linear-gradient(90deg, #4b6cb7 0%, #182848 100%);
+}
+
+.page-heading h1 {
+    font-size: 3em;
+    margin: .3em;
+}
+
+.page-heading p {
+    font-style: italic;
+}
+
+/**
+* Top Navigation
+*/
+nav {
+    font-family: "Raleway", sans-serif;
+    background-color: black;
+    margin-bottom: 2em;
+    display: flex;
+}
+
+nav a {
+    display: block;
+    color: white;
+    text-align: center;
+    padding: 14px 16px;
+    text-decoration: none;
+}
+
+nav a:hover {
+    text-decoration: underline;
+}
+
+nav .align-right {
+    /* Use all available space as the left margin, pushing this over to right */
+    margin-left: auto;
+}
+
+/**
+* Main Blog Content. Don't let it get wider than 1024px
+*/
+main {
+    display: flex;
+    margin-left: auto;
+    margin-right: auto;
+    max-width: 1024px;
+}
+
+article {
+    padding: .5em 1em;
+    flex: 75%;
+}
+
+.blog-title {
+    background: url(images/mountains.jpg) no-repeat;
+    background-size: cover;
+    height: 300px;
+    padding: 1.5em;
+    border-radius: .5em;
+    border: 1px solid rgb(49, 75, 99);
+}
+
+.blog-title h2 {
+    margin: 0;
+    font-size: 2em;
+}
+
+.blog-title p {
+    margin-top: .1em;
+    font-style: italic;
+}
+
+/**
+* Sidebar
+*/
+aside {
+    font-family: "Raleway", sans-serif;
+    margin: 1em;
+    flex: 25%;
+}
+
+aside h2 {
+    color: black;
+    padding: .5em;
+    margin: 0;
+    font-size: 1.2em;
+}
+
+aside ul {
+    list-style-type: none;
+    margin: .7em;
+    padding: 0;
+}
+
+aside a {
+    color: #657786;
+    text-decoration: none;
+}
+
+aside a:hover {
+    text-decoration: underline;
+}
+
+/**
+* Bottom Footer
+*/
+footer {
+    padding: .3em;
+    text-align: center;
+    background: black;
+    color: white;
+}
+
+/**
+* Responsive Sizing - remove sidebar when we go below 960px wide
+*/
+@media screen and (max-width: 960px) {
+    article {
+        flex: 100%;
+    }
+
+    aside {
+        display: none;
+    }
+}
+ 

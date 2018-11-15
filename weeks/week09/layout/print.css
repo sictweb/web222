@@ -1,0 +1,14 @@
+/**
+ * For printing, hide content we don't need to see.
+ */
+.page-heading {
+    display: none;
+}
+
+aside {
+    display: none;
+}
+
+nav {
+    display: none;
+}
