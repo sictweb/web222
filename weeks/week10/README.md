@@ -348,7 +348,8 @@ translation service.  There are a number of ways to enter text:
 
 1. free-form text, which can span many lines
     <img alt="Google Translate with textarea" src="images/google-translate.png" width="600">
-1. upload a file to be translated 
+1. upload a file to be translated
+
     <img alt="Google Translate with file upload" src="images/google-translate-file.png" width="600">
 
 Here's a simplified version of the HTML used to create this form:
