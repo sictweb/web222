@@ -67,7 +67,7 @@ by looking at some well-known, real-world examples of forms and how they are bui
 
 Our first example is perhaps the most popular form on the web:
 
-![Google's search form](images/google-search.png =600x)
+![Google's search form](images/google-search.png | width=600)
 
 Here's a simplified version of the HTML Google uses to create that form (if you
 want to see the original, open your browser's dev tools on the Google home page
@@ -121,7 +121,7 @@ using a `<form>` and submitting via a `GET` request, the browser has created it 
 
 Our second example is well known to Seneca students: the login form on https://my.senecacollege.ca:
 
-![mySeneca Login Form](images/my-seneca-login.png =600x)
+![mySeneca Login Form](images/my-seneca-login.png | width=600)
 
 Here's a simplified version of the HTML used to create it:
 
@@ -194,7 +194,7 @@ sensitive form data to secure origins (i.e., using `https`).
 
 Let's look at another, somewhat more complex form, this time from Twitter's settings:
 
-![Twitter Email Notification Form](images/twitter-email.form.png =600x)
+![Twitter Email Notification Form](images/twitter-email.form.png | width=600)
 
 Here's a simplified version of the HTML used to create it:
 
@@ -289,7 +289,7 @@ value as the chosen value when the page loads.
 
 Here's another form that introduces a few more concepts:
 
-![Airbnb search form](images/airbnb-search.png =600x)
+![Airbnb search form](images/airbnb-search.png | width=600)
 
 And the simplified HTML used to create it:
 
