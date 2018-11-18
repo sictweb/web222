@@ -3,8 +3,8 @@
 ## Suggested Readings
 
 * [HTML Forms](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms)
-* [Native Form Widgets](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/The_native_form_widgets)
-
+* [Designing Efficient Web Forms: On Structure, Inputs, Labels and Actions](https://www.smashingmagazine.com/2017/06/designing-efficient-web-forms/)
+* [Create Amazing Forms](https://developers.google.com/web/fundamentals/design-and-ux/input/forms/)
 
 ## HTML5 Forms
 
@@ -67,7 +67,7 @@ by looking at some well-known, real-world examples of forms and how they are bui
 
 Our first example is perhaps the most popular form on the web:
 
-![Google's search form](images/google-search)
+![Google's search form](images/google-search.png)
 
 Here's a simplified version of the HTML Google uses to create that form (if you
 want to see the original, open your browser's dev tools on the Google home page
