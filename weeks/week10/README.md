@@ -67,7 +67,7 @@ by looking at some well-known, real-world examples of forms and how they are bui
 
 Our first example is perhaps the most popular form on the web:
 
-![Google's search form](images/google-search.png | width=600)
+<img src="images/google-search.png" alt="Google's search form" width="600">
 
 Here's a simplified version of the HTML Google uses to create that form (if you
 want to see the original, open your browser's dev tools on the Google home page
@@ -121,7 +121,7 @@ using a `<form>` and submitting via a `GET` request, the browser has created it 
 
 Our second example is well known to Seneca students: the login form on https://my.senecacollege.ca:
 
-![mySeneca Login Form](images/my-seneca-login.png | width=600)
+<img alt="mySeneca Login Form" src="images/my-seneca-login.png" width="600">
 
 Here's a simplified version of the HTML used to create it:
 
@@ -194,7 +194,7 @@ sensitive form data to secure origins (i.e., using `https`).
 
 Let's look at another, somewhat more complex form, this time from Twitter's settings:
 
-![Twitter Email Notification Form](images/twitter-email.form.png | width=600)
+<img alt="Twitter Email Notification Form" src="images/twitter-email.form.png" width="600">
 
 Here's a simplified version of the HTML used to create it:
 
@@ -289,7 +289,7 @@ value as the chosen value when the page loads.
 
 Here's another form that introduces a few more concepts:
 
-![Airbnb search form](images/airbnb-search.png | width=600)
+<img alt="Airbnb search form" src="images/airbnb-search.png" width="600">
 
 And the simplified HTML used to create it:
 
@@ -347,9 +347,9 @@ allows users to enter text in one language and have it get translated by Google'
 translation service.  There are a number of ways to enter text:
 
 1. free-form text, which can span many lines
-    ![Google Translate with textarea](images/google-translate.png)
+    <img alt="Google Translate with textarea" src="images/google-translate.png" width="600">
 1. upload a file to be translated 
-    ![Google Translate with file upload](images/google-translate-file.png)
+    <img alt="Google Translate with file upload" src="images/google-translate-file.png" width="600">
 
 Here's a simplified version of the HTML used to create this form:
 
