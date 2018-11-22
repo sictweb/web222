@@ -526,4 +526,4 @@ to specify the state of a form control:
 In this in-class example we'll create a simple HTML form and then style it using CSS.
 
 * [Initial HTML with no CSS](form-no-css.html)
-* [Final version with CSS](form-with-css.html)
+* [Final version with CSS](form-styled.html)
