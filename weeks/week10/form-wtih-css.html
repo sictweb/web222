@@ -1,0 +1,79 @@
+<!DOCTYPE html>
+<html>
+  <head>
+    <title>Form with CSS</title>
+    <meta charset="utf-8" />
+    <link rel="stylesheet" href="styles.css" type="text/css" />
+  </head>
+  <body>
+    <h1>Forms and CSS Styling</h1>
+    <p>
+      This form demonstrates many of the topics we have been discussing this
+      week. For this sample form, we are building a User Feedback Form.
+    </p>
+
+    <form name="feedback" action="/feedback" method="post">
+      <label for="feedback-user">Username</label>
+      <input
+        id="feedback-user"
+        name="username"
+        autocomplete="username"
+        type="text"
+        autofocus
+        tabindex="0"
+      />
+
+      <label for="feedback-fullname">Fullname</label>
+      <input
+        id="feedback-fullname"
+        name="name"
+        autocomplete="name"
+        type="text"
+        tabindex="1"
+      />
+
+      <label for="feedback-email">Email</label>
+      <input
+        id="feedback-email"
+        name="email"
+        autocomplete="email"
+        type="email"
+        tabindex="2"
+      />
+
+      <label for="feedback-date">Date</label>
+      <input id="feedback-date" name="date" type="date" tabindex="3" />
+
+      <label for="feedback-problem">Problem</label>
+      <input
+        type="text"
+        list="feedback-problems"
+        name="problem"
+        placeholder="I'm having a problem with the..."
+        tabindex="4"
+      />
+      <datalist id="feedback-problems">
+        <option value="Network"> </option>
+        <option value="User Interface"> </option>
+        <option value="Documentation"> </option>
+        <option value="Website"> </option>
+      </datalist>
+
+      <textarea
+        id="feedback-message"
+        name="message"
+        rows="10"
+        tabindex="5"
+        placeholder="What's happening?"
+      ></textarea>
+
+      <label for="feedback-file">File Upload</label>
+      <input type="file" id="feedback-file" name="file" tabindex="6" />
+
+      <div class="buttons">
+        <input type="submit" name="Submit" value="Submit" tabindex="7" />
+        <input type="reset" name="Reset" value="Reset" tabindex="8" />
+      </div>
+    </form>
+  </body>
+</html>

@@ -1,0 +1,105 @@
+/**
+* Add some fonts from Google Fonts
+*
+* Raleway - https://fonts.google.com/specimen/Raleway
+* Open Sans - https://fonts.google.com/specimen/Open+Sans
+*/
+@import url("https://fonts.googleapis.com/css?family=Open+Sans");
+@import url("https://fonts.googleapis.com/css?family=Raleway");
+
+/**
+ * Apply border-box to all elements in the page, so content, padding, and border
+ * are all taken into account when calculating width and height.
+ */
+* {
+  box-sizing: border-box;
+}
+
+body {
+  padding: 1em;
+  font-family: "Open Sans", sans-serif;
+}
+
+form {
+  /* apply some space around our form, and add a border */
+  margin-top: 3em;
+  padding: 2em;
+  border: 1px solid black;
+
+  /* set a max-width, so it doesn't expand with the window, using the rest as margin */
+  max-width: 800px;
+  min-width: 400px;
+  margin-left: auto;
+  margin-right: auto;
+
+  /* use a grid layout for items in the form: 2 columns, with most of the width in the second. */
+  display: grid;
+  grid-template-columns: 0.3fr 1fr;
+  /* align all items in the grid cells center, and add 20px of space between the rows/columns */
+  align-items: center;
+  grid-gap: 20px;
+}
+
+form label {
+  /* Use a better font and text size for our labels, to make them easy to read */
+  font-family: "Raleway", sans-serif;
+  font-size: 1.5em;
+}
+
+/**
+ * Style the input controls (and textarea) so they are full width in their cells,
+ * use a larger font-size, have a light gray border, and slightly rounded corners.
+ */
+input,
+textarea {
+  width: 100%;
+  padding: 0.3em;
+  font-size: 1.5em;
+  border: 1px solid rgb(206, 212, 218);
+  border-radius: 0.25em;
+}
+
+/**
+ * When the input controls (and textarea) have the focus, change the border
+ * colour to light blue so it's clear where you're entering text.
+ */
+input:focus,
+textarea:focus {
+  outline: 3px solid lightskyblue;
+}
+
+/**
+ * For our two "submit" style buttons, make them stand out a bit more
+ */
+input[type="submit"],
+input[type="reset"] {
+  width: 150px;
+  background-color: rgb(0, 123, 255);
+  color: white;
+}
+
+/**
+ * Also do something when you hover or focus them
+ */
+input[type="submit"]:hover,
+input[type="submit"]:focus,
+input[type="reset"]:hover,
+input[type="reset"]:focus {
+  background-color: #0069d9;
+}
+
+/**
+ * Stretch our texteara from the start of the grid to the end.  NOTE: the
+ * grid has 2 columns, but the numbers here are for the outside lines of each
+ */
+textarea {
+  grid-column: 1 / 3;
+}
+
+/**
+ * Move the buttons to the right side of the right column
+ */
+.buttons {
+  grid-column: 2 / 3;
+  text-align: right;
+}

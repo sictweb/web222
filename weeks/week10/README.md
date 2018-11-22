@@ -389,19 +389,42 @@ opens a File dialog box, allowing the user to navigate to their chosen file(s). 
 files are then "uploaded" to the web page, before being included in the form submission
 and sent to the server. 
 
-### Other `<input>` Types
+### Leverage the Platform: the right control
 
-We've seen many common `<input>` control types, but there are many more you can use:
+Before we look at styling, and think about custom UI, it's a good idea to remind ourselves about the built-in controls the web platform offers.  A textbox is often our first choice, but make sure you pick the [most appropriate input control type for the data you're expecting](https://developers.google.com/web/fundamentals/design-and-ux/input/forms/#html5_input_types):
 
-* [`<input type="image">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/image) - similar to a `<button>` or `submit` type, but allows a custom image to be used instead of the button.
-* [`<input type="reset"`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/reset) - a special button used to clear the form's current values
-* [`<input type="radio"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/radio) - a mix between a checkbox and dropdown list, where multiple values are available, but only one can be chosen at a time (e.g., Pick a colour: red, green, or blue).
-* [`<input type="tel"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number) - a special purpose textbox for entering a telephone number.
-* [`<input type="email"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email) - a special purpose textbox for entering an email address.
-* [`<input type="date"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date) - a special purpose textbox for entering a date.
+* [`<input type="tel"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number) - Telephone numbers. On mobile, the keyboard will show a keypad style entry vs. letters.
+* [`<input type="url"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/url) - URLs. On mobile, the keyboard will show extra buttons (e.g., `.com`) to make entering the URL easier.  URLs must begin with `http://` or another valid scheme.
+* [`<input type="email"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email) - Email Address.  On mobile, the keyboard will include keys like `@` to make it easier to enter an email address.
+* [`<input type="number"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number) - A Number (integer).  On mobile, the keyboard will switch to the number pad.
+* [`<input type="range"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range) - A Number between two values (i.e., range of values) .  Gets displayed as a slider, making it easier to switch between values.
+* [`<input type="date"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date), [`<input type="time"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time), [`<input type="week"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/week), [`<input type="month"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/month), [`<input type="date-local"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date-local) - Date/Time values (or portions thereof). Users are provided with special purpose date controls for entering valid dates, times, etc.
+* [`<input type="color"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/color) - Colour value. The OS will provide a colour picker control to visually select a colour.
 
 The [list goes on](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types), and it's worth familiarizing yourself with everything you can use.  Many of these
 controls have [special native rendering, especially on mobile devices](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/The_native_form_widgets).
+
+### Leverage the Platform: give the browser hints for `name` and `autocomplete`
+
+Browsers try to [autofill common field information](https://support.google.com/chrome/answer/142893) for users.  As a web developer,
+you can improve the user experience of your forms by giving the browser hints about
+the data you're expecting for each form input field.
+
+We do this using standard values for the `name="..."` and `autocomplete="..."` attributes on a form control.  For example, if we needed a username:
+
+```html
+<label for="username">Username</label>
+<input type="text" name="username" id="username" autocomplete="username">
+``
+
+Or, if we needed a user's mobile telephone number:
+
+```html
+<label for="mobile-num">Mobile Number</label>
+<input type="tel" name="mobile" autocomplete="tel" id="mobile-num">
+```
+
+There's a long list of [standard `name/autocomplete` values](https://html.spec.whatwg.org/multipage/form-control-infrastructure.html#autofill) that browsers know about and you should use whenever you want to help the user enter less information.
 
 ### Other `<input>` Attributes
 
@@ -421,3 +444,86 @@ are some [other important ones](https://developer.mozilla.org/en-US/docs/Web/HTM
         <option value="IOS110">
     </datalist>
     ```
+
+## Forms and CSS
+
+HTML forms have evolved and improved significantly in HTML5 and modern browsers.
+As you learn how to create and style your own forms, be aware that many resources
+give outdated advice, or use unnecessary workarounds and tricks to create functionality
+that is now built into the web.
+
+Form controls use the CSS box model, but [each one applies it slightly differently](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Styling_HTML_forms#Box_model).
+This can make it hard to align everything.  We can make things easier by altering
+our controls' [`box-sizing`](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing) to use [`border-box`](https://developer.mozilla.org/en-US/docs/Web/CSS/box-sizing#Values), where the `width` and `height` also include the controls content, padding, and border.  This
+helps to even out the inconsistencies between different controls and their sizes: 
+
+```css
+/* Example: make all controls 150px wide */
+input, textarea, select, button {
+  width : 150px;
+  margin: 0;
+  box-sizing: border-box;
+}
+```
+
+When working with `<label>`s and `<span>`s in forms, it's common to need to specify
+their width and height, so that they properly align with other controls in the form.  By default these controls are displayed as `inline` elements, but we can instead use
+[`display: inline-block;`](http://learnlayout.com/inline-block.html) to add a `width`
+and `height` to an inline element.
+
+```css
+label {
+    display: inline-block;
+    width: 100px;
+    text-align: right;
+}
+```
+
+### CSS Selectors and Forms
+
+There are a number of CSS selectors that are useful when working with forms.
+
+An attribute selector allows us to match on the basis of either:
+
+* the presence of an attribute
+* the exact or partial match of an attribute's value
+
+For example, consider the following:
+
+```css
+/* Style submit input controls */
+input[type="submit"] {
+    border: 2px solid #ccc;
+}
+```
+
+Another useful selector type are the various sibling selectors:
+
+```css
+/* Style all <input> elements that are direct siblings of a <label> */
+label+input {
+    ...
+}
+
+/* Style all <input> elements that are siblings (direct or indirect) of a <label> */ 
+label~input {
+    ...
+}
+```
+
+Finally, a range of pseudo-selectors can be added to other elements/selectors
+to specify the state of a form control:
+
+- `:valid` - style to be used when the value meets all of the validation requirements.
+- `:invalid` - style to be used when the value does not meet all of the validation requirements.
+- `:required` - style for an input element that has the required attribute set.
+- `:optional` - style for an input element that does not have the required attribute set.
+- `:in-range` - style for a number input element where the value is in range.
+- `:out-of-range` - style for a number input element where the value is out of range.
+
+## Form CSS Example
+
+In this in-class example we'll create a simple HTML form and then style it using CSS.
+
+* [Initial HTML with no CSS](form-no-css.html)
+* [Final version with CSS](form-with-css.html)
