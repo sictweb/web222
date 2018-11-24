@@ -393,21 +393,20 @@ and sent to the server.
 
 Before we look at styling, and think about custom UI, it's a good idea to remind ourselves about the built-in controls the web platform offers.  A textbox is often our first choice, but make sure you pick the [most appropriate input control type for the data you're expecting](https://developers.google.com/web/fundamentals/design-and-ux/input/forms/#html5_input_types):
 
-* [`<input type="tel"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number) - Telephone numbers. On mobile, the keyboard will show a keypad style entry vs. letters.
-* [`<input type="url"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/url) - URLs. On mobile, the keyboard will show extra buttons (e.g., `.com`) to make entering the URL easier.  URLs must begin with `http://` or another valid scheme.
-* [`<input type="email"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email) - Email Address.  On mobile, the keyboard will include keys like `@` to make it easier to enter an email address.
-* [`<input type="number"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number) - A Number (integer).  On mobile, the keyboard will switch to the number pad.
-* [`<input type="range"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range) - A Number between two values (i.e., range of values) .  Gets displayed as a slider, making it easier to switch between values.
-* [`<input type="date"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date), [`<input type="time"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time), [`<input type="week"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/week), [`<input type="month"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/month), [`<input type="date-local"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date-local) - Date/Time values (or portions thereof). Users are provided with special purpose date controls for entering valid dates, times, etc.
-* [`<input type="color"](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/color) - Colour value. The OS will provide a colour picker control to visually select a colour.
+* [`<input type="tel">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number) - Telephone numbers. On mobile, the keyboard will show a keypad style entry vs. letters.
+* [`<input type="url">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/url) - URLs. On mobile, the keyboard will show extra buttons (e.g., `.com`) to make entering the URL easier.  URLs must begin with `http://` or another valid scheme.
+* [`<input type="email">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/email) - Email Address.  On mobile, the keyboard will include keys like `@` to make it easier to enter an email address.
+* [`<input type="number">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/number) - A Number (integer).  On mobile, the keyboard will switch to the number pad.
+* [`<input type="range">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/range) - A Number between two values (i.e., range of values) .  Gets displayed as a slider, making it easier to switch between values.
+* [`<input type="date">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date), [`<input type="time">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/time), [`<input type="week">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/week), [`<input type="month">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/month), [`<input type="date-local">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/date-local) - Date/Time values (or portions thereof). Users are provided with special purpose date controls for entering valid dates, times, etc.
+* [`<input type="color">`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input/color) - Colour value. The OS will provide a colour picker control to visually select a colour.
 
 The [list goes on](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/input#Form_%3Cinput%3E_types), and it's worth familiarizing yourself with everything you can use.  Many of these
 controls have [special native rendering, especially on mobile devices](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/The_native_form_widgets).
 
 ### Leverage the Platform: give the browser hints for `name` and `autocomplete`
 
-Browsers try to [autofill common field information](https://support.google.com/chrome/answer/142893) for users.  As a web developer,
-you can improve the user experience of your forms by giving the browser hints about
+Browsers try to [autofill common field information](https://support.google.com/chrome/answer/142893) for users.  As a web developer, you can improve the user experience of your forms by giving the browser hints about
 the data you're expecting for each form input field.
 
 We do this using standard values for the `name="..."` and `autocomplete="..."` attributes on a form control.  For example, if we needed a username:
@@ -415,7 +414,7 @@ We do this using standard values for the `name="..."` and `autocomplete="..."` a
 ```html
 <label for="username">Username</label>
 <input type="text" name="username" id="username" autocomplete="username">
-``
+```
 
 Or, if we needed a user's mobile telephone number:
 
