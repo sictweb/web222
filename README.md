@@ -19,7 +19,7 @@ The WEB222 course content is here available at [https://web222.ca](https://web22
 |8     | [Introduction to CSS, selectors, web colors, units, properties and values, fonts, updating CSS using the DOM](weeks/week08/README.md) |
 |9     | [CSS box model, display and positioning, layout](weeks/week09/README.md) |
 |10    | [Introduction to HTML5 forms, `<input>` elements, styling using CSS](weeks/week10/README.md) |
-|11    | Client-side validation using HTML5 features and JavaScript |
+|11    | [Client-side validation using HTML5 features and JavaScript](weeks/week11/README.md) |
 |12    | Introduction to AJAX and JSON, dynamically updating the DOM with JSON data with the DOM |
 
 ## Code examples and resources
