@@ -1,10 +1,8 @@
-# WEB222 - Week 10
+# WEB222 - Week 11
 
 ## Suggested Readings
 
-* [HTML Forms](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms)
-* [Designing Efficient Web Forms: On Structure, Inputs, Labels and Actions](https://www.smashingmagazine.com/2017/06/designing-efficient-web-forms/)
-* [Create Amazing Forms](https://developers.google.com/web/fundamentals/design-and-ux/input/forms/)
+* [HTML Form Validation](https://developer.mozilla.org/en-US/docs/Learn/HTML/Forms/Form_validation)
 
 ## Client Side Form Validation
 
@@ -368,8 +366,3 @@ and support any style of entry:
     }
 <script>
 ```
-
-### Obtaining Values for Group Controls
-
-When working with groups of controls like checkboxes, radio buttons, select lists, etc.
-we can't use `.value`.  Instead we have to examine other properties
