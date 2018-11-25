@@ -291,7 +291,7 @@ submit a form:
     infoForm.onreset = function() {
         // If you ever need to do extra work to clear a form, do it here.
     };
-<script>
+</script>
 ```
 
 Consider the example of a form that asks the user to enter a list of 2-4
@@ -364,5 +364,5 @@ and support any style of entry:
         // Return true if EVERY element passes isNumber, and false otherwise.
         return list.every(isNumber);
     }
-<script>
+</script>
 ```
