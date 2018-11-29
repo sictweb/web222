@@ -85,7 +85,13 @@ when creating your web pages.
     1. Run the parcel command: `npx parcel build index.html`.  See the [parcel cli docs](https://parceljs.org/cli.html#set-the-public-url-to-serve-on) for details on changing the public URL if your host uses a particular path for your site (e.g., GitHub pages).
     1. Your built website, and all optimized files, will be available in the `dist/` directory.
 
-### Option 1 (recommended): Netlify
+### Option 1: Glitch
+
+[Glitch](https://glitch.com/) provides both online coding and hosting together in one tool.  You can [remix existing pages](https://glitch.com/edit/#!/remix/hello-webpage) and then add your own files or change the code.
+
+If you need a quick way to both create and host a small web site, especially if you're just wanting to learn and experiment with something, Glitch is a good option to consider.  See the [help docs](https://glitch.com/help/) for more info.
+
+### Option 2: Netlify
 
 To use [Netlify](https://www.netlify.com), first you need to [Sign up](https://app.netlify.com/signup).  If you followed the advice above, you already
 have a GitHub account, and can authenticate using your GitHub (or GitLab) account
@@ -96,13 +102,7 @@ drag-and-drop the site's folder into the [dropzone on your Netlify dashboard](ht
 
 Once your site is deployed, you can manage it via the [Netlify Dashboard](https://app.netlify.com/account/sites).  See the [Netflify docs](https://www.netlify.com/docs/) for more info on other things you can do.
 
-### Option 2: Glitch
-
-[Glitch](https://glitch.com/) provides both online coding and hosting together in one tool.  You can [remix existing pages](https://glitch.com/edit/#!/remix/hello-webpage) and then add your own files or change the code.
-
-If you need a quick way to both create and host a small web site, especially if you're just wanting to learn and experiment with something, Glitch is a good option to consider.  See the [help docs](https://glitch.com/help/) for more info.
-
-### Option 2: GitHub Pages
+### Option 3: GitHub Pages
 
 [GitHub](https://github.com/) is a git hosting service, which also offers static site hosting for users and their open source repositories.  Using GitHub usually
 means working with [git](https://git-scm.com/), but you can also begin by using the [GitHub Desktop app](https://desktop.github.com/), and upload your files that way.
@@ -110,7 +110,7 @@ means working with [git](https://git-scm.com/), but you can also begin by using 
 GitHub provides static hosting via [GitHub Pages](https://pages.github.com/).
 In order to use GitHub Pages for free, you'll need to host your source code on GitHub in a public repository.  As a [student](https://education.github.com/students) you can get special access to GitHub and create private repositories.
 
-### Option 3: GitLab Pages
+### Option 4: GitLab Pages
 
 Similar to GitHub, [GitLab](https://about.gitlab.com/) provides git repository hosting.  They also have a [pages](https://about.gitlab.com/product/pages/) feature for hosting static sites.
 
