@@ -62,6 +62,7 @@ Or, you can clone the repository to your own computer.
     * [ESlint JavaScript Linter](https://eslint.org/)
 
 * Online Web Code Tools
+    * [Static Site Hosting](static-site-hosting.md)
     * [JSFiddle](https://jsfiddle.net/)
     * [CodePen](https://codepen.io/)
     * [JS Bin](http://jsbin.com/?html,js,output)
