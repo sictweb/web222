@@ -261,6 +261,76 @@ var fname = form.fname.value;
 var numberList = form["number-list"].value;
 ```
 
+### Special Cases for Obtaining Form Values
+
+Some form controls need different approaches when you want to access their value
+in JavaScript:
+
+1. `<textarea>`: use the `.value` property to access the text.
+1. `<input type="radio">`: use the `name` property (i.e., all radio buttons will use the same `name` in a group) to iterate over all possible radio controls, and then look at the `.checked` property, which will be `true` for the one checked.
+1. `<input type="checkbox">`: use the `name` property to iterate over all possible radio controls, and then look at the `.checked` property, which will be `true` for the one checked.
+1. `<select>`: use the `selectedIndex` to determine which `<option>` index was selected (if any).  A value of `-1` means none are currently selected; a value greater than `-1` indicates the index to use when accessing the `options[n]` array for the chosen option.  If the `<select>` is defined to allow for `multiple` options, you can loop through the options and inspect the `.selected` property to determine if it's `true`.
+
+Consider the following form:
+
+```html
+<form id="info-form" name="info" action="/i">
+    <label for="text">Enter some text</label>
+    <textarea id="text" name="text"></textarea>
+
+    <fieldset>
+        <legend>Pick a Colour</legend>
+
+        <label for="colour-red">Red</label>
+        <input type="radio" name="colour" id="colour-red" value="red" checked>
+
+        <label for="colour-green">Green</label>
+        <input type="radio" name="colour" id="colour-green" value="green">
+
+        <label for="colour-blue">Red</label>
+        <input type="radio" name="colour" id="colour-blue" value="blue">
+    </fieldset>
+
+    <label for="agree-disagree">I agree with the terms and conditions.</label>
+    <input type="checkbox" name="agree" id="agree-disagree">
+
+    <label for="food">Favourite Food</label>
+    <select id="food" name="food">
+        <option value="pizza">Pizza</option>
+        <option value="tacos">Tacos</option>
+        <option value="salad">Salad</option>
+        <option value="other">Other</option>
+    </select>
+</form>
+```
+
+In order to access the form's values in code, we could do the following:
+
+```js
+var form = document.querySelector('#info-form');
+
+// Get the value form the <textarea>
+var text = form.text.value.trim();
+
+// Get the chosen colour value from the radio button group
+var colour;
+var colourChoices = Array.from(form.colour); // convert to array
+colourChoices.forEach(function(option) {
+    if(option.checked) {
+        colour = option.value;
+    }
+});
+
+// Get the chosen food value form the <select>
+var food = "None"; // there may be nothing selected
+var foodChoices = Array.from(form.food); // convert to array
+foodChoices.forEach(function(option) {
+    if(option.selected) {
+        food = option.value;
+    }
+});
+```
+
 ### Using the `submit` Event to Validate Forms with JavaScript
 
 There are a wide variety of custom validation tests we can write via JavaScript:
