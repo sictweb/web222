@@ -1,0 +1,49 @@
+<!doctype html>
+<html>
+<head>
+  <meta charset="utf-8">
+  <title>Bitcoin Value</title>
+</head>
+<body>
+    <p>Current Bitcoin value: <span id="bitcoin-value"></span></p>
+    <script>
+        function updateBitcoinValue(newValue) {
+            // Update the <span> with the new value we get from the server
+            var span = document.querySelector("#bitcoin-value");
+            span.innerHTML = newValue;
+
+            // Every minute, get the new value and update the page
+            var oneMinute = 60 * 1000;
+            setTimeout(getCurrentValue, oneMinute);
+        }
+
+        function getCurrentValue() {
+            var xhr = new XMLHttpRequest();
+            var url = "https://blockchain.info/q/24hrprice?cors=true";
+
+            // If/When the request returns successfully, get the value and update DOM 
+            xhr.onload = function() {
+                // Format the raw text we get from the server into a currency string
+                var response = this.responseText;
+                var currentValue = `${response} (USD)`;
+                updateBitcoinValue(currentValue);
+            };
+
+            // If the request fails, and we get an error, update the page with an error message
+            xhr.onerror = function(e) {
+                updateBitcoinValue("unknown (error, unable to get current value)");
+            };
+
+            // Open a GET request to the Blockchain API
+            xhr.open("GET", url);
+
+            // Send our HTTP request to the server, and wait for a response
+            xhr.send();
+        }
+
+        window.onload = function() {
+            getCurrentValue();
+        }
+    </script>
+</body>
+</html>

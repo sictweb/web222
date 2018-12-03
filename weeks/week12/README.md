@@ -115,6 +115,10 @@ one way we could do it.
             // Update the <span> with the new value we get from the server
             var span = document.querySelector("#bitcoin-value");
             span.innerHTML = newValue;
+
+            // Every minute, get the new value and update the page
+            var oneMinute = 60 * 1000;
+            setTimeout(getCurrentValue, oneMinute);
         }
 
         function getCurrentValue() {
@@ -142,14 +146,14 @@ one way we could do it.
         }
 
         window.onload = function() {
-            // Every minute, get the new value and update the page
-            var oneMinute = 60 * 1000;
-            setInterval(getCurrentValue, oneMinute);
+            getCurrentValue();
         }
     </script>
 </body>
 </html>
 ```
+
+See [bitcoin.html](bitcoin.html) for an online version.
 
 By separating the data into a separate web service, it's possible for various
 applications to all share it, and use it in different ways.
