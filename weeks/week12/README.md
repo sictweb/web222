@@ -74,7 +74,7 @@ xhr.open("GET", "http://example.com");
 xhr.send();
 ```
 
-## Example 1: Current BitCoin Value in USD
+## Example 1: Current Bitcoin Value in USD
 
 To demonstrate a real-world example of what we've been discussing, let's
 build a simple example.  Imagine we want to create a web page that includes
@@ -343,7 +343,7 @@ for the dog breeds.  We will load these dynamically once the page is loaded.
 We include a textbox for entering a number of images to show (default is `5`),
 and provide a `<button>` to click.
 
-### 2. Dynamically load dog breeds into a <select>
+### 2. Dynamically load dog breeds into a drop-down
 
 Next we need to load our dog breeds from the Dogs API.  We'll do that
 when the page finishes loading, and the DOM is fully created:
