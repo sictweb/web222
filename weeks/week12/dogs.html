@@ -1,0 +1,25 @@
+<!doctype html>
+<html>
+    <head>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="styles.css" type="text/css">
+        <title>Dynamic Dogs</title>
+    </head>
+    <body>
+        <div id="error-msg" class="hidden"></div>
+
+        <form id="dogs-form" action="#">
+            <select id="breeds" name="breeds"></select>
+            <input id="image-count" type="number" min="1" max="100" value="5">
+            <input type="button" id="btn-load" value="Show me dogs!">
+        </form>
+
+        <main>
+            <h2>Dog Breed: <span id="breed-name"></span></h2>
+            <section id="images-container">
+                <!-- Dog <img> elements will go here -->
+            </section>
+        </main>
+        <script src="dogs.js"></script>
+    </body>
+</html>
