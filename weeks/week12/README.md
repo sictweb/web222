@@ -358,17 +358,19 @@ Our `loadDogBreeds` function needs to create an XHR request to the Dogs API,
 and parse the JSON we get back:
 
 ```js
-// See https://dog.ceo/dog-api/documentation/
-var url = "https://dog.ceo/api/breeds/list/all";
-var xhr = new XMLHttpRequest();
+function loadDogBreeds() {
+    // See https://dog.ceo/dog-api/documentation/
+    var url = "https://dog.ceo/api/breeds/list/all";
+    var xhr = new XMLHttpRequest();
 
-xhr.onload = function() {
-    var response = JSON.parse(this.responseText);
-    var breedList = extractBreedList(response);
-    updateBreedList(breedList);
-};
-xhr.open("GET", url);
-xhr.send();
+    xhr.onload = function() {
+        var response = JSON.parse(this.responseText);
+        var breedList = extractBreedList(response);
+        updateBreedList(breedList);
+    };
+    xhr.open("GET", url);
+    xhr.send();
+}
 ```
 
 When our request comes back (i.e., `xhr.onload`), we'll get a JSON string
@@ -460,24 +462,26 @@ Our `loadBreedImages` function is nearly identical to `loadDogBreeds`, but
 we use the `breed` name as part of the URL:
 
 ```js
-// See https://dog.ceo/dog-api/documentation/breed
-// Use the imageCount and breed variables to create our URL 
-var imageCount = document.querySelector("#image-count").value;
-var url = `https://dog.ceo/api/breed/${breed}/images/random/${imageCount}`;
-var xhr = new XMLHttpRequest();
+function loadBreedImages(breed) {
+    // See https://dog.ceo/dog-api/documentation/breed
+    // Use the imageCount and breed variables to create our URL 
+    var imageCount = document.querySelector("#image-count").value;
+    var url = `https://dog.ceo/api/breed/${breed}/images/random/${imageCount}`;
+    var xhr = new XMLHttpRequest();
 
-xhr.onload = function() {
-    try {
-        var response = JSON.parse(this.responseText);
-        var breedImageList = extractBreedImageList(response);
-        updateBreedImages(breedImageList);
-    } catch(e) {
-        showError("Unable to load dog breeds");
-    }
-};
+    xhr.onload = function() {
+        try {
+            var response = JSON.parse(this.responseText);
+            var breedImageList = extractBreedImageList(response);
+            updateBreedImages(breedImageList);
+        } catch(e) {
+            showError("Unable to load dog breeds");
+        }
+    };
 
-xhr.open("GET", url);
-xhr.send();
+    xhr.open("GET", url);
+    xhr.send();
+}
 ```
 
 As before, we make a request to the server, and get back JSON, which we
@@ -527,6 +531,12 @@ to look completely different, depending on the needs of the user.  We didn't
 have to write HTML for every image, which would have involved hand-writing
 120 * 150 = 18,000 `<img>` elements!  Using AJAX we can do this with very
 little code.
+
+Complete code for the example above can be found in the following files:
+
+* [dogs.html](https://github.com/sictweb/web222/blob/master/weeks/week12/dogs.html) 
+* [dogs.js](https://github.com/sictweb/web222/blob/master/weeks/week12/dogs.js) 
+* [styles.css](https://github.com/sictweb/web222/blob/master/weeks/week12/styles.css)
 
 ## XHR and Cross-Origin Requests
 
