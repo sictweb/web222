@@ -12,18 +12,31 @@ good at the web, you need to be curious and you need to go exploring, you need t
 Make sure you follow the links below as you read, and begin to create your own web of knowledge
 and experience.  No one resource can begin to cover the breadth and depth of web development.
 
+> Question: do I need to read the weekly notes?  How about all the many links to external resources?
+
+Yes, you do need to read the weekly notes.  You will be tested on this material.  We will
+discuss it in class, but not cover everything.  The external links will help you understand and
+master the material.  You are advised to read some external material, but you don't need to read
+all of it.  However, make sure you *do* read Recommended Readings.
+
 ## Internet Architecture
 
 ### Overview
 
 * [How does the Internet work?](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/How_does_the_Internet_work)
+    * [How the Internet works in 5 minutes (video)](https://www.youtube.com/watch?v=7_LPdttKXPc)
 * [How the Web works](https://developer.mozilla.org/en-US/docs/Learn/Getting_started_with_the_web/How_the_Web_works)
 
 ### Application Protocols
 
 The web runs on-top of TCP/IP networks using a number of communication protocols, including:
 
-* [Domain Name System (DNS)](https://www.cloudflare.com/learning/dns/what-is-dns/)
+* [IP](https://en.wikipedia.org/wiki/IP_address#IPv4_addresses) these 32-bit numbers (IPv4) are assigned to every device on the Internet (IPv6 uses 128-bit numbers).
+* [Domain Name System (DNS)](https://www.cloudflare.com/learning/dns/what-is-dns/), the "Phone Book" of the Internet.  There are many popular DNS servers you can use:
+    * OpenDNS: `208.67.222.222`, `208.67.220.220`
+    * Cloudeflare: `1.1.1.1`, `1.0.0.1`
+    * Google: `8.8.8.8`, `8.8.4.4`
+    * There are lots more, but each has trade offs (privacy, [speed](https://www.dnsperf.com/#!dns-resolvers,North%20America))
 * [Hypertext Transfer Protocol (HTTP)](https://dev.opera.com/articles/http-basic-introduction/)
     * [How to get things on the web](https://dev.opera.com/articles/http-lets-get-it-on/)
     * [HTTP Responses](https://dev.opera.com/articles/http-response-codes/)
@@ -40,14 +53,14 @@ The *World Wide Web* (WWW) runs on top of the Internet using HTTP, and
 allows us to access web services, request resources (i.e., pages, images), and
 transmit data between clients and servers.  The web is a subset of the Internet.
 
-The web isn't owned or controlled by any single company, organization, or government.
+**The web isn't owned or controlled by any single company, organization, or government.**
 Instead, it is defined as a set of [open standards](https://en.wikipedia.org/wiki/Web_standards),
 which everyone building and using the web relies upon.  Some examples of these
 standards include [HTML](https://html.spec.whatwg.org/multipage/), [HTTP](https://tools.ietf.org/html/rfc7230), [SVG](https://www.w3.org/TR/SVG11/), and many more.
 
 ### HTTP Requests and Responses
 
-The Hypertext Transfer Protocol is a stateless, client-server model for formatting
+The Hypertext Transfer Protocol is a **stateless**, **client-server** model for formatting
 requests and responses between computers on the Internet.  This means one computer
 makes a request (the client) to another (the server), and after the response is returned,
 the connection is closed.
@@ -60,7 +73,7 @@ The server listens for requests, and fulfills (or rejects) those requests by ret
 Web resources are reachable via unique identifiers called a *Uniform Resource Locator* or
 *URL*.  Consider the URL for this course's outline:
 
-https://ict.senecacollege.ca/course/web222?q=course/web222
+`[https://ict.senecacollege.ca/course/web222?q=course/web222](https://ict.senecacollege.ca/course/web222?q=course/web222)`
 
 A URL contains all the information necessary for a web client (e.g., a browser) to request
 the resource.  In the URL given above we have:
@@ -75,7 +88,9 @@ the resource.  In the URL given above we have:
 URLs can only contain a limited set of characters, and anything outside that set has to be *encoded*.
 This includes things like spaces, non-ASCII characters, Unicode, etc.
 
-*NOTE*: we'll discuss this again later, but be aware that the Web Platform provides a number of APIs (i.e., functions) you can call from JavaScript to help construct, parse, encode/decode, and work with URLs:
+##### Working with URLs in JavaScript
+
+We'll discuss this again later, but be aware that the Web Platform provides a number of APIs (i.e., functions) you can call from JavaScript to help construct, parse, encode/decode, and work with URLs:
 
 * [`URL()`](https://developer.mozilla.org/en-US/docs/Web/API/URL)
 * [`encodeURIComponent()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent) 
@@ -112,8 +127,7 @@ new URL("https://ict.senecacollege.ca/course/web222?q=course/web222")
 
 #### Requests
 
-A URL describes the location (i.e., server, pathname) and how to interpret (i.e., which protocol) a resource on the Internet.  To get the resource, we need to request it by sending a properly formatted
-HTTP Request to the appropriate server:
+A URL describes the location (i.e., server, pathname) and how to interpret (i.e., which protocol) a resource on the Internet.  To get the resource, we need to request it by sending a properly formatted HTTP Request to the appropriate server (host):
 
 ```http
 GET /course/web222 HTTP/1.1 
@@ -188,13 +202,19 @@ Content-Type: text/html; charset=utf-8
 ...
 ```
 
-In this case, we see a two-part structure: first a set of Response Headers; then
-the actual HTML Response Body.  The two are separated by a blank line.  The headers
+In this case, we see a two-part structure: first a set of **Response Headers**; then
+the actual HTML **Response Body**.  The two are separated by a blank line.  The headers
 provide extra metadata about the response, the resource being returned, the server, etc.
 
 [HTTP Headers](https://developer.mozilla.org/en-US/docs/Web/HTTP/Headers) are well defined,
-and easy to lookup via Google, MDN, or StackOverflow.  They follow the form `name:value`, and
-can be upper- or lower-case.
+and easy to lookup via Google, MDN, or StackOverflow.  They follow the `key: value` format,
+and can be upper- or lower-case:
+
+`name: value`
+
+For example:
+
+`Content-Language: en`, where `Content-Language` is the **name** and `en` is the **value**.
 
 In the response above, we see a number of interesting things:
 
@@ -202,9 +222,9 @@ In the response above, we see a number of interesting things:
 * Info about the `Date`, when the response `Expires`, whether to cache it (`Cache-Control`) on the client
 * The `Content-Language` is English, and the `Content-Type` is `text`, and more specifically, `html` (a web page) using [UTF8 text encoding](https://en.wikipedia.org/wiki/UTF-8).
 * That the web `Server` is running [Apache](https://httpd.apache.org/), [OpenSSL](https://www.openssl.org/), and [PHP](http://php.net/), as well as the versions being used
-* Finally some non-standard `X-...` style headers are included, which are extra, user-defined bits of data, for example, that Drupal version 7 was used to create the document.
+* Finally some non-standard `X-...` style headers are included, which are extra, user-defined bits of data, for example, that Drupal version 7 was used to create the document.  (NOTE: when you see names starting with `x-` or `x` it often means a non-standardized name is being used).
 
-After these headers we have a blank line, followed by the body of our response: the actual HTML document.
+After these **headers** we have a blank line (i.e., `\n\n`), followed by the **body** of our response: the actual HTML document.
 
 What if we requested a URL that we know doesn't exist?
 
@@ -258,7 +278,7 @@ Content-Type: text/html; charset=utf-8
 Now a third response code has been returned, [`404 Not Found`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) as well as another HTML page
 telling us our course couldn't be located.
 
-There are dozens of response codes, but they fall into a few categories you should learn:
+There are dozens of response codes, but they fall into a [few categories you should learn](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status):
 
 * `1xx` - [information responses](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#Information_responses)
 * `2xx` – [successful responses](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#Successful_responses)
@@ -268,7 +288,9 @@ There are dozens of response codes, but they fall into a few categories you shou
 
 ### Web Browsers
 
-So far we've been using `curl` to work with URLs, but a more common tool is a Web Browser.
+So far we've been communicating with web servers using `curl`, but a more common
+tool is a **Web Browser**.
+
 A good way to think about a browser is as an operating system vs. an application.
 A web browser provides implementations of the web's open standards.  This means
 it knows how to communicate HTTP, DNS and other protocols over the network in order
@@ -303,7 +325,7 @@ This is a service that keeps track of web platform features, and which browsers 
 implement it.
 
 For example, you can look at the [`URL()`](https://developer.mozilla.org/en-US/docs/Web/API/URL) API we discussed previously at [https://caniuse.com/#feat=url](https://caniuse.com/#feat=url).
-Notice that it's widely supported (green) in most browsers (88.47% at the time of writing), but not supported (red) in some older browsers like Internet Explorer.
+Notice that it's widely supported (green) in most browsers (89.69% at the time of writing), but not supported (red) in some older browsers like Internet Explorer.
 
 Because the web is so big, so complicated, so old, and used by so many people for so many different
 and competing things, it's common for things to break, for there to be bugs, and for you to have
@@ -316,14 +338,16 @@ We've been discussing HTTP as a way to request URLs be transferred between clien
 The web is globally distributed set of 
 
 * services - requesting *data* ([JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON), [XML](https://developer.mozilla.org/en-US/docs/XML_introduction), binary, etc) to be used in code (vs. looked at by a user)
-* pages, documents, and media - both static and dynamic user viewable resources (web pages), which link to other similar resources.
+* resources, pages, documents, images, media - both static and dynamic user viewable resources (web pages), which link to other similar resources.
 * applications - a combination of the above, providing rich user interfaces for working with real-time data or other complex information, alone or in networked (i.e., collaborative) ways.
 
 The web can be read-only.  The web can also be interactive (video games), editable (wikis), personal (blog), and productive (e-commerce).
 
 The web is *linkable*, which makes it something that can be indexed, searched, navigated, and connected. The web gets more valuable as its connections grow: just look at all the other pages and resources this page links to itself!
 
-The web allows users to access and run remote applications *without* needing to install new software.  The deployment model of the web is HTTP.  Compare that to traditional software that has to be manually installed on every computer that needs to run it.  Same with mobile phones and apps in the various app stores.  Updates get *installed* every time you use a URL.
+The web allows users to access and run remote applications *without* needing to install new software.  **The deployment model of the web is HTTP**.  Compare that to traditional software that has to be manually installed on every computer that needs to run it.  Same with mobile phones and apps in the various app stores.  Updates get *installed* every time you use a URL.
+
+> Question: how many mobile or desktop apps did you install today vs. how many websites did you visit?
 
 The web works on *every* computing platform.  You can access and use the web on desktop and mobile computers, on TVs and smartwatches, on Windows and Mac, in e-Readers and video game consoles.  The web works everywhere, and learning how to develop software for the web extends your reach into all those platforms.
 
@@ -334,7 +358,7 @@ When we talk about programming for the web in a browser, we often refer to this 
 In this course we will be focused on the front-end, leaving back-end for subsequent courses.
 
 The modern web, and modern web browsers, are incredibly powerful.  What was once possible
-only on native operating systems can now be done within browsers using only web technologies.
+only on native operating systems can now be done within browsers using only web technologies (cf. [running Windows 2000](https://bellard.org/jslinux/vm.html?url=https://bellard.org/jslinux/win2k.cfg&mem=192&graphic=1&w=1024&h=768) or [Doom 3](http://continuation-labs.com/d3wasm/) in a browser window!)
 
 The set of front-end technologies that make this possible, and are commonly referred to as the Web Platform, include:
 
@@ -358,7 +382,7 @@ the browser, both on desktop and mobile using things like [Electron](https://ele
 ## Introduction to JavaScript
 
 The first front-end web technology we will learn is JavaScript.  JavaScript (often shortened to JS)
-is a lightweight, interpreted or JIT (i.e., Just In Time) compiled language mean to be
+is a lightweight, interpreted or JIT (i.e., Just In Time) compiled language meant to be
 embedded in host environments, for example, web browsers.
 
 JavaScript looks [similar to C/C++ or Java](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Introduction#JavaScript_and_the_ECMAScript_Specification#JavaScript_and_Java) in some of its syntax, but is quite different
@@ -589,8 +613,8 @@ console.log("Area", area);              // print area to the console
 |`/=`     | Assignment with division | `a /= 7` same as `a = a / 7`|
 |`&&`     | Logical `AND` | `if(x > 3 && x < 10)` both must be `true`|
 |`()`     | Call/Create | `()` invokes a function, `f()` means invoke/call function stored in variable `f`|
-|`\|\|`   | Logical `OR` | `if(x === 3 \|\| x === 10)` only one must be `true`|
-|`\|`     | Bitwise `OR` | `3.1345\|0` gives `3` as an integer|
+|<code>&#124;&#124;</code>   | Logical `OR` | <code>if(x === 3 &#124;&#124; x === 10)</code> only one must be `true`|
+|<code>&#124;</code>     | Bitwise `OR` | <code>3.1345&#124;0</code> gives `3` as an integer|
 |`!`      | Logical `NOT` | `if(!(x === 2))` negates an expression |
 |`==`     | Equal | `1 == 1` but also `1 == "1"` due to type coercion|
 |`===`    | Strict Equal | `1 === 1` but  `1 === "1"` is not `true` due to types. Prefer `===`|
