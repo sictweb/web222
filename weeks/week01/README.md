@@ -73,7 +73,7 @@ The server listens for requests, and fulfills (or rejects) those requests by ret
 Web resources are reachable via unique identifiers called a *Uniform Resource Locator* or
 *URL*.  Consider the URL for this course's outline:
 
-`[https://ict.senecacollege.ca/course/web222?q=course/web222](https://ict.senecacollege.ca/course/web222?q=course/web222)`
+[https://ict.senecacollege.ca/course/web222?q=course/web222](https://ict.senecacollege.ca/course/web222?q=course/web222)
 
 A URL contains all the information necessary for a web client (e.g., a browser) to request
 the resource.  In the URL given above we have:
@@ -90,7 +90,8 @@ This includes things like spaces, non-ASCII characters, Unicode, etc.
 
 ##### Working with URLs in JavaScript
 
-We'll discuss this again later, but be aware that the Web Platform provides a number of APIs (i.e., functions) you can call from JavaScript to help construct, parse, encode/decode, and work with URLs:
+<details>
+<summary>We'll discuss this again later, but be aware that the Web Platform provides a number of APIs (i.e., functions) you can call from JavaScript to help construct, parse, encode/decode, and work with URLs.</summary>
 
 * [`URL()`](https://developer.mozilla.org/en-US/docs/Web/API/URL)
 * [`encodeURIComponent()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent) 
@@ -124,6 +125,7 @@ new URL("https://ict.senecacollege.ca/course/web222?q=course/web222")
 //   username: ""
 // }
 ```
+</details>
 
 #### Requests
 
