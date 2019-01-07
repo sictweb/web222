@@ -32,6 +32,7 @@ all of it.  However, make sure you *do* read Recommended Readings.
 The web runs on-top of TCP/IP networks using a number of communication protocols, including:
 
 * [IP](https://en.wikipedia.org/wiki/IP_address#IPv4_addresses) these 32-bit numbers (IPv4) are assigned to every device on the Internet (IPv6 uses 128-bit numbers).
+* [Domain Names](https://developer.mozilla.org/en-US/docs/Learn/Common_questions/What_is_a_domain_name#Structure_of_domain_names) human-readable addresses for servers on the Internet
 * [Domain Name System (DNS)](https://www.cloudflare.com/learning/dns/what-is-dns/), the "Phone Book" of the Internet.  There are many popular DNS servers you can use:
     * OpenDNS: `208.67.222.222`, `208.67.220.220`
     * Cloudeflare: `1.1.1.1`, `1.0.0.1`
@@ -287,7 +288,8 @@ does and doesn't work in a particular browser is to use [https://caniuse.com/](h
 This is a service that keeps track of web platform features, and which browsers do and don't
 implement it.
 
-For example, you can look at the [`URL()`](https://developer.mozilla.org/en-US/docs/Web/API/URL) API we discussed previously at [https://caniuse.com/#feat=url](https://caniuse.com/#feat=url).
+For example, you can look at the [`URL()`](https://developer.mozilla.org/en-US/docs/Web/API/URL) API,
+used to work with URLs in JavaScript: [https://caniuse.com/#feat=url](https://caniuse.com/#feat=url).
 Notice that it's widely supported (green) in most browsers (89.69% at the time of writing), but not supported (red) in some older browsers like Internet Explorer.
 
 Because the web is so big, so complicated, so old, and used by so many people for so many different
