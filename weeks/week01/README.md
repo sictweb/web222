@@ -88,45 +88,6 @@ the resource.  In the URL given above we have:
 URLs can only contain a limited set of characters, and anything outside that set has to be *encoded*.
 This includes things like spaces, non-ASCII characters, Unicode, etc.
 
-##### Working with URLs in JavaScript
-
-<details>
-<summary>We'll discuss this again later, but be aware that the Web Platform provides a number of APIs (i.e., functions) you can call from JavaScript to help construct, parse, encode/decode, and work with URLs.</summary>
-
-* [`URL()`](https://developer.mozilla.org/en-US/docs/Web/API/URL)
-* [`encodeURIComponent()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent) 
-* [`decodeURIComponent()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURIComponent)
-* [`encodeURI()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI)
-* [`decodeURI()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/decodeURI)
-
-```js
-encodeURI("http://www.me.com/My Resumé.html");
-// "http://www.me.com/My%20Resum%C3%A9.html"
-decodeURI("http://www.me.com/My%20Resum%C3%A9.html")
-// "http://www.me.com/My Resumé.html"
-
-encodeURIComponent("Seneca College")
-// "Seneca%20College"
-decodeURIComponent("Seneca%20College")
-// "Seneca College"
-
-new URL("https://ict.senecacollege.ca/course/web222?q=course/web222")
-// {
-//   hash: "",
-//   host: "ict.senecacollege.ca",
-//   hostname: "ict.senecacollege.ca",
-//   href: "https://ict.senecacollege.ca/course/web222?q=course/web222",
-//   origin: "https://ict.senecacollege.ca",
-//   password: "",
-//   pathname: "/course/web222",
-//   port: "",
-//   protocol: "https:",
-//   search: "?q=course/web222",
-//   username: ""
-// }
-```
-</details>
-
 #### Requests
 
 A URL describes the location (i.e., server, pathname) and how to interpret (i.e., which protocol) a resource on the Internet.  To get the resource, we need to request it by sending a properly formatted HTTP Request to the appropriate server (host):
