@@ -35,14 +35,14 @@ is normally called a *member function* or *method*.  Fourth, we use them to defi
 *constructor* functions, which are used to create new objects.  We'll look at all
 of these in the coming weeks.
 
-Before we dive into that , we'll try to teach you that writing many smaller functions
+Before we dive into that, we'll try to teach you that writing many smaller functions
 is often [better than having a few large ones](https://martinfowler.com/bliki/FunctionLength.html).  Smaller code is [easier to test, easier to understand](https://dzone.com/articles/rule-30-%E2%80%93-when-method-class-or),
 and generally [has fewer bugs](https://dubroy.com/blog/method-length-are-short-methods-actually-worse/).
 
 ### User-defined Functions
 
 JavaScript has many built-in functions, which we'll get to below; however, it also
-allows you to write your own and/or use ones written by other developers (libraries, frameworks).
+allows you to write your own and/or use functions written by other developers (libraries, frameworks).
 These user-defined functions can take a number of forms.
 
 #### Function Declarations
