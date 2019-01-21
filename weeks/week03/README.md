@@ -182,6 +182,72 @@ arr[5] = 56;   // element 5 now contains 56, and arr's length is now 6
 
 There are more [`Array` methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array#Array_instances) you can learn as you progress with JavaScript, but these will get you started.
 
+## Iterating over String, Array, and other collections
+
+The most familiar way to iterate over a `String` or `Array` works as you'd expect:
+
+```js
+var s = 'Hello World!';
+for(var i = 0; i < s.length; i++) {
+    var char = s.charAt(i);
+    console.log(i, char);
+    // Prints:
+    // 0, H
+    // 1, e
+    // 2, l
+    // ...
+}
+
+var arr = [10, 20, 30, 40];
+for(var i = 0; i < arr.length; i++) {
+    var elem = arr[i];
+    console.log(i, elem);
+    // Prints:
+    // 0, 10
+    // 1, 20
+    // 2, 30
+    // ...
+}
+```
+
+The standard `for` loop works, but is not the best we can do.  Using a `for` loop
+is prone to various types of errors: off-by-one errors, for example.  It also
+requires extra code to convert an index counter into an element.
+
+An alternative approach is available in ES6, [`for...of`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of):
+
+```js
+var s = 'Hello World!';
+for(var char of s) {
+    console.log(char);
+    // Prints:
+    // H
+    // e
+    // l
+    // ...
+}
+
+var arr = [10, 20, 30, 40];
+for(var elem of arr) {
+    console.log(elem);
+    // Prints:
+    // 10
+    // 20
+    // 30
+    // ...
+}
+```
+
+Using `for...of` we eliminate the need for a loop counter altogether, which has
+the added benefit that we'll never under- or over- shoot our collection's element
+list; we'll always loop across exactly the right number of elements within the
+given collection.
+
+The `for...of` loop works with all collection types, from `String` to `Array` to
+`arguments` to `NodeList` (as well as newer collection types like
+[`Map`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Map),
+[`Set`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Set), etc.).
+
 ## JavaScript's [`RegExp`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions)
 
 A regular expression is a special string that describes a pattern to be used for matching or searching within other strings.  They are also known as a *regex* or *regexp*, and in JavaScript we refer to `RegExp` when we mean the built-in `Object` type for creating and working with regular expressions.
