@@ -119,10 +119,10 @@ function initGame(options) {
 
 // Define our options: we have a score and level, but no inventory 
 var options = {
-    score: 25;
+    score: 25,
     level: 2
 };
-startGame(options);
+initGame(options);
 ```
 
 In the code above, we have an `options` `Object` that defines some, but not all of the 
