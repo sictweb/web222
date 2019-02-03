@@ -666,7 +666,7 @@ We can do this in error as well, and cause unexpected behaviour:
 var total = 100;
 
 function increase(n) {
-    var total += n;
+    var total = n + n;
 }
 
 increase(50);
