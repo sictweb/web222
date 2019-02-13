@@ -1,5 +1,5 @@
 // Morse Code character map (format is LETTER=MORSE,LETTER=MORSE,...)
-var characters = 'A=.-,B=...,C=-.-.,D=-..,E=.,F=..-.,G=--.,H=....,I=..,J=.---,K=-.-,L=.-..,M=--,N=-.,O=--,P=.--.,Q=--.-,R=.-.,S=...,T=-|,U..-,V=...-,W=.--,X=-..-,Y=-.--,Z=--.., =/';
+var characters = 'A=.-,B=...,C=-.-.,D=-..,E=.,F=..-.,G=--.,H=....,I=..,J=.---,K=-.-,L=.-..,M=--,N=-.,O=--,P=.--.,Q=--.-,R=.-.,S=...,T=-,U=..-,V=...-,W=.--,X=-..-,Y=-.--,Z=--.., =/';
 
 // Object to provide lookup of morse code (value) for a given letter (key).
 var alpha = {
