@@ -47,7 +47,9 @@ in the `<head>`, and [a dozen others](https://developer.mozilla.org/en-US/docs/G
 
 ## Grouping Elements
 
-Often we need to group elements in our page together. We have a number of pre-defined element container options for how to achieve this, depending on what kind of content we are creating, and where it is in the document:
+Often we need to group elements in our page together. We have a number of pre-defined element container options for how to achieve this, depending on what kind of content we are creating, and where it is in the document.
+
+Using this so-called semantic markup helps the browser and other tools (e.g., accessibility) determine important structural information about the document (see [this post](https://www.brucelawson.co.uk/2018/the-practical-value-of-semantic-html/) for a great discussion):
 
 * [`<header>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/header) - introductory material at the top of a 
 * [`<nav>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/nav) - content related to navigation (a menu, index, links, etc)

@@ -131,7 +131,7 @@ var title = document.title;
 var body = document.body;
 
 // Return a list of all <a> elements in the document
-var hyperlinks = document.anchors;
+var hyperlinks = document.links;
 
 // Return a list of all the <img> elements in the document
 var images = document.images;
@@ -167,7 +167,7 @@ elements in our document:
         var para = document.querySelector('.formatted');
     </script>
     ```
-* [`document.querySelectorAll(selectors)`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll) - similar to `document.querySelector(selectors`, but returns *all* elements that match the selectors as a [`NodeList`](https://developer.mozilla.org/en-US/docs/Web/API/NodeList):
+* [`document.querySelectorAll(selectors)`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll) - similar to `document.querySelector(selector)`, but returns *all* elements that match the selectors as a [`NodeList`](https://developer.mozilla.org/en-US/docs/Web/API/NodeList):
     ```html
     <div id="menu">
         <p class="formatted">Paragraph 1...</p>
