@@ -479,6 +479,9 @@ In this second example, it's possible for the browser to call more than one func
 different parts of our code don't have to be combined into a single function.  Instead,
 we can keep things separate (saving logic vs. analytics logic).
 
+A complete example of a page that listens for changes to the network online/offline status,
+and updates the page accordingly, is available at [online.html](online.html).
+
 #### Common Events
 
 There are [many types of events we can listen for in the DOM](https://developer.mozilla.org/en-US/docs/Web/Events),

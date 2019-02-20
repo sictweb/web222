@@ -1,0 +1,58 @@
+<!DOCTYPE html>
+<html>
+    <head>
+        <title>Online and Offline Events</title>
+        <meta charset="utf-8">
+        <link rel="stylesheet" href="https://use.fontawesome.com/releases/v5.7.2/css/all.css" integrity="sha384-fnmOCqbTlWIlj8LyTjo7mOUStjsKC4pOpQbqyi7RrhN7udi9RwhKkMHpvLbHG9Sr" crossorigin="anonymous">
+    </head>
+    <body>
+        <h1>Online and Offline Events <span id="online-icon" class="fas"></span></h1>
+        <p>This is an example demonstrating using events in the DOM, specifically to detect changes to network connectivity and online/offline events.</p>
+        <p>For more technical information about how it works, see the <a href="https://developer.mozilla.org/en-US/docs/Web/API/NavigatorOnLine/onLine">docs on </code>navigator.onLine</code></a>.</p>
+
+        <h2>Current Network Status:</h2>
+        <p>The network is <span id="online-status" style="color: red;"></span>.</p>
+
+        <script>
+            // Depending on whether isOnline is true/false, update display
+            function updateUI(isOnline) {
+                var onlineIcon = document.querySelector('#online-icon');
+                var onlineStatus = document.querySelector('#online-status');
+
+                if(!isOnline) {
+                    onlineIcon.classList.remove('fa-wifi');
+                    onlineIcon.classList.add('fa-exclamation');
+                    onlineStatus.innerHTML = "offline";
+                } else {
+                    onlineIcon.classList.add('fa-wifi');
+                    onlineIcon.classList.remove('fa-exclamation');
+                    onlineStatus.innerHTML = "online";
+                }
+            }
+
+            function setup() {
+                // Do an initial check if we're online or offline on startup
+                updateUI(navigator.onLine);
+
+                // Also start listening for events that the network changed
+                addEventListener('online', handleOnline);
+                addEventListener('offline', handleOffline);
+
+                // Deal with an online event
+                function handleOnline() {
+                    console.log('online event');
+                    updateUI(true);
+                }
+
+                // Deal with an offline event
+                function handleOffline() {
+                    console.log('offline event');
+                    updateUI(false);
+                }
+            }
+
+            // When the window is fully loaded, run our setup function
+            window.onload = setup;
+        </script>
+    </body>
+</html>
