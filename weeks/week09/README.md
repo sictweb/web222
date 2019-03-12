@@ -223,7 +223,7 @@ change the `display` from `block` to `inline`:
 We can also control the way that elements are laid out *within* an element (i.e.,
 its children).  Some of the display types for inside layout options include:
 
-* [`table`]() - make elements behave as though they were part of a `<table>`
+* [`table`](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Table) - make elements behave as though they were part of a `<table>`
 * [`flex`](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Display#display_flex) - lays out the contents according to the [flexbox model](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Flexible_Box_Layout) 
 * [`grid`](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Display#display_grid) - lays out the contents according to the [grid model](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Grid_Layout/Basic_Concepts_of_Grid_Layout)
 
