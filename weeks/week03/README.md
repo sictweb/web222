@@ -150,7 +150,7 @@ Unlike languages such as C, a JavaScript `Array` can contain any type of data, i
 var list = [0, "1", "two", true];
 ```
 
-JavaScript `Array`s can also contain holes (i.e., be missing certain elements), change size dynamically at runtime, and we don't need to specify an initial size:
+JavaScript `Arrays` can also contain holes (i.e., be missing certain elements), change size dynamically at runtime, and we don't need to specify an initial size:
 
 ```js
 var arr = [];  // empty array
