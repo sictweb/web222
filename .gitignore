@@ -62,3 +62,9 @@ typings/
 
 # macOS files we don't need
 .DS_Store
+
+# Used to Run the site locally using Jekyll (https://help.github.com/en/articles/setting-up-your-github-pages-site-locally-with-jekyll)
+
+/Gemfile
+/Gemfile.lock
+/_site
