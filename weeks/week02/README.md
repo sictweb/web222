@@ -115,8 +115,8 @@ A function can *accept* any number of arguments when it is called, including non
 break in many other languages, but not JavaScript:
 
 ```js
-function(a) {
-    console.log(a);
+function a(c) {
+    console.log(c);
 }
 
 a("correct");          // logs "correct"
@@ -135,7 +135,7 @@ obtain the actual number of arguments passed to the function at runtime, and use
 notation (e.g., `arguments[0]`) to access an argument:
 
 ```js
-function(a) {
+function a(c) {
     console.log(arguments.length, a, arguments[0]);
 }
 
