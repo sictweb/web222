@@ -44,35 +44,50 @@ and can be installed and run on your local computer; however, they
 are much more complicated and powerful than anything we will need for hosting
 our initial web pages.
 
-For our purposes, we will use a simple node.js based http-server.  In order to
-use it, do the following:
+For our purposes, we will use a simple node.js based http servers.  In order to
+use them, do the following:
 
 1. Make sure you have installed [node.js](https://nodejs.org/en/) on your computer.
 1. In a terminal window, navigate to the directory that you want your web server to host. For example `cd my-website`
-1. Now start the web server by running the following command: `npx http-server`.
+1. Now start the web server by running the following command: `npx lite-server`.
 
-This will download and run the necessary software, and show you the following message:
+This will download and run the necessary software, and show you a message like the following:
 
 ```
-Starting up http-server, serving ./
-Available on:
-  http://127.0.0.1:8080
-  http://192.168.2.124:8080
-Hit CTRL-C to stop the server
+Did not detect a `bs-config.json` or `bs-config.js` override file. Using lite-server defaults...
+** browser-sync config **
+{ injectChanges: false,
+  files: [ './**/*.{html,htm,css,js}' ],
+  watchOptions: { ignored: 'node_modules' },
+  server: { baseDir: './', middleware: [ [Function], [Function] ] } }
+[Browsersync] Access URLs:
+ --------------------------------------
+       Local: http://localhost:3000
+    External: http://192.168.1.110:3000
+ --------------------------------------
+          UI: http://localhost:3001
+ UI External: http://localhost:3001
+ --------------------------------------
+[Browsersync] Serving files from: ./
+[Browsersync] Watching files...
 ```
 
-You can now open your web browser to `http://127.0.0.1:8080` and load your files.
+You can now open your web browser to `http://127.0.0.1:3000` and load your files.
 This uses the `http` protocol, and connects you to the special IP address
 `127.0.0.1`, also known as [localhost](https://en.wikipedia.org/wiki/Localhost)
-(i.e., you can also use `http://localhost:8080`).  The localhost IP address always
+(i.e., you can also use `http://localhost:3000`).  The localhost IP address always
 refers to *this* computer, and allows you to connect network clients to your own
-machine.  The final `:8080` portion of the URL is a port number.  Together,  
-`http://127.0.0.1:8080` means *connect using HTTP to my local computer on port 8080.*
+machine.  The final `:3000` portion of the URL is a port number.  Together,
+`http://127.0.0.1:3000` means *connect using HTTP to my local computer on port 3000.*
+
+*NOTE: the second External IP address will be different than the above, but 127.0.0.1 will always be correct.*
 
 When you are done testing your web site, stop the web server by pressing `CTRL-C`
-in your terminal window.  To run the server again, use `npx http-server`.
+in your terminal window.  To run the server again, use `npx lite-server`.
 
-*NOTE: the second IP address will be different than the above, but 127.0.0.1 will always be correct.*
+NOTE: a previous version of this document recommended using the command
+`npx http-server`.  This works well on macOS and Linux, but recently started to
+fail on Windows, see [this bug](https://github.com/http-party/http-server/issues/525).
 
 ## HTML
 
