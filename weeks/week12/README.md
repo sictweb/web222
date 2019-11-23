@@ -406,7 +406,7 @@ var response = JSON.parse(this.responseText);
 This data has two main parts:
 
 1. a `status` message, that tells us the server was successful in doing our query
-1. a `message` body, which is itself an `Object` of key/value paris, with the breed name and sub-breeds (if any) in an `Array`.
+1. a `message` body, which is itself an `Object` of key/value pairs, with the breed name and sub-breeds (if any) in an `Array`.
 
 To get all the dog breeds as a list (i.e. `Array`), we need to extract the
 `message` property, then call [`Object.keys()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Object/keys)
