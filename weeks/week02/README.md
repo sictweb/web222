@@ -115,13 +115,13 @@ A function can *accept* any number of arguments when it is called, including non
 break in many other languages, but not JavaScript:
 
 ```js
-function(a) {
+function log(a) {
     console.log(a);
 }
 
-a("correct");          // logs "correct"
-a("also", "correct");  // logs "also"
-a();                   // logs undefined
+log("correct");          // logs "correct"
+log("also", "correct");  // logs "also"
+log();                   // logs undefined
 ```
 
 Because we can invoke a function with any number of arguments, we have to write our functions
@@ -135,13 +135,13 @@ obtain the actual number of arguments passed to the function at runtime, and use
 notation (e.g., `arguments[0]`) to access an argument:
 
 ```js
-function(a) {
+function log(a) {
     console.log(arguments.length, a, arguments[0]);
 }
 
-a("correct");          // 1, "correct", "correct"
-a("also", "correct");  // 2, "also", "also"
-a();                   // 0, undefined, undefined
+log("correct");          // 1, "correct", "correct"
+log("also", "correct");  // 2, "also", "also"
+log();                   // 0, undefined, undefined
 ```
 
 We can use a loop to access all arguments, no matter the number passed:
