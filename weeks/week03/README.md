@@ -177,8 +177,75 @@ arr[5] = 56;   // element 5 now contains 56, and arr's length is now 6
 
 #### Methods for iterating across the elements in an Array
 
+JavaScript's `Array` type also provides a [long list](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array#) of useful methods for working with list data.  All of
+these methods work in roughly the same way:
+
+```js
+// Define an Array
+let list = [1, 2, 3, 4];
+
+// Define a function that you want to call on each element of the array
+function operation(element) {
+    // do something with element...
+}
+
+// Call the Array method that you want, passing your function operation
+list.arrayOperation(operation);
+```
+
+JavaScript will call the given function on every element in the array, one after
+the other.  Using these methods, we are able to work with the elements in an Array
+instead of only being able to do things with the Array itself.
+
+As a simple example, let's copy our `list` Array and add 3 to every element.
+We'll do it once with a for-loop, and the second time with the `forEach()` method:
+
+```js
+// Create a new Array that adds 3 to every item in list, using a for-loop
+let listCopy = [];
+
+for(let i = 0; i < list.length; i++) {
+    let element = list[i];
+    element += 3;
+    listCopy.push(element);
+}
+```
+
+Now the same code using the `Array`'s `forEach()` method:
+
+```js
+let listCopy = [];
+
+list.forEach(function(element) {
+    element += 3;
+    listCopy.push(element);
+});
+```
+
+We've been able to get rid of all the indexing code, and with it, the chance
+for [off-by-one errors](https://en.wikipedia.org/wiki/Off-by-one_error). We
+also don't have to write code to get the element out of the list: we just use
+the variable passed to our function.
+
+These `Array` methods are so powerful that there are often functions that do
+exactly what we need.  For example, we could shorten our code above even further
+but using the `map()` method.  The `map()` method takes one `Array`, and calls
+a function on every element, creating and returning a new `Array` with those
+elements:
+
+```js
+let listCopy = list.map(function(element) {
+    return element + 3;
+});
+```
+
+Here are some of the `Array` methods you should work on learning:
+
 * [`arr.forEach()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) - calls the provided function on each element in the array.
 * [`arr.map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) - creates and returns a new array constructed by calling the provided function on each element of the original array.
+* [`arr.find()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) - finds and returns an element from the array which matches a condition you define.
+* [`arr.filter()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) - creates and returns a new array containing only those elements that match a condition you define in your function.
+* [`arr.every()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every) - returns `true` if all of the elements in the array meet a condition you define in your function.
 
 There are more [`Array` methods](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array#Array_instances) you can learn as you progress with JavaScript, but these will get you started.
 
