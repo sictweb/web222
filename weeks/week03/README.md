@@ -2,9 +2,9 @@
 
 ## Suggested Readings
 
-* [SpeakingJS, Chapter 12. Strings](speakingjs.com/es5/ch12.html)
-* [SpeakingJS, Chapter 18. Arrays](speakingjs.com/es5/ch18.html)
-* [SpeakingJS, Chapter 19. Regular Expressions](speakingjs.com/es5/ch19.html)
+* [SpeakingJS, Chapter 12. Strings](http://speakingjs.com/es5/ch12.html)
+* [SpeakingJS, Chapter 18. Arrays](http://speakingjs.com/es5/ch18.html)
+* [SpeakingJS, Chapter 19. Regular Expressions](http://speakingjs.com/es5/ch19.html)
 
 ## Introduction to Objects and Object-Oriented Programming
 

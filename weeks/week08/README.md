@@ -728,7 +728,6 @@ the CSS file, and everything "Just Works":
 
 * [Normalize.css](http://necolas.github.io/normalize.css/) - normalizes CSS so it is the same in all browsers ([CDN link](https://cdnjs.com/libraries/normalize))
 * [Milligram](https://milligram.io/) - tiny set of default styles to make your site look great ([CDN link](https://cdnjs.com/libraries/milligram))
-* [Bare.css](http://barecss.com/) - beautiful defaults with no classes ([CDN link](https://unpkg.com/bare-css@2.0.3/css/bare.min.css))
 * [Tacit](https://yegor256.github.io/tacit/) - CSS framework with no classes.
 
 Next, there are lots of stylesheets you can use to improve the readability of your text:
@@ -758,7 +757,6 @@ navigation, and other solutions.  We often refer to these as "frameworks" to ind
 expanded scope.  There are many to choose from, including:
 
 * [Pure.css](https://purecss.io/) - tiny CSS framework for responsive layouts, buttons, forms, menus, etc. 
-* [Boilerform](https://boilerform.design/) - simplify creating HTML forms
 * [PaperCSS](https://www.getpapercss.com/) - playful, hand-drawn style UI kit
 * [Bootstrap](http://getbootstrap.com/) - one of the most popular UI grid and component system for mobile and desktop web.  Lots of themed versions of this too, for example [Material UI](http://daemonite.github.io/material/)
 * [UIKit](https://getuikit.com/) - lightweight toolkit for building web app front-ends

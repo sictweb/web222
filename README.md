@@ -51,7 +51,6 @@ Or, you can clone the repository to your own computer.
     * [Chrome](https://www.google.com/chrome/)
     * [Visual Studio Code](https://code.visualstudio.com/)
     * [node.js](https://nodejs.org/en/)
-    * [Guide to Seneca's Mac Lab DB3078](https://petermcintyre.com/topics/computer-lab-t3078-web-client/)
 
 * Tools
     * [Firefox Developer Tools](https://developer.mozilla.org/en-US/docs/Tools)

@@ -317,7 +317,7 @@ and artificial intelligence training.
 There are a number of endpoints we can use with this API, but we'll focus on these:
 
 * [https://dog.ceo/api/breeds/list/all](https://dog.ceo/api/breeds/list/all) - get a JSON formatted list of all breeds and sub-breeds
-* [https://dog.ceo/api/breed/hound/images/3](https://dog.ceo/api/breed/hound/images/3) - get a JSON formatted list of image URLs for hounds, returning 3 (we can ask for more or less)  In other words the URL works like this: `https://dog.ceo/api/breed/{name-of-breed}/images/{number-of-images-to-return}`
+* [https://dog.ceo/api/breed/hound/images/random/3](https://dog.ceo/api/breed/hound/images/random/3) - get a JSON formatted list of image URLs for hounds, returning 3 (we can ask for more or less)  In other words the URL works like this: `https://dog.ceo/api/breed/{name-of-breed}/random/{number-of-images-to-return}`
 
 Our goal is to do the following:
 
