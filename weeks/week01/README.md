@@ -725,3 +725,5 @@ use `console.log()`, which will print the argument(s) you give it.
 1. Write an `If` statement that checks to see if your `statusCode` is a [`4xx` client error](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#Client_error_responses). HINT: use the `<`, `>`, `>=`, and/or `<=` operators to test the value
 1. Write a `switch` statement that checks your `statusCode` for all possible [`1xx` information responses](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#Information_responses).  In each case, you should `console.log()` the response text associated with the status code, or `"unknown information response"` if the status code is not known.
 1. Write a function `is2xx(status)` which takes a status code `status` (e.g., `200`) and returns `true` if the status code is a [valid 2xx code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#Successful_responses).
+
+After you try writing these yourself, take a look at a [possible solution](practice-exercises-solution.js).
