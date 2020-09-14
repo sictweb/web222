@@ -426,7 +426,7 @@ We will spend a month learning JavaScript, and there is no one best way to do it
 The more you read and experiment the better.  The following chapters/pages give a good overview:
 
 * [Chapter 1. Basic JavaScript](http://speakingjs.com/es5/ch01.html) of [Speaking JS (ES5)](http://speakingjs.com/es5).
-* [MDN JavaScript Introduction Tutorial](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript#Functions)
+* [MDN JavaScript Introduction Tutorial](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript)
 * [Chapter 1. Values, Types and Operators](https://eloquentjavascript.net/2nd_edition/01_values.html) and [Chapter 2. Program Structure](https://eloquentjavascript.net/2nd_edition/02_program_structure.html) of [Eloquent JavaScript (2nd Ed.)](https://eloquentjavascript.net/2nd_edition/).  NOTE: the [third edition](https://eloquentjavascript.net/) covers ES6, which you can also read if you like, but be aware that it uses more modern syntax.
 
 #### Important Ideas
