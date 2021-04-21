@@ -505,7 +505,7 @@ parse.  The resulting `Object` we get back looks like this:
 Once again we get a `status` and a `message` body.  This time, however,
 the `message` is already an `Array` of URLs. 
 
-### 4. Dynamically create <img> elements for all dog breed image URLs
+### 4. Dynamically create &lt;img&gt; elements for all dog breed image URLs
 
 Using the list of URLs for dog breed images from the server, we can
 easily update our page to display new images:
