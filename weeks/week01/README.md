@@ -496,9 +496,11 @@ b = 7;          // BAD: b is used without declaration, and is now a global
 
 * Data Types: JavaScript is a typeless language--you don't need to specify a type for your data (it will be inferred at runtime).  However, internally, the [following data types are used](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript#Overview):
     * [`Number`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript#Numbers) - a double-precision 64-bit floating point number.  Using `Number` you can work with both Integers and Floats.  There are also some special `Number` types, [`Infinity`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Infinity) and [`NaN`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/NaN).
+    * [`BigInt`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/BigInt) - a value that can be too large to be represented by a `Number` (larger than [`Number. MAX_SAFE_INTEGER`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Number/MAX_SAFE_INTEGER),) can be represented by a `BigInt`. This can easily be done by appending `n` to the end of an integer value.
     * [`String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript#Strings) - a sequence of Unicode characters.  JavaScript supports both single (`'...'`) and double (`"..."`) quotes when defining a `String`.
     * `Boolean` - a value of `true` or `false`. We'll also see how JavaScript supports so-called *truthy* and *falsy* values that are not pure `Boolean`s.
     * `Object`, which includes [`Function`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript#Functions), [`Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array), [`Date`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Date), and many more. - JavaScript supports object-oriented programming, and uses objects and functions as first-class members of the language.
+    * [`Symbol`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Symbol) - a primitive type in JavaScript that represents a unique and anonymous value/identifier. They can normally be used as an object's unique properties.
     * [`null`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/null) - a value that means "this is intentionally nothing" vs. `undefined`
     * [`undefined`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/undefined) - a special value that indicates a value has never been defined.
 
@@ -510,9 +512,11 @@ b = 7;          // BAD: b is used without declaration, and is now a global
 |`var s4 = '172' + 4;`   |`String`|`"1724"` (concatenation vs. addition)|
 |`var n1 = 172;`         |`Number`|`172` (integer)|
 |`var n2 = 172.45;`      |`Number`|`172.45` (double-precision float)|
+|`var n3 = 9007199254740993n;`         |`BigInt`|`9007199254740993n` (integer)|
 |`var b1 = true;`        |`Boolean`| `true` |
 |`var b2 = false;`       |`Boolean`| `false`|
 |`var b3 = !b2;`         |`Boolean`| `true` |
+|`var s = Symbol("Sym");`         |`symbol`| `Symbol(Sym)` |
 |`var c;`                |`undefined`| `undefined`|
 |`var d = null;`         |`null`|`null`|
 
