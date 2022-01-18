@@ -518,7 +518,7 @@ b = 7;          // BAD: b is used without declaration, and is now a global
 |`var b3 = !b2;`         |`Boolean`| `true` |
 |`var s = Symbol("Sym");`         |`symbol`| `Symbol(Sym)` |
 |`var c;`                |`undefined`| `undefined`|
-|`var d = null;`         |`null`|`null`|
+|`var d = null;`         |`object`|`null`|
 
 Consider a simple program from your C course, and how it would look in JavaScript
 
