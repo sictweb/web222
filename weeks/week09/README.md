@@ -200,7 +200,9 @@ window.onload = function() {
 ```
 
 If elements don't have a display type of `none`, they get included in the render
-tree and eventually painted to the screen. If we don't specify a display type, the default is `inline`.  With `inline`, boxes are laid out horizontally (typically left to right, unless
+tree and eventually painted to the screen. If we don't specify a display type, the default is `inline` for inline elements (like `<a>` and `<span>`) and `block` for block-level elements (like `<p>` and `<div>`).  
+
+With `inline`, boxes are laid out horizontally (typically left to right, unless
 we are doing [rtl](https://developer.mozilla.org/en-US/docs/Web/CSS/direction)), starting
 at the top corner of the parent.
 
