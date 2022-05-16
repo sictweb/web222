@@ -663,7 +663,7 @@ In the end, the console will show `3`.
 We can do this in error as well, and cause unexpected behaviour:
 
 ```js
-var total = 100;
+var total = 200;
 
 function increase(n) {
     var total = n + n;
@@ -673,7 +673,7 @@ increase(50);
 console.log(total);
 ```
 
-Here we expect to see `150` but instead will get `100` on the `console.`  The problem is
+Here we expect to see `100` but instead will get `200` on the `console.`  The problem is
 that we have redefined, and thus overwritten `total` inside the `increase` function.  During 
 the call to `increase`, the new local variable `total` will be used, and then go out of scope.
 After the function completes, the original global variable `total` will again be used.
