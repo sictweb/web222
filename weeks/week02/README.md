@@ -693,7 +693,7 @@ function f() {
 ```
 
 In JavaScript, functions have access not only to their own local variables, but also
-to any functions in their parents' scope.  That is, if a function is used (referenced)
+to any variables in their parents' scope.  That is, if a variable is used (referenced)
 but not declared in a function, JavaScript will visit the parent scope to find the variable.
 This can happen for any number of child/parent levels up to the global level.
 
