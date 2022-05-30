@@ -406,7 +406,7 @@ and define *how many* times a pattern or match can/must occur.  We do this by ad
 
 * `+` is similar to `*` but means *one or more*. `vroo+m` would match `"vroom"` but also `"vroooooooom"` and `"vroooooooooooooooooooooooooooooooom"`
 
-* We can limit the number of matches to an exact number using `{n}`, which means *match exactly `n` times*. `vroo{3}m` would only match `"vroooom"`.  We can further specify that we want a match to happen  *match `n` or more times* using `{n,}`, or use `{n,m}` to indicate we want to match *at least `n` times and no more than `m` times: `\w{8,16}` would match 8 to 16 word characters, `"ABCD1234"` or `"zA5YncUI24T_3GHO"`
+* We can limit the number of matches to an exact number using `{n}`, which means *match exactly `n` times*. `vroo{3}m` would only match `"vroooom"`.  We can further specify that we want a match to happen  *match `n` or more times* using `{n}`, or use `{n,m}` to indicate we want to match *at least `n` times and no more than `m` times: `\w{8,16}` would match 8 to 16 word characters, `"ABCD1234"` or `"zA5YncUI24T_3GHO"`
 
 #### Define Positional Match Parameters or Alternatives
 
