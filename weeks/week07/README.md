@@ -636,7 +636,7 @@ events, and JavaScript to create an interactive web page.
 1. Create a **folder** called `cats` on your computer
 1. Create a **file** inside the `cats` folder named `index.html`
 1. Open a **terminal** to your `cats` folder (i.e., `cd cats`)
-1. In your **terminal**, start a web server by running the following command: `npx http-server`
+1. In your **terminal**, start a web server by running the following command: `npx http-server` (alternatively, you can use the command: `npx lite-server`, refer week 5 notes)
 1. Open the `cats` folder in Visual Studio Code
 1. Edit the `index.html` file so it contains a [basic HTML5 web page](https://web222.ca/weeks/week05/#basic-html5-document), including a `<head>`, `<body>`, etc.  Try to do it from memory first, then look up what you've missed.
 1. Save `index.html` and try loading it in your browser by visiting your local web server at `http://localhost:8080/index.html`
@@ -831,7 +831,7 @@ events, and JavaScript to create an interactive web page.
         }
     };
     ```
-1. Rewrite `script.js` so that we only load a new cat picture when the old picture is finished loading (don't send too many requests to thh server).  Also, add some [cache busting](https://www.keycdn.com/support/what-is-cache-busting):
+1. Rewrite `script.js` so that we only load a new cat picture when the old picture is finished loading (don't send too many requests to the server).  Also, add some [cache busting](https://www.keycdn.com/support/what-is-cache-busting):
 
     ```js
     // Demonstrate using a closure, and use an immediately executing function to hide
