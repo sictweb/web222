@@ -639,7 +639,7 @@ events, and JavaScript to create an interactive web page.
 1. In your **terminal**, start a web server by running the following command: `npx http-server`
 1. Open the `cats` folder in Visual Studio Code
 1. Edit the `index.html` file so it contains a [basic HTML5 web page](https://web222.ca/weeks/week05/#basic-html5-document), including a `<head>`, `<body>`, etc.  Try to do it from memory first, then look up what you've missed.
-1. Save `index.html` and try loading it in your browser by visiting your local web server at `http://localhost:8080/index.html`
+1. Save `index.html` and try loading it in your browser by visiting your local web server at `http://127.0.0.1:3000`
 1. In your editor, modify the `body` of your `index.html` file to contain the text of the poem in [cats.txt](cats.txt).  Use HTML tags to markup the poem for the web.  Your page should have a proper heading for the title, each line should break at the correct position, and the poet's name should be bold.
 1. Add an image of a cat to the page below the text.  You can use [https://upload.wikimedia.org/wikipedia/commons/c/c1/Six_weeks_old_cat_%28aka%29.jpg](https://upload.wikimedia.org/wikipedia/commons/c/c1/Six_weeks_old_cat_%28aka%29.jpg).
 1. Adjust the `width` of your image so it fits nicely on your page.  What happens if you adjust the `width` and `height`?  
