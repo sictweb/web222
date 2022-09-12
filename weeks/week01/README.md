@@ -367,7 +367,7 @@ They are listed here so you can make yourself aware of them, and begin to explor
 All programmers, no matter how experienced, have to return to these documents on
 a routine basis, so it's good to know about them.
 
-* [JavaScript on MDN](https://developer.mozilla.org/bm/docs/Web/JavaScript)
+* [JavaScript on MDN](https://developer.mozilla.org/en-US/docs/Web/JavaScript)
     * [JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide)
     * [JavaScript Reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference)
 * [Eloquent JavaScript](https://eloquentjavascript.net/)
