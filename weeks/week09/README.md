@@ -22,7 +22,7 @@ relate to each other.  A "box" is made up of four distinct parts:
 The easiest way to visual this is using your browser's dev tools, which have
 [tools for viewing and altering](https://developer.mozilla.org/en-US/docs/Tools/Page_Inspector/How_to/Examine_and_edit_the_box_model) each of these parts.
 
-![Box Model View in Firefox Dev Tools]([https://mdn.mozillademos.org/files/15509/57-computed-view.png](https://media.prod.mdn.mozit.cloud/attachments/2017/10/02/15509/71658a0c91b898c6596c38010bbf1616/57-computed-view.png))
+![Box Model View in Firefox Dev Tools](https://media.prod.mdn.mozit.cloud/attachments/2017/10/02/15509/71658a0c91b898c6596c38010bbf1616/57-computed-view.png)
 
 The sizes of each of these can be controlled through CSS properties:
 
