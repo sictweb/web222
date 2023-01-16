@@ -43,7 +43,7 @@ Or, you can clone the repository to your own computer.
 
 * Online Books (free)
     * [Eloquent JavaScript](https://eloquentjavascript.net/)
-    * [Speaking JavaScript (es5)](http://speakingjs.com/es5/index.html)
+    * [Exploring JavaScript (es5)](http://exploringjs.com/es5/index.html)
     * [Exploring ES6](http://exploringjs.com/es6/index.html)
 
 * Software

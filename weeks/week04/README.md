@@ -3,9 +3,9 @@
 ## Suggested Readings
 
 * [Object-oriented JavaScript for beginners](https://developer.mozilla.org/en-US/docs/Learn/JavaScript/Objects/Object-oriented_JS)
-* [SpeakingJS, Chapter 17. Objects and Inheritance](http://speakingjs.com/es5/ch17.html)
-* [SpeakingJS, Chapter 20. Dates](http://speakingjs.com/es5/ch20.html)
-* [SpeakingJS, Chapter 21. Math](http://speakingjs.com/es5/ch21.html)
+* [ExploringJS, Chapter 17. Objects and Inheritance](http://exploringjs.com/es5/ch17.html)
+* [ExploringJS, Chapter 20. Dates](http://exploringjs.com/es5/ch20.html)
+* [ExploringJS, Chapter 21. Math](http://exploringjs.com/es5/ch21.html)
 
 ## Objects in JavaScript
 

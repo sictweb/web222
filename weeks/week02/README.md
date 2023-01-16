@@ -2,7 +2,7 @@
 
 ## Suggested Readings
 
-* [SpeakingJS,  Chapter 15. Functions](http://speakingjs.com/es5/ch15.html) and [Chapter 16. Variables: Scopes, Environments, and Closures](http://speakingjs.com/es5/ch16.html)
+* [ExploringJS,  Chapter 15. Functions](http://exploringjs.com/es5/ch15.html) and [Chapter 16. Variables: Scopes, Environments, and Closures](http://exploringjs.com/es5/ch16.html)
 * [Eloquent JavaScript, Chapter 3. Functions](https://eloquentjavascript.net/2nd_edition/02_program_structure.html)
 * [Functions Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions) and [Reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions) on MDN.
 
