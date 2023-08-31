@@ -20,7 +20,9 @@ The WEB222 course content is here available at [https://web222.ca](https://web22
 |9     | [CSS box model, display and positioning, layout](weeks/week09/README.md) |
 |10    | [Introduction to HTML5 forms, `<input>` elements, styling using CSS](weeks/week10/README.md) |
 |11    | [Client-side validation using HTML5 features and JavaScript](weeks/week11/README.md) |
-|12    | [Introduction to AJAX and JSON, fetching data, dynamically updating the DOM](weeks/week12/README.md) |
+|12    | [Introduction to JSON, data fetching, dynamically updating the DOM](weeks/week12/README.md) |
+|13    | [Case Study: using REST APIs to integrate data in web apps](weeks/week13/README.md) |
+|14    | Course Conclusion |
 
 ## Code examples and resources
 
