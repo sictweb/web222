@@ -46,7 +46,7 @@ The web runs on-top of TCP/IP networks using a number of communication protocols
 There are many more as well (SMTP, FTP, POP, IMAP, SSH, etc).
 
 We often use the terms "Web" and "Internet" interchangeably, however, they aren't
-the same.
+the same.  Pictured below, [Tim Berners-Lee](https://en.wikipedia.org/wiki/Tim_Berners-Lee) (left), who invented the *World Wide Web*, and [Vint Cert](https://en.wikipedia.org/wiki/Vint_Cerf) (right), who was one of the main inventors of the *Internet*:
 
 ![Tim Berners-Lee (left) invented the web, and Vint Cert (right) invented the internet](https://pbs.twimg.com/media/Dl8QP8WU4AIk6ap.jpg)
 
@@ -74,17 +74,17 @@ The server listens for requests, and fulfills (or rejects) those requests by ret
 Web resources are reachable via unique identifiers called a *Uniform Resource Locator* or
 *URL*.  Consider the URL for this course's outline:
 
-[https://ict.senecacollege.ca/course/web222?q=course/web222](https://ict.senecacollege.ca/course/web222?q=course/web222)
+[https://www.senecacollege.ca/cgi-bin/subject?s1=WEB222](https://www.senecacollege.ca/cgi-bin/subject?s1=WEB222)
 
 A URL contains all the information necessary for a web client (e.g., a browser) to request
 the resource.  In the URL given above we have:
 
 * protocol: `https:` - the resource is available using the HTTPS (i.e., secure HTTP) protocol
-* domain: `ict.senecacollege.ca` - the domain (domain name) of the server.  We could also have substituted the IP address (`142.204.140.190`), but it's easier to remember domain names.
-* port: Not Given - if not specified, the port is the default for HTTP `80` or `443` for HTTPS.  It could have been specified by appending `:443` like so: `https://ict.senecacollege.ca:443`
-* origin: combining the protocol, domain, and port gives us a unique origin, `https://ict.senecacollege.ca`.  Origins play a central role in the web's security model.
-* path: `/course/web222` - a filesystem-like path to the resource on the server.  It may or may not end with a file extension (e.g., you might also have seen another server use `/course/web222.html`)
-* query string: `?q=course/web222` - additional parameters sent to the server as part of the URL, of the form `name=value`
+* domain: `www.senecacollege.ca` - the domain (domain name) of the server.  We could also have substituted the IP address (`23.208.15.99`), but it's easier to remember domain names.
+* port: Not Given - if not specified, the port is the default for HTTP `80` or `443` for HTTPS.  It could have been specified by appending `:443` like so: `https://www.senecacollege.ca:443`
+* origin: combining the protocol, domain, and port gives us a unique origin, `https://www.senecacollege.ca`.  Origins play a central role in the web's security model.
+* path: `/cgi-bin/subject` - a filesystem-like path to the resource on the server.  It may or may not end with a file extension (e.g., you might also have seen another server use `/cgi-bin/subject.html`)
+* query string: `?s1=WEB222` - additional parameters sent to the server as part of the URL, of the form `name=value`
 
 URLs can only contain a limited set of characters, and anything outside that set has to be *encoded*.
 This includes things like spaces, non-ASCII characters, Unicode, etc.
@@ -94,12 +94,12 @@ This includes things like spaces, non-ASCII characters, Unicode, etc.
 A URL describes the location (i.e., server, pathname) and how to interpret (i.e., which protocol) a resource on the Internet.  To get the resource, we need to request it by sending a properly formatted HTTP Request to the appropriate server (host):
 
 ```http
-GET /course/web222 HTTP/1.1 
-Host: ict.senecacollege.ca 
+GET /cgi-bin/subject HTTP/1.1 
+Host: www.senecacollege.ca 
 ```
 
-Here we do a `GET` request using HTTP version 1.1 for the resource at the path `/course/web222`
-on the server named `ict.senecacollege.ca`.
+Here we do a `GET` request using HTTP version 1.1 for the resource at the path `/cgi-bin/subject`
+on the server named `www.senecacollege.ca`.
 
 There are various *HTTP Verbs* we can use other than `GET`, which allow us to request that
 resources be returned, created, deleted, updated, etc.  The most common include:
@@ -109,10 +109,10 @@ resources be returned, created, deleted, updated, etc.  The most common include:
 * `PUT` - update an existing resource at the given URL with the data sent along with the request in its *body*
 * `DELETE` - delete the resource at the given URL
 
-We can use a URL in many ways, for example, via the command line using a tool like [curl](https://curl.haxx.se/):
+We can use a URL in many ways, for example, via the command line using a tool like [curl](https://curl.haxx.se/) (NOTE: on Windows, use `curl.exe`):
 
 ```bash
-$ curl https://ict.senecacollege.ca/course/web222?q=course/web222
+$ curl https://www.senecacollege.ca/cgi-bin/subject?s1=WEB222
 
 <!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
   "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
@@ -125,12 +125,9 @@ $ curl https://ict.senecacollege.ca/course/web222?q=course/web222
   xmlns:sioc="http://rdfs.org/sioc/ns#"
   xmlns:sioct="http://rdfs.org/sioc/types#"
   ...
-  <p>School of ICT | Faculty of Applied Science and Engineering Technology | Seneca College | Toronto, Canada<br /><a href="/contact-us">Questions? Click here to contact us.</a></p>
-
 </section> <!-- /.block -->
   </div>
 </footer>
-  <script src="//ict.senecacollege.ca/sites/default/files/public_files/advagg_js/js__i11V-7AETPhfL9YzRpXBpECwVkYyQ_ahu2eHxES_mK0__Tgy2Gm7LmUJY8GXZeWxVbS51f3txED35LX1ul4UiOfk__wTFB7oqRI9plmqzTHohaf0cp34LSVimp29dS48vpVW4.js"></script>
 </body>
 </html> 
 ```
@@ -142,27 +139,17 @@ information about the response, and possibly the resource being requested.  Let'
 but this time ask that it `--include` the response headers:
 
 ```bash
-$ curl --include https://ict.senecacollege.ca/course/web222?q=course/web222
-
+$ curl --include https://www.senecacollege.ca/cgi-bin/subject\?s1\=WEB222
 HTTP/1.1 200 OK
-Date: Thu, 30 Aug 2018 20:14:30 GMT
-Server: Apache/2.4.29 (Unix) OpenSSL/1.0.2l PHP/5.6.30
-X-Powered-By: PHP/5.6.30
-Expires: Sun, 19 Nov 1978 05:00:00 GMT
-Cache-Control: no-cache, must-revalidate, post-check=0, pre-check=0
-Content-Language: en
-X-Generator: Drupal 7 (http://drupal.org)
-Transfer-Encoding: chunked
-Content-Type: text/html; charset=utf-8
+Content-Type: text/html;charset=ISO-8859-1
+Strict-Transport-Security: max-age=16070400; includeSubDomains
+Date: Wed, 06 Sep 2023 14:31:11 GMT
+Content-Length: 17241
+Connection: keep-alive
 
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
-  "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
-<html lang="en" dir="ltr"
-  xmlns:content="http://purl.org/rss/1.0/modules/content/"
-  xmlns:dc="http://purl.org/dc/terms/"
-  xmlns:foaf="http://xmlns.com/foaf/0.1/"
-  xmlns:og="http://ogp.me/ns#"
-  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
+<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML 1.0 Transitional//EN" "http://www.w3.org/TR/xhtml1/DTD/xhtml1-transitional.dtd">
+
+<html xmlns="http://www.w3.org/1999/xhtml"><!-- InstanceBegin template="/Templates/mainTemplate.dwt" codeOutsideHTMLIsLocked="false" -->
 ...
 ```
 
@@ -176,17 +163,11 @@ and can be upper- or lower-case:
 
 `name: value`
 
-For example:
-
-`Content-Language: en`, where `Content-Language` is the **name** and `en` is the **value**.
-
-In the response above, we see a number of interesting things:
+For example, in the response above, we see a number of interesting things:
 
 * `200 OK` - tells us that the requested resource was successful located and returned.
-* Info about the `Date`, when the response `Expires`, whether to cache it (`Cache-Control`) on the client
-* The `Content-Language` is English, and the `Content-Type` is `text`, and more specifically, `html` (a web page) using [UTF8 text encoding](https://en.wikipedia.org/wiki/UTF-8).
-* That the web `Server` is running [Apache](https://httpd.apache.org/), [OpenSSL](https://www.openssl.org/), and [PHP](http://php.net/), as well as the versions being used
-* Finally some non-standard `X-...` style headers are included, which are extra, user-defined bits of data, for example, that Drupal version 7 was used to create the document.  (NOTE: when you see names starting with `x-` or `x` it often means a non-standardized name is being used).
+* Info about the `Date`
+* The `Content-Type` is `text`, and more specifically, `html` (a web page) using [ISO-8859-1 text encoding](https://en.wikipedia.org/wiki/ISO/IEC_8859-1).
 
 After these **headers** we have a blank line (i.e., `\n\n`), followed by the **body** of our response: the actual HTML document.
 
@@ -213,34 +194,20 @@ and later in the headers we are given a new `Location` to try.  Notice there is 
 Let's try following the suggested redirect URL:
 
 ```bash
-$ curl --include https://ict.senecacollege.ca/Course/CourseNotFound?=web000
-
+curl -I https://www.senecacollege.ca/cgi-bin/subjec
 HTTP/1.1 404 Not Found
-Date: Thu, 30 Aug 2018 20:29:11 GMT
-Server: Apache/2.4.29 (Unix) OpenSSL/1.0.2l PHP/5.6.30
-X-Powered-By: PHP/5.6.30
-Expires: Sun, 19 Nov 1978 05:00:00 GMT
-Cache-Control: no-cache, must-revalidate, post-check=0, pre-check=0
-Content-Language: en
-Link: </?q=Course/CourseNotFound>; rel="canonical",</?q=node/891>; rel="shortlink"
-X-Generator: Drupal 7 (http://drupal.org)
-Content-Type: text/html; charset=utf-8
-
-<!DOCTYPE html PUBLIC "-//W3C//DTD XHTML+RDFa 1.0//EN"
-  "http://www.w3.org/MarkUp/DTD/xhtml-rdfa-1.dtd">
-<html lang="en" dir="ltr"
-  xmlns:content="http://purl.org/rss/1.0/modules/content/"
-  xmlns:dc="http://purl.org/dc/terms/"
-  xmlns:foaf="http://xmlns.com/foaf/0.1/"
-  xmlns:og="http://ogp.me/ns#"
-  xmlns:rdfs="http://www.w3.org/2000/01/rdf-schema#"
-  xmlns:sioc="http://rdfs.org/sioc/ns#"
-  xmlns:sioct="http://rdfs.org/sioc/types#"
-  ...
+Pragma: no-cache
+Content-Type: text/html;charset=UTF-8
+Strict-Transport-Security: max-age=16070400; includeSubDomains
+Cache-Control: no-cache, no-store, must-revalidate
+Date: Wed, 06 Sep 2023 14:35:04 GMT
+Connection: keep-alive
+Set-Cookie: JSESSIONID=25B152E3F14082DDB666AEE9BE3B4CA7; Path=/; Secure
+Set-Cookie: TS0148d87b=01576d3f8972e643bf2b887be1dd52aa5ea6da872a01d2283959af6601471be59f46727200dd63159112ada83202dee0854fecd43d332679805a76b9d6d9e9bacdf505fd97; Path=/
+...
 ```
 
-Now a third response code has been returned, [`404 Not Found`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) as well as another HTML page
-telling us our course couldn't be located.
+Now a third response code has been returned, [`404 Not Found`](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status/404) as well as another HTML page telling us our course couldn't be located.
 
 There are dozens of response codes, but they fall into a [few categories you should learn](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status):
 
@@ -302,7 +269,7 @@ of jobs for web developers to make sure it all keeps working.
 We've been discussing HTTP as a way to request URLs be transferred between clients and servers.
 The web is globally distributed set of 
 
-* services - requesting *data* ([JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON), [XML](https://developer.mozilla.org/en-US/docs/XML_introduction), binary, etc) to be used in code (vs. looked at by a user)
+* services - requesting *data* (Text, [JSON](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON), [XML](https://developer.mozilla.org/en-US/docs/XML_introduction), binary, etc) to be used in code (vs. looked at by a user)
 * resources, pages, documents, images, media - both static and dynamic user viewable resources (web pages), which link to other similar resources.
 * applications - a combination of the above, providing rich user interfaces for working with real-time data or other complex information, alone or in networked (i.e., collaborative) ways.
 
@@ -310,7 +277,7 @@ The web can be read-only.  The web can also be interactive (video games), editab
 
 The web is *linkable*, which makes it something that can be indexed, searched, navigated, and connected. The web gets more valuable as its connections grow: just look at all the other pages and resources this page links to itself!
 
-The web allows users to access and run remote applications *without* needing to install new software.  **The deployment model of the web is HTTP**.  Compare that to traditional software that has to be manually installed on every computer that needs to run it.  Same with mobile phones and apps in the various app stores.  Updates get *installed* every time you use a URL.
+The web allows users to access and run remote applications *without* needing to install new software.  **The deployment model of the web is HTTP**.  Compare that to traditional software that has to be manually installed on every computer that needs to run it.  The same is true with mobile phones and apps in the various app stores.  On the web, updates get *installed* every time you open a URL.
 
 > Question: how many mobile or desktop apps did you install today vs. how many websites did you visit?
 
@@ -332,17 +299,19 @@ The set of front-end technologies that make this possible, and are commonly refe
 * [JS](https://developer.mozilla.org/bm/docs/Web/JavaScript) - JavaScript allows complex user interaction with web content, and dynamic behaviours in documents and applications.
 * [DOM](https://developer.mozilla.org/en-US/docs/Web/API/Document_Object_Model) - the Document Object Model and its APIs allows scripts and web content to interact at runtime.
 * [Web APIs](https://developer.mozilla.org/en-US/docs/Web/API) - hundreds of APIs provide access to hardware devices, networking, files, 2D and 3D graphics, databases, and so much more.
+* [WebAssembly or WASM](https://developer.mozilla.org/en-US/docs/WebAssembly) - a low-level assembly language that can be run in web browsers, allowing code written in C/C++ and other non-web languages to target the web. For example, [Google Earth](https://earth.google.com/web) uses WebAssembly.
 
 In addition to these primary technologies, an increasingly important set of secondary,
 or third-party technologies are also in play:
 
 * Libraries, Modules - [Bootstrap](https://getbootstrap.com/), [Leaflet](http://leafletjs.com/), [Three.js](http://threejs.org/), [Lodash](http://lodash.com/), ...
 * Frameworks - [React](https://reactjs.org/), [Angular](https://angular.io/), [Vue.js](https://vuejs.org/), ...
-* Tooling - [Babel](https://babeljs.io/), [webpack](https://webpack.js.org/), [ESLint](https://eslint.org/), [TypeScript](https://www.typescriptlang.org/), ...
+* Tooling - [Babel](https://babeljs.io/), [webpack](https://webpack.js.org/), [ESLint](https://eslint.org/), [Prettier](https://prettier.io/)
+* Languages that "compile" to JavaScript - because JavaScript runs everywhere, many languages target the web by "compiling" (also know as _transpiling_) to JavaScript.  A good example is [TypeScript](https://www.typescriptlang.org/).
 
 The front-end web stack is also increasingly being used to build software outside
 the browser, both on desktop and mobile using things like [Electron](https://electronjs.org/) and [Progressive Web Apps (PWA)](https://developers.google.com/web/progressive-web-apps/).
-[Visual Studio Code](https://code.visualstudio.com/), for example, is written using web technologies and runs on Electron, which is one of the reasons it works across so many platforms.
+[Visual Studio Code](https://code.visualstudio.com/), for example, is written using web technologies and runs on Electron, which is one of the reasons it works across so many platforms. You can also run it entirely in the browser: [vscode.dev](https://vscode.dev/).
 
 ## Introduction to JavaScript
 
@@ -354,11 +323,11 @@ JavaScript looks [similar to C/C++ or Java](https://developer.mozilla.org/en-US/
 in philosophy; it is more closely related to [Scheme](https://en.wikipedia.org/wiki/Scheme_(programming_language)) than C. For example, JavaScript is a dynamic scripting language supporting
 multiple programming styles, from [object-oriented](https://en.wikipedia.org/wiki/Object-oriented_programming) to [imperative](https://en.wikipedia.org/wiki/Imperative_programming) to [functional](https://en.wikipedia.org/wiki/Functional_programming).
 
-JavaScript is one of, if not the [most popular programming languages in the world](https://redmonk.com/sogrady/2018/08/10/language-rankings-6-18/), and has been for many years.
+JavaScript is one of, if not the [most popular programming languages in the world](https://redmonk.com/sogrady/2023/05/16/language-rankings-1-23/), and has been for many years.
 Learning JavaScript well will be a tremendous asset to any software developer, since so
 much of the software we use is built using JS.
 
-> JavaScript's many versions: JavaScript is an evolving language, and you'll hear it [referred to by a number of names](https://medium.freecodecamp.org/whats-the-difference-between-javascript-and-ecmascript-cba48c73a2b5), including: ECMAScript (or ES), ES5, ES6, ES2015, ES2017, etc.  [ECMA is the European Computer Manufacturers Association, which is the standards body responsible for the JS language](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Introduction#JavaScript_and_the_ECMAScript_Specification). As the standard evolves, the specification goes through different versions, adding or changing features and syntax.  In this course we will primarily focus on ECMAScript 5 (ES5), which all browsers support.  We will also sometimes use newer features of the language from ECMAScript 6 (ES6), which most browsers support.  Language feature support across browsers is [maintained in this table](http://kangax.github.io/compat-table/es6/).
+> JavaScript's many versions: JavaScript is an evolving language, and you'll hear it [referred to by a number of names](https://medium.freecodecamp.org/whats-the-difference-between-javascript-and-ecmascript-cba48c73a2b5), including: ECMAScript (or ES), ES5, ES6, ES2015, ES2017, ..., ES2021, ES2022, etc.  [ECMA is the European Computer Manufacturers Association, which is the standards body responsible for the JS language](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Introduction#JavaScript_and_the_ECMAScript_Specification). As the standard evolves, the specification goes through different versions, adding or changing features and syntax.  In this course we will primarily focus on ECMAScript 6 (ES6) and newer versions, which all browsers support.  We will also sometimes use new features of the language, which most browsers support.  Language feature support across browsers is [maintained in this table](http://kangax.github.io/compat-table/es2016plus/).
 
 ### JavaScript Resources
 
@@ -371,8 +340,7 @@ a routine basis, so it's good to know about them.
     * [JavaScript Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide)
     * [JavaScript Reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference)
 * [Eloquent JavaScript](https://eloquentjavascript.net/)
-* [Exploring JavaScript (ES5)](http://exploringjs.com/es5/index.html)
-* [Exploring ES6](http://exploringjs.com/es6/index.html)
+* [JavaScript for impatient programmers (ES2022 edition)](https://exploringjs.com/impatient-js/index.html)
 
 ### JavaScript Environments
 
@@ -427,7 +395,7 @@ The more you read and experiment the better.  The following chapters/pages give 
 
 * [Chapter 1. Basic JavaScript](http://exploringjs.com/es5/ch01.html) of [Exploring JS (ES5)](http://exploringjs.com/es5).
 * [MDN JavaScript Introduction Tutorial](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript)
-* [Chapter 1. Values, Types and Operators](https://eloquentjavascript.net/2nd_edition/01_values.html) and [Chapter 2. Program Structure](https://eloquentjavascript.net/2nd_edition/02_program_structure.html) of [Eloquent JavaScript (2nd Ed.)](https://eloquentjavascript.net/2nd_edition/).  NOTE: the [third edition](https://eloquentjavascript.net/) covers ES6, which you can also read if you like, but be aware that it uses more modern syntax.
+* [Chapter 1. Values, Types and Operators](https://eloquentjavascript.net/2nd_edition/01_values.html) and [Chapter 2. Program Structure](https://eloquentjavascript.net/2nd_edition/02_program_structure.html) of [Eloquent JavaScript (2nd Ed.)](https://eloquentjavascript.net/2nd_edition/).
 
 #### Important Ideas
 
@@ -446,7 +414,7 @@ The more you read and experiment the better.  The following chapters/pages give 
  */
 ```
 
-* Whitespace: JavaScript will mostly ignore whitespace (spaces, tabs, newlines).  In this course we will expect you to use good indentation practices, and for your code to be clean and readable. 
+* Whitespace: JavaScript will mostly ignore whitespace (spaces, tabs, newlines).  In this course we will expect you to use good indentation practices, and for your code to be clean and readable. Many web programmers use [Prettier](https://prettier.io/) to automatically format their code, and we will too:
 
 ```js
 // This is poorly indented, and needs more whitespace
@@ -472,25 +440,25 @@ function add(a, b) {
 
 * [Functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions) are one of the primary building blocks of JavaScript.  A function defines a subprogram that can be called by other parts of your code.  JavaScript treats functions like other built-in types, and they can be stored in variables passed to functions, returned from functions or generated at run-time.  Learning how to write code in terms of functions will be one of your primary goals as you get used to JavaScript.
 
-* Variables are declared using the [`var` keyword](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var).  You must use the `var` keyword to precede a variable name, but you do not need to provide a type, since the initial value will set the type.
+* Variables are declared using the [`let` keyword](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let).  You must use the `let` keyword to precede a variable name, but you do not need to provide a type, since the initial value will set the type.
 
-> JavaScript version note: newer versions of JavaScript also support the [`let` and `const` keywords](https://developer.mozilla.org/en-US/docs/Web/JavaScript/A_re-introduction_to_JavaScript#Functions#Variables) for variable declaration.  We will primarily use `var` in this course, but slowly start to add `let` and `const` as you become more familiar with the language.
+> JavaScript version note: JavaScript also supports the [[`var`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var) and [`const`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) keywords for variable declaration.  We will primarily use `let` in this course, but be aware of `var` and `const` as well, which other developers will use.
 
 ```js
-var year;
-var seasonName = "Summer";
+let year;
+let seasonName = "Fall";
 
 // Referring to and using syntax:
-year = 2018;
+year = 2023;
 console.log(seasonName, year);
 ```
 
 * JavaScript Variables: variables must start with a letter (`a-zA-z`), underscore (`_`), or dollar sign (`$`).  They cannot be a [reserved (key) word](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Lexical_grammar#Keywords). Subsequent characters can be letters, numbers, underscores.
 
-*NOTE*: If you forget to use the `var` keyword, JavaScript will still allow you to use a variable, and simply create a *global variable*.  We often refer to this as "leaking a global," and it should always be avoided:
+*NOTE*: If you forget to use the `let` keyword, JavaScript will still allow you to use a variable, and simply create a *global variable*.  We often refer to this as "leaking a global," and it should always be avoided:
 
 ```js
-var a = 6;      // GOOD: a is declared with var
+let a = 6;      // GOOD: a is declared with let
 b = 7;          // BAD: b is used without declaration, and is now a global
 ```
 
@@ -506,19 +474,19 @@ b = 7;          // BAD: b is used without declaration, and is now a global
 
 |Declaration|Type|Value|
 |-----------|----|-----|
-|`var s1 = "some text";` |`String`|`"some text"`|
-|`var s2 = 'some text';` |`String`|`"some text"` |
-|`var s3 = '172';`       |`String`|`"172"`|
-|`var s4 = '172' + 4;`   |`String`|`"1724"` (concatenation vs. addition)|
-|`var n1 = 172;`         |`Number`|`172` (integer)|
-|`var n2 = 172.45;`      |`Number`|`172.45` (double-precision float)|
-|`var n3 = 9007199254740993n;`         |`BigInt`|`9007199254740993n` (integer)|
-|`var b1 = true;`        |`Boolean`| `true` |
-|`var b2 = false;`       |`Boolean`| `false`|
-|`var b3 = !b2;`         |`Boolean`| `true` |
-|`var s = Symbol("Sym");`         |`symbol`| `Symbol(Sym)` |
-|`var c;`                |`undefined`| `undefined`|
-|`var d = null;`         |`object`|`null`|
+|`let s1 = "some text";` |`String`|`"some text"`|
+|`let s2 = 'some text';` |`String`|`"some text"` |
+|`let s3 = '172';`       |`String`|`"172"`|
+|`let s4 = '172' + 4;`   |`String`|`"1724"` (concatenation vs. addition)|
+|`let n1 = 172;`         |`Number`|`172` (integer)|
+|`let n2 = 172.45;`      |`Number`|`172.45` (double-precision float)|
+|`let n3 = 9007199254740993n;`         |`BigInt`|`9007199254740993n` (integer)|
+|`let b1 = true;`        |`Boolean`| `true` |
+|`let b2 = false;`       |`Boolean`| `false`|
+|`let b3 = !b2;`         |`Boolean`| `true` |
+|`let s = Symbol("Sym");`         |`symbol`| `Symbol(Sym)` |
+|`let c;`                |`undefined`| `undefined`|
+|`let d = null;`         |`object`|`null`|
 
 Consider a simple program from your C course, and how it would look in JavaScript
 
@@ -545,20 +513,20 @@ Consider a simple program from your C course, and how it would look in JavaScrip
 Now the same program in JavaScript:
 
 ```js
-var pi = 3.14159;                       // pi is a Number 
-var radius = 4.2;                       // radius is a Number
-var area;                               // area is (currently) undefined
+const pi = 3.14159;                       // pi is a Number 
+let radius = 4.2;                         // radius is a Number
+let area;                                 // area is (currently) undefined
 
-area = pi * radius * radius;            // calculate area from radius
+area = pi * radius * radius;              // calculate area from radius
 
-console.log("Area = " + area + "\n");   // print area to the console
+console.log("Area = " + area );           // print area to the console
 ```
 
 We could also have written it like this, using [`Math.PI`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Math/PI), which we'll learn about later:
 
 ```js
-var radius = 4.2;                       // radius is a Number
-var area = Math.PI * radius * radius;   // calculate area from radius
+let radius = 4.2;                       // radius is a Number
+let area = Math.PI * radius * radius;   // calculate area from radius
 
 console.log("Area", area);              // print area to the console
 ```
@@ -601,7 +569,7 @@ console.log("Area", area);              // print area to the console
 * JavaScript is dynamic, and variables can change value *and* type at runtime:
 
 ```js
-var a;             // undefined
+let a;             // undefined
 a = 6;             // 6, Number
 a++;               // 7, Number
 a--;               // 6, Number
@@ -613,18 +581,18 @@ a = null;          // null
 
 * JavaScript is a [garbage collected language](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Memory_Management).  Unlike C, memory automatically gets freed at runtime when variables are not longer in scope or reachable.  We still need to be careful not to leak memory (i.e., hold onto data longer than necessary, or forever) and block the garbage collector from doing its job.
 
-* Strings: JavaScript doesn't distinguish between a single `char` and a multi-character `String`--everything is a `String`.  You [define a `String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) using either single (`'...'`) or double (`"..."`) quotes.  Make sure you use one or the other, but don't mix them in a single program, so as to avoid confusion.  
+* Strings: JavaScript doesn't distinguish between a single `char` and a multi-character `String`--everything is a `String`.  You [define a `String`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String) using either single (`'...'`), double (`"..."`) quotes.  Try to pick one style and stick with it within a given file/program vs. mixing them.  
 
 * JavaScript version note: newer versions of ECMAScript also allow for the use of [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals).  Instead of `'` or `"`, a template literal uses \` (backticks), and you can also [interpolate expressions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals#Expression_interpolation).
 
 * A JavaScript [expression](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Expressions_and_Operators#Expressions) is any code (e.g., literals, variables, operators, and expressions) that evaluates to a single value. The value may be a `Number`, `String`, an `Object`, or a logical value.
 
 ```js
-var a = 10 /2;                        // arithmetic expression
-var b = !(10 / 2);                    // logical expression evaluates to false
-var c = "10 " + "/" + " 2";           // string, evaluates to "10 / 2"
-var f = function() { return 10 / 2;}; // function expression, f can now be called via the () operator
-var d = f();                          // f() evaluates to 10/2, or the Number 5
+let a = 10 / 2;                       // arithmetic expression
+let b = !(10 / 2);                    // logical expression evaluates to false
+let c = "10 " + "/" + " 2";           // string, evaluates to "10 / 2"
+let f = function() { return 10 / 2;}; // function expression, f can now be called via the () operator
+let d = f();                          // f() evaluates to 10/2, or the Number 5
 ```
 
 * JavaScript execution flow is determined using the following four (4) basic control structures:
@@ -637,17 +605,17 @@ var d = f();                          // f() evaluates to 10/2, or the Number 5
 /**
  * 1. Sequence example: each statement is executed one after the other
  **/
-var a = 3;
-var b = 6;
-var c = a + b;
+let a = 3;
+let b = 6;
+let c = a + b;
 
 
 /**
  * 2. Conditional examples: a decision is made based on the evaluation of an expression,
  * and a code path (or branch) taken.
  **/
-var grade;
-var mark = 86;
+let grade;
+let mark = 86;
 
 if (mark >= 90) {
     grade = 'A+';
@@ -689,8 +657,8 @@ switch(grade) {
  * 3. Looping example: a set of statements are repeated
  **/
 
-var total = 0;
-for(var i = 1; i < 11; i++) {
+let total = 0;
+for(let i = 1; i < 11; i++) {
     total += i;
     console.log("i", i, "total", total);
 }
@@ -707,7 +675,7 @@ function add(a, b) {        // declaring the add function
     return a + b;           // otherwise, return the two arguments added together
 }
 
-var total;
+let total;
 total = add(56);            // invoking the add function with a single argument
 total = add(total, 92);     // invoking the add function with two arguments
 ```
@@ -729,5 +697,20 @@ use `console.log()`, which will print the argument(s) you give it.
 1. Write an `If` statement that checks to see if your `statusCode` is a [`4xx` client error](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#Client_error_responses). HINT: use the `<`, `>`, `>=`, and/or `<=` operators to test the value
 1. Write a `switch` statement that checks your `statusCode` for all possible [`1xx` information responses](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#Information_responses).  In each case, you should `console.log()` the response text associated with the status code, or `"unknown information response"` if the status code is not known.
 1. Write a function `is2xx(status)` which takes a status code `status` (e.g., `200`) and returns `true` if the status code is a [valid 2xx code](https://developer.mozilla.org/en-US/docs/Web/HTTP/Status#Successful_responses).
+1. Create a variable `studentName` and assign your name. Create another variable `studentAge` and assign it your age. Use `console.log()` to print out a sentence that includes both variables, like `"Alice is 20 years old."`.
+1. Create a variable `isEven` and assign it a boolean value (`true` or `false`) depending on whether a given number `num` is even or not. HINT: use the modulus operator `%`.
+1. Create a variable `isOdd` and assign it the inverse boolean value of `isEven`. HINT: if `isEven` is `true`, `isOdd` should be `false`.
+1. Create a variable `radius` and assign it a value of `10`. Calculate the area of a circle with this radius and assign the result to a variable `area`. HINT: use `Math.PI` and the formula `area = πr^2`.
+1. Create a variable `temperatureInCelsius` and assign it a value. Convert this temperature to Fahrenheit and assign the result to a variable `temperatureInFahrenheit`. HINT: use the formula `F = C * 9/5 + 32`.
+1. Create a variable `heightInFeet` and assign it a value. Convert this height to meters and assign the result to a variable `heightInMeters`. HINT: use the conversion factor `1 foot = 0.3048 meters`.
+1. Create a variable `seconds` and assign it a value. Convert this time to minutes and seconds (e.g., 90 seconds becomes 1 minute and 30 seconds) and assign the result to two variables `minutes` and `remainingSeconds`.
+1. Create a variable `score` and assign it a value. Write an `if` statement that checks if the score is an A (90-100), B (80-89), C (70-79), D (60-69), or F (below 60) and assigns the result to a variable `grade`.
+1. Write a `switch` statement that checks the value of a variable `day` and `console.log()`s whether it is a weekday or weekend. HINT: `day` can be a value from 1 (Monday) to 7 (Sunday).
+1. Write a function `isPositive(num)` which takes a number `num` and returns `true` if the number is positive and `false` otherwise.
+1. Write a function `isLeapYear(year)` which takes a year `year` and returns `true` if the year is a leap year and `false` otherwise. HINT: a leap year is divisible by 4, but not by 100, unless it is also divisible by 400.
+1. Write a function `getDayOfWeek(day)` which takes a number `day` (from 1 to 7) and returns the day of the week as a string (e.g., "Monday").
+1. Write a function `getFullName(firstName, lastName)` which takes two strings `firstName` and `lastName` and returns the full name as a single string.
+1. Write a function `getCircleArea(radius)` which takes a number `radius` and returns the area of a circle with that radius.
+1. Write a function `getHypotenuse(a, b)` which takes two numbers `a` and `b` (the lengths of the two sides of a right triangle) and returns the length of the hypotenuse. HINT: use the Pythagorean theorem and `Math.sqrt()` to calculate the square root.
 
 After you try writing these yourself, take a look at a [possible solution](practice-exercises-solution.js).
