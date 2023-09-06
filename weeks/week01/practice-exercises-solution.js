@@ -293,9 +293,6 @@ console.log(`The area of a circle with radius 5 is ${getCircleArea(5)}`);
 function getHypotenuse(a, b) {
   return Math.sqrt(Math.pow(a, 2) + Math.pow(b, 2));
 }
-console.log(
-  `The hypotenuse of a right triangle with sides 3 and 4 is ${getHypotenuse(
-    3,
-    4
-  )}`
-);
+
+let hypotenuse = getHypotenuse(3, 4);
+console.log(`The hypotenuse of a right triangle with sides 3 and 4 is ${hypotenuse}`);

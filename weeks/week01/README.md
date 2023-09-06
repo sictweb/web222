@@ -442,7 +442,7 @@ function add(a, b) {
 
 * Variables are declared using the [`let` keyword](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/let).  You must use the `let` keyword to precede a variable name, but you do not need to provide a type, since the initial value will set the type.
 
-> JavaScript version note: JavaScript also supports the [[`var`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var) and [`const`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) keywords for variable declaration.  We will primarily use `let` in this course, but be aware of `var` and `const` as well, which other developers will use.
+> JavaScript version note: JavaScript also supports the [`var`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/var) and [`const`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/const) keywords for variable declaration.  We will primarily use `let` in this course, but be aware of `var` and `const` as well, which other developers will use.
 
 ```js
 let year;
