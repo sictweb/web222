@@ -3,7 +3,7 @@
 ## Suggested Readings
 
 * [ExploringJS,  Chapter 15. Functions](http://exploringjs.com/es5/ch15.html) and [Chapter 16. Variables: Scopes, Environments, and Closures](http://exploringjs.com/es5/ch16.html)
-* [Eloquent JavaScript, Chapter 3. Functions](https://eloquentjavascript.net/2nd_edition/02_program_structure.html)
+* [Eloquent JavaScript, Chapter 3. Functions](https://eloquentjavascript.net/03_functions.html)
 * [Functions Guide](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Functions) and [Reference](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions) on MDN.
 
 ## Functions
@@ -43,6 +43,7 @@ and generally [has fewer bugs](https://dubroy.com/blog/method-length-are-short-m
 
 JavaScript has many built-in functions, which we'll get to below; however, it also
 allows you to write your own and/or use functions written by other developers (libraries, frameworks).
+
 These user-defined functions can take a number of forms.
 
 #### Function Declarations
@@ -76,24 +77,40 @@ expressions evaluate to a value: a function expression evaluates to a `function`
 The resulting value is often bound (i.e., assigned) to a variable, or used as a parameter.
 
 ```js
-var noop = function() {};
+let noop = function() {};
 
-var square = function(n) {
+let square = function(n) {
     return n * n;
 };
 
-var add = function add(a, b) {
+let add = function add(a, b) {
     return a + b;
 };
 ```
 
 A few things to note:
 
-* The function's *name* is often omitted.  Instead we return an *anonymous function* and bind it to a variable.  We'll access it again via the variable name later.  In the case of recursive functions, we sometimes include it to make it easier for functions to call themselves.  You'll see it done both ways.
-* We *did* use a semi-colon at the end of our function expression.  We do this to signify the end of our assignment statement `var add = ... ;`.
+* The function's *name* is often omitted.  Instead we return an *anonymous function* and bind it to a variable.  We'll access it again via the variable name.  In the case of recursive functions, we sometimes include it to make it easier for functions to call themselves.  You'll see it done both ways.
+* We *did* use a semi-colon at the end of our function expression.  We do this to signify the end of our assignment statement `let add = ... ;`.
 * In general, *function declarations* are likely a better choice (when you can choose) due to subtle errors introduced with declaration order and hosting (see below); however, both are used widely and are useful.
 
-> JavaScript version note: newer versions of JavaScript also include the new `=>` notation, which denotes an [Arrow Function](https://eloquentjavascript.net/03_functions.html#h_/G0LSjQxoo).  When you see `var add = (a, b) => a + b;` it is short-hand for `var add = function(a, b) { return a + b; }`, where `=>` replaces the `function` keyword and comes *after* the parameter list, and the `return` keyword is optional when functions return a single value).  Arrow functions also introduce some new semantics for the `this` keyword, which we'll address later.
+#### Arrow Functions
+
+Modern JavaScript also introduces a new function syntax called an [Arrow Function](https://eloquentjavascript.net/03_functions.html#h_/G0LSjQxoo) or "Fat Arrow".  These functions are more terse, using the `=>` notation (not to be confused with the `<=` and `>=` comparison operators):
+
+```js
+let noop = () => {};
+
+let square = n => n * n;
+
+let add = (a, b) => a + b;
+```
+
+When you see `let add = (a, b) => a + b;` it is short-hand for `let add = function(a, b) { return a + b; }`, where `=>` replaces the `function` keyword and comes *after* the parameter list, and the `return` keyword is optional, when functions return a single value.
+
+Arrow functions also introduce some new semantics for the `this` keyword, which we'll address later.
+
+You should be aware of Arrow functions, since many web developers use them heavily.  However, don't feel pressure to use them yet if you find their syntax confusing.
 
 #### Parameters and `arguments`
 
@@ -129,9 +146,9 @@ carefully, and test things before we make assumptions.  How can we deal with a c
 sending 2 vs. 10 values to our function?
 
 One way we do this is using the built-in [`arguments` Object](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/arguments).
+
 Every function has an implicit `arguments` variable available to it, which is an array-like
-object containing all the arguments passed to the function.  We can use `arguments.length` to 
-obtain the actual number of arguments passed to the function at runtime, and use array index
+object containing all the arguments passed to the function.  We can use `arguments.length` to obtain the actual number of arguments passed to the function at runtime, and use array index
 notation (e.g., `arguments[0]`) to access an argument:
 
 ```js
@@ -148,9 +165,9 @@ We can use a loop to access all arguments, no matter the number passed:
 
 ```js
 function sum() {
-    var count = arguments.length;
-    var total = 0;
-    for(var i = 0; i < count; i++) {
+    const count = arguments.length;
+    let total = 0;
+    for(let i = 0; i < count; i++) {
         total += arguments[i];
     }
     return total;
@@ -166,12 +183,18 @@ more arguments.  The answer is that all JavaScript functions work this way, and 
 to "overload" your functions with different argument patterns, making them useful
 in more than one scenario.
 
-> JavaScript version note: in newer versions of JavaScript, we can also use [Rest Parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters), which allow us to specify that all final arguments to a function, no matter how many, should appear within the function as an `Array`.  There are [some advantages](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters#Difference_between_rest_parameters_and_the_arguments_object) to *not* using `arguments`, which rest parameters provide. We can convert the example above to:
+#### Parameters and `...`
+
+Modern JavaScript also supports naming the "rest" of the parameters passed to a function. These [Rest Parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters) allow us to specify that all final arguments to a function, no matter how many, should be available to the function as a named `Array`.
+
+There are [some advantages](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/rest_parameters#Difference_between_rest_parameters_and_the_arguments_object) to *not* using the implicit `arguments` keyword, which rest parameters provide.
+
+We can convert the example above to this, naming our arbitrary list of "numbers":
 
 ```js
 function sum(...numbers) {
-    var total = 0;
-    for(var i = 0; i < numbers.length; i++) {
+    let total = 0;
+    for(let i = 0; i < numbers.length; i++) {
         total += numbers[i];
     }
     return total;
@@ -199,8 +222,7 @@ Here we call `updateScore` three different times, sometimes with 2 arguments, an
 once with 3.  Our `updateScore` function has been written so it will work in both cases.
 We've used a [conditional ternary operator](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Conditional_Operator) to
 decide whether or not to add an extra bonus score.  When we say `bonus ? ... : ...` we are
-checking to see if the `bonus` argument is *truthy* or *falsy*--did the caller provide a value for it?
-If they did, we do one thing, if not, we do another.
+checking to see if the `bonus` argument is *truthy* or *falsy*--that is, did the caller provide a value for it? If they did, we do one thing, if not, we do another.
 
 Here's another common way you'll see code like this written, using a default value:
 
@@ -218,8 +240,7 @@ instead assign it a value of `1`.  Then, our calculation will always work, since
 the value by `1` will be the same as not using a bonus.
 
 The idiom `bonus = bonus || 1` is very common in JavaScript.  It uses the
-[Logical Or Operator `||`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_Operators#Logical_OR_()) to test whether `bonus` evaluates to a value or not, and prefers that value if possible
-to the fallback default of `1`.  We could also have written it out using an `if` statements like these:
+[Logical Or Operator `||`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Logical_Operators#Logical_OR_()) to test whether `bonus` evaluates to a value or not, and prefers that value if possible to the fallback default of `1`.  We could also have written it out using an `if` statements like these:
 
 ```js
 function updateScore(currentScore, value, bonus) {
@@ -247,13 +268,15 @@ function updateScore(currentScore, value, bonus) {
 }
 ```
 
-> JavaScript version note: newer versions of JavaScript also support [Default Parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters), which allows us to specify a default value for any named parameter when declared.  This frees us from having to check for, and set default values in the function body.  Using default parameters, we could convert our code above to this:
+Because this pattern is so common, modern JavaScript has added a built-in way to handle [Default Parameters](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Functions/Default_parameters).  Instead of using `||` notation in the body of the function, we can specify a default value for any named parameter when it is declared.  This frees us from having to check for, and set default values in the function body.  Using default parameters, we could convert our code above to this:
 
 ```js
 function updateScore(currentScore, value, bonus = 1) {
     return currentScore + value * bonus;
 }
 ```
+
+Now, if `bonus` has a value (i.e., is passed as a parameter), we use it; otherwise, we use `1` as a default.
 
 #### Return Value
 
@@ -298,17 +321,17 @@ function validateUser() {
 }
 
 // Name is used only at the level of the bound variable, function is anonymous
-var validateUser = function() {
+let validateUser = function() {
     ...
 };
 
 // Name is repeated, which is correct but not common. Used with recursive functions
-var validateUser = function validateUser() {
+let validateUser = function validateUser() {
     ...
 };
 
 // Names are different, which is also correct, but not common as it can lead to confusion
-var validateUser = function validate() {
+let validateUser = function validate() {
     // the validate name is only accessible here, within the function body
     ...
 };
@@ -334,10 +357,10 @@ execute(function(n) {
 // 2. Same thing as above, but with different formatting
 execute(function(n) { return n * n;}, 3);
 
-// 3. Using ES6 Arrow Function syntax
+// 3. Same thing as above, using an Arrow Function
 execute((n) => n * n, 3);
 
-var doubleIt = function(num) {
+let doubleIt = function(num) {
     return num * 2;
 }
 
@@ -345,8 +368,7 @@ var doubleIt = function(num) {
 execute(doubleIt, 3); 
 ```
 
-We can also use functions declared via function declarations used this way, and 
-bind them to variables:
+We can also use functions declared via function declarations used this way, and bind them to variables:
 
 ```js
 function greeting(greeting, name) {
@@ -377,14 +399,14 @@ function showAuthenticatedUI() {
     ...
 }
 
-// We will never call showUnauthenticatedUI or showAauthenticatedUI directly.
+// We will never call showUnauthenticatedUI or showAuthenticatedUI directly.
 // Instead, we will use showUI to hold a reference to one or the other,
 // and default to the unauthenticated version at first (i.e., until the user logs in).
-var showUI = showUnauthenticatedUI;
+let showUI = showUnauthenticatedUI;
 
 ...
 
-// Later in the program, when a user logs in, we can swap the implemenation
+// Later in the program, when a user logs in, we can swap the implementation
 // without touching any of our UI code.
 function authenticate(user) {
     ...
@@ -400,37 +422,33 @@ showUI();
 
 #### Invoking Functions, the Execution Operator
 
-In many of the examples above, we've been invoking (calling, running, executing) functions
+In many of the examples above, we've been invoking (i.e., calling, running, executing) functions
 but haven't said much about it.  We invoke a function by using the `()` operator:
 
 ```js
-var f = function() { console.log('f was invoked'); };
+let f = function() { console.log('f was invoked'); };
 f();
 ```
 
-In the code above, `f` is a variable that is assigned the value returned by 
-a function expression.  This means `f` is a regular variable, and we can use it 
-like any other variable.  For example, we could create another variable and share
-its value:
+In the code above, `f` is a variable that is assigned the value returned by a function expression.  This means `f` is a regular variable, and we can use it like any other variable.  For example, we could create another variable and share its value:
 
 ```js
-var f = function() { console.log('f was invoked'); };
-var f2 = f;
+let f = function() { console.log('f was invoked'); };
+let f2 = f;
 f();       // invokes the function
 f2();      // also invokes the function
 ```
 
 Both `f` and `f2` refer to the the same function object.  What is the difference
-between saying `f` vs. `f()` in the line `var f2 = f;`?  When we write `f()`
+between saying `f` vs. `f()` in the line `let f2 = f;`?  When we write `f()`
 we are really saying, "Get the value of `f` (the function referred to) and invoke it."  However,
-when we write `f` (without `()`), we are saying, "Get the value of `f` (the function referred to)"
-so that we can do something with it (assign it to another variable, pass it to a function, etc).
+when we write `f` (without `()`), we are saying, "Get the value of `f` (the function referred to)" so that we can do something with it (assign it to another variable, pass it to a function, etc).
 
 The same thing is true of function declarations, which also produce `function` Objects:
 
 ```js
 function f() { console.log('f was invoked'); };
-var f2 = f;
+let f2 = f;
 f2();      // also invokes the function
 ```
 
@@ -458,20 +476,11 @@ Notice the line `if(customValidationFn && typeof customValidationFn === 'functio
 `customValidationFn` is used like any other variable (accessing the value it refers to vs. doing an invocation), to check if it has a value, and if its value is actually a function.  Only then is it save to invoke it.
 
 It's important to remember that JavaScript functions aren't executed until they are called
-via the invocation operator, and may also be used as values without being called. 
-
-
-
-
-
-
-
-
-
+via the invocation operator, and may also be used as values without being called.
 
 ### Built-in/Global Functions
 
-JavaScript provides a number of [built-in global functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects#Function_properties) for working with its data types, for example:
+JavaScript provides a small number of [built-in global functions](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects#Function_properties) for working with its data types, for example:
 
 * [`parseInt()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseInt)
 * [`parseFloat()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/parseFloat)
@@ -482,8 +491,7 @@ JavaScript provides a number of [built-in global functions](https://developer.mo
 * [`encodeURI()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURI)
 * [`encodeURIComponent()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/encodeURIComponent)
 
-There are also global functions that exist for historical reasons, but should be avoided for performance,
-usability, and/or security reasons:
+There are also global functions that exist for historical reasons, but should be avoided for performance, usability, and/or security reasons:
 
 * [`eval()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/eval) dangerous to parse and run user-defined strings
 * [`prompt()`](https://developer.mozilla.org/en-US/docs/Web/API/Window/prompt) and [`alert()`](https://developer.mozilla.org/en-US/docs/Web/API/Window/alert) synchronous calls that block the UI thread.
@@ -514,15 +522,18 @@ quite a few worth learning, but here are some to get you started:
     * [`JSON.parse()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/parse)
     * [`JSON.stringify()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/JSON/stringify)
 
+Much of web programming is done using `Objects` and calling their methods.  JavaScript is a small language, but the ecosystem of `Objects`, APIs, libraries, and frameworks allows it to do anything.
+
 ## Scope
 
-JavaScript variables are *declared* with the `var` keyword (or `let`, `const` in es6).  We often
-*assign* a value when we *declare* it, though we don't have to do both at once:
+JavaScript variables were historically *declared* with the `var` keyword.  Modern JavaScript has switched to `let`, `const`.  The way each works is different, and it's important to understand these differences.
+
+We often *assign* a value when we *declare* it, though we don't have to do both at once:
 
 ```js
-var x;      // declared, no assignment (value is `undefined`)
+let x;      // declared, no assignment (value is `undefined`)
 x = 7;      // assignment of previously declared variable
-var y = x;  // declaration and assignment combined
+let y = x;  // declaration and assignment combined
 ```
 
 A variable always has a *scope*, which is the location(s) in the code where it
@@ -533,7 +544,7 @@ is usable.  Consider the variables `total` and `value`, as well as the
 var total = 7;                    // global variable, accessible everywhere
 
 function add(n) {
-    var value = total + n;        // local variable, accessible within `add` function only 
+    var value = total + n;        // local variable, accessible anywhere within the function only 
     return value;
 }
 
@@ -542,8 +553,7 @@ console.log("Value is", value);   // `undefined`, since `value` isn't defined in
 console.log("New Total", add(16)) // Works, because `add` is defined in the same scope
 ```
 
-Unlike most programming languages, which use *block scope*, JavaScript variables
-have *function scope*:
+When using the `var` keyword, variables use *function scope*, while variables declared with `let` and `const` use *block scope*.  Coming from C/C++, using `let` and `const` will likely feel more familiar`:
 
 ```c
 int main()
@@ -571,11 +581,7 @@ function main() {
 }
 ```
 
-In many languages, we are told to declare variables when we need them.  However,
-in JavaScript we tend to define our variables at the top of our functions.  We
-don't strictly need to do this, due to *hoisting*.  JavaScript will *hoist* or
-raise all variable declarations it finds in a function to the top of their
-scope:
+Because variables declared using `var` have **function scope**, programmers tended to define them at the top of their functions.  They don't strictly need to do this, since JavaScript will *hoist* or raise all variables declared with `var` in a function to the top of the function's scope:
 
 ```js
 function f() {
@@ -615,28 +621,42 @@ function f() {
 ```
 
 The previous example introduces another important concept with JavaScript scopes, namely,
-that scopes can be *nested* within one another.  Hoisting is moving variable declarations to the beginning of a scope.  For example, function declarations are hoisted completely, which means
-we can call a function *before* we declare it.
+that scopes can be *nested* within one another.  Hoisting is moving variable declarations to the beginning of a scope.  For example, function declarations are hoisted completely, which means we can call a function *before* we declare it.
 
 ```js
 f(); // this will work, as f's declaration gets hoisted
-function f() {
-}
+function f() {}
 f(); // this will also work, because f has been declared as you expect.
 
 g(); // this will not work, since g's declaration will be hoisted, but not the assignment.
 var g = function() {};
 ```
 
-In general, declare and define things *before* you need them.
+Many of the confusing aspects of function scope and hoisting are solved by using `let` and `const`, which work at the block level instead.  Consider these two loops:
+
+```js
+// Version 1 using var
+for(var i = 0; i < 10; i++) {
+    console.log('The value of i is ' + i);
+}
+
+// Version 2 using let
+for(let i = 0; i < 10; i++) {
+    console.log('The value of i is ' + i);
+}
+```
+
+In the preceding code, the scope of `i` is different in version 1 vs. 2.  In version 1, the declaration of `i` will actually cause a variable to be created in the scope of the owning function.  This may or may not be what you expect (i.e., the variable `i` will exist outside the loop).  In version 2, this is not the case, and `i` is scoped to the function body only (i.e., you can't access it before or after the loop).
+
+We're discussing both function and block scopes because JavaScript supports each of them, and code you'll work on will use both methods.  It's important to understand each approach.
+
+For new code that you write, you are encouraged to prefer `let` and `const` and use block scope.
 
 ### Overwriting Variables in Child Scopes
 
-Since variables have function scope, and because functions can be nested, we have to be
-careful when naming our variables and arguments so as to not overwrite a variable in a parent
-scope.  Or, we can use this to temporarily do exactly that.  In both cases, we need to understand
-how nested scopes work.  Consider the the following code, where a variable named `x` is used
-in three different scopes.  What will be printed to the `console` when `child` is called?
+Since variables defined with `var` have function scope, and because functions can be nested, we have to be careful when naming our variables and arguments so as to not overwrite a variable in a parent scope.  Or, we can use this to temporarily do exactly that.  In both cases, we need to understand how nested scopes work.
+
+Consider the the following code, where a variable named `x` is used in three different scopes.  What will be printed to the `console` when `child` is called?
 
 ```js
 var x = 1;
@@ -663,7 +683,7 @@ In the end, the console will show `3`.
 We can do this in error as well, and cause unexpected behaviour:
 
 ```js
-var total = 50;
+var total = 5;
 
 function increase(n) {
     var total = n + n;
@@ -673,14 +693,14 @@ increase(50);
 console.log(total);
 ```
 
-Here we expect to see `100` but instead will get `50` on the `console.`  The problem is
+Here we expect to see `100` but instead will get `5` on the `console.`  The problem is
 that we have redefined, and thus overwritten `total` inside the `increase` function.  During 
 the call to `increase`, the new local variable `total` will be used, and then go out of scope.
 After the function completes, the original global variable `total` will again be used.
 
 ## Closures
 
-A closure is a function that has *closed over* a scope, retaining it even after it would
+A closure is a function that has *closed over* a scope, retaining this scope even after it would
 otherwise disappear through the normal rules of execution.  In the following function, the
 variable `x` goes out of scope as soon as the function finishes executing:
 
@@ -742,15 +762,8 @@ add(2)   // returns 13
 ```
 
 Here the `createAccumulator` function takes an argument `value`, the initial value to use
-for an accumulator function.  It returns an anonymous function which takes a value `n` (a `Number`)
-and adds it to the `value` before returning it.  The `add` function is created by invoking
-`createAccumulator` with the initial `value` of `10`.  The function that is returned by `createAccumulator` has access to `value` in its parent's scope.  Normally, `value` would be
-destroyed as soon as `createAccumulator` finished executing.  However, we have created a *closure*
-to capture the variable `value` in a scope that is now attached to the function we're creating and
-returning.  As long as the returned function exists (i.e., as long as `add` holds on to it), the
-variable `value` will continue to exist in our child function's scope: the variables that existed
-when this function was created continue to live on like a memory, attached to the lifetime of
-the returned function.  
+for an accumulator function.  It returns an anonymous function which takes a value `n` (a `Number`) and adds it to the `value` before returning it.  The `add` function is created by invoking `createAccumulator` with the initial `value` of `10`.  The function that is returned by `createAccumulator` has access to `value` in its parent's scope.  Normally, `value` would be
+destroyed as soon as `createAccumulator` finished executing.  However, we have created a *closure* to capture the variable `value` in a scope that is now attached to the function we're creating and returning.  As long as the returned function exists (i.e., as long as `add` holds on to it), the variable `value` will continue to exist in our child function's scope: the variables that existed when this function was created continue to live on like a memory, attached to the lifetime of the returned function.  
 
 Closures make it possible to *associate* some *data* (i.e., the environment) with a
 function that can then operate on that data.  We see similar strategies in pure
@@ -761,7 +774,7 @@ associations.
 
 By connecting data and functionality, closures help to reduce global variables, provide
 ways to "hide" data, allow a mechanism for creating private "methods", avoid overwriting
-other variables in unexpected ways. 
+other variables in unexpected ways.
 
 As we go further with JavaScript and web programming, we will encounter many instances
 where closures can be used to manage variable lifetimes, and associated functions with
@@ -772,7 +785,7 @@ Another way we'll see closures used, is in conjunction with [Immediately-Invoked
 the following rewrite of the code above:
 
 ```js
-var add = (function(value) {
+let add = (function(value) {
     return function(n) {
         value += n;
         return value;
@@ -789,8 +802,7 @@ that gets executed immediately, and which returns another function that we will 
 going forward in our program.
 
 This is an advanced technique to be aware of at this point, but not one you need to master
-right away.  We'll see it used, and use it ourselves, in later weeks to to avoid global variables,
-simulate block scope in JavaScript, and to choose or generate function implementations at runtime (e.g., [polyfill](https://remysharp.com/2010/10/08/what-is-a-polyfill)).
+right away.  We'll see it used, and use it ourselves, in later weeks to to avoid global variables, simulate block scope in JavaScript, and to choose or generate function implementations at runtime (e.g., [polyfill](https://remysharp.com/2010/10/08/what-is-a-polyfill)).
 
 ## Practice Exercises
 
