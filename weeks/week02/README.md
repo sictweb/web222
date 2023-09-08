@@ -830,3 +830,5 @@ or produces (e.g., `console.log`) the given result.
 1. Function that takes a `String` and returns its value properly encoded for use in a URL. `prepareString("hello world")` should return `"hello%20world"`
 1. Using the previous function, write an enclosing function that takes any number of `String` arguments and returns them in encoded form, concatenated together like so: `"?...&...&..."` where "..." are the encoded strings.  `buildQueryString("hello world", "goodnight moon")` should return `"?hello%20world&goodnight%20moon"`
 1. Function that takes a `Function` followed by any number of `Number`s, and applies the function to all the numbers, returning the total: `applyFn(function(x) { return x * x;}, 1, 2, 3)` should return 14.
+
+After you try writing these yourself, take a look at a [possible solution](practice-exercises-solutions.js).
