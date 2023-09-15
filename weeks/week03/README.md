@@ -74,25 +74,25 @@ string literal, followed by a call to the [`new` operator](https://developer.moz
 /*
  * JavaScript String Literals
  */ 
-var s = 'some text';  // single-quotes
-var s1 = "some text"; // double-quotes
-var s2 = `some text`; // template literal using back-ticks
-var unicode = "中文 español Deutsch English देवनागरी العربية português বাংলা русский 日本語 ਪੰਜਾਬੀ 한국어 தமிழ் עברית" // non-ASCII characters
+let s = 'some text';  // single-quotes
+let s1 = "some text"; // double-quotes
+let s2 = `some text`; // template literal using back-ticks
+let unicode = "中文 español Deutsch English देवनागरी العربية português বাংলা русский 日本語 ਪੰਜਾਬੀ 한국어 தமிழ் עברית" // non-ASCII characters
 
 /*
  * JavaScript String Constructor: `new String()` creates a new instance of a String
  */
-var s3 = new String("Some Text");
-var s4 = new String('Some Text'); 
+let s3 = new String("Some Text");
+let s4 = new String('Some Text'); 
 ```
 
 If we want to convert other types to a `String`, we have a few options:
 
 ```js
-var x = 17;
-var s = '' + x;        // concatenate with a string (the empty string)
-var s2 = String(x);    // convert to String. Note: the `new` operator is not used here
-var s3 = x.toString(); // use a type's .toString() method
+let x = 17;
+let s = '' + x;        // concatenate with a string (the empty string)
+let s2 = String(x);    // convert to String. Note: the `new` operator is not used here
+let s3 = x.toString(); // use a type's .toString() method
 ```
 
 Whether you use a literal or the constructor function, in all cases you will be able to use
@@ -103,11 +103,13 @@ the various [functionality](https://developer.mozilla.org/en-US/docs/Web/JavaScr
 * [`s.length`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/length) - will tell us the length of the string (UTF-16 code units)
 * [`s.charAt(1)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/charAt) - returns the character at the given position (UTF-16 code unit).  We can also use `s[1]` and use an index notation to get a particular character from the string.
 * [`s.concat()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/concat) - returns a new string created by concatenating the original with the given arguments.
+* [`s.padStart(2, '0)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padStart) - returns a new string padded with the given substring until the length meets the minimum length given.  See also [`s.padEnd()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/padEnd).
  * [`s.includes("tex")`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/includes) - returns `true` if the search string is found within the string, otherwise `false` if not found.
 * [`s.startsWith("some")`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/startsWith) - returns `true` if the string starts with the given substring, otherwise `false`.
 * [`s.endsWith("text")`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/endsWith) - returns `true` if the string ends with the given substring, otherwise `false`.
+* [`s.indexOf("t")`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/indexOf) - returns the first index position of the given substring within `s`, or `-1` if the substring is not found within `s`.   See also [`s.lastIndexOf()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/lastIndexOf)
 * [`s.match(regex)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/match) - tries to match a regular expression against the string, returning the matches.  See discussion of RegExp below.
-* [`s.replace(regex, "replacement")`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) - returns a new string with occurrence(s) of a matched RegExp replaced by the replacement text.  See discussion of RegExp below.
+* [`s.replace(regex, "replacement")`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replace) - returns a new string with the first occurrence of a matched RegExp replaced by the replacement text.  See also [`s.replaceAll()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/replaceAll), which replaces *all* occurrences.
 * [`s.slice(2, 3)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/slice) - returns a new string extracted (sliced) from within the original string.  A beginning index and (optional) end index mark the position of the slice.
 * [`s.split()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/split) - returns an Array (see discussion below) of substrings by splitting the original string based on the given separator (`String` or `RegExp`).
 * [`s.toLowerCase()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/String/toLowerCase) - returns a new string with all characters converted to lower case.
@@ -117,9 +119,10 @@ the various [functionality](https://developer.mozilla.org/en-US/docs/Web/JavaScr
 > JavaScript Version Note: modern JavaScript also supports [template literals](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Template_literals), also sometimes called template *strings*.  Template literals use back-ticks instead of single- or double-quotes, and allow you to interpolate JavaScript expressions.  For example:
 
 ```js
-var a = 1;
-var s = "The value is " + (1 * 6);
-var templateVersion = `The value is ${1*6}` 
+let a = 1;
+let s = "The value is " + (1 * 6);
+// Use ${...} to interpolate the value of an expression into a string
+let templateVersion = `The value is ${1*6}` 
 ```
 
 ## JavaScript's [`Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array)
@@ -131,33 +134,83 @@ An [`Array`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/G
 Like creating a `String`, we can create an `Array` in JavaScript using either a literal or the `Array` constructor function:
 
 ```js
-var arr = new Array(1, 2, 3); // array constructor
-var arr2 = [1, 2, 3]; // array literal
+let arr = new Array(1, 2, 3); // array constructor
+let arr2 = [1, 2, 3]; // array literal
 ```
 
 Like arrays in C, a JavaScript `Array` has a length, and items contained within it can be
 accessed via an index:
 
 ```js
-var arr = [1, 2, 3];
-var len = arr.length; // len is 3
-var item0 = arr[0]; // item0 is 1
+let arr = [1, 2, 3];
+let len = arr.length; // len is 3
+let item0 = arr[0]; // item0 is 1
 ```
 
 Unlike languages such as C, a JavaScript `Array` can contain any type of data, including mixed types:
 
 ```js
-var list = [0, "1", "two", true];
+let list = [0, "1", "two", true];
 ```
 
 JavaScript `Array`s can also contain holes (i.e., be missing certain elements), change size dynamically at runtime, and we don't need to specify an initial size:
 
 ```js
-var arr = [];  // empty array
+let arr = [];  // empty array
 arr[5] = 56;   // element 5 now contains 56, and arr's length is now 6
 ```
 
 > NOTE: a JavaScript `Array` is really a **map**, which is a data structure that associates values with unique keys (often called a key-value pair).  JavaScript arrays are a special kind of map that uses numbers for the keys, which makes them look and behave very much like arrays in other languages.  We will encounter this **map** structure again when we look at how to create `Object`s.
+
+### Accessing Elements in an Array
+
+Like arrays in C, we can use index notation to obtain an element at a given index:
+
+```js
+let numbers = [50, 12, 135];
+let firstNumber = numbers[0];
+let lastNumber = numbers[numbers.length - 1];
+```
+
+JavaScript also allows us to use a technique called [Destructuring Assignment](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Operators/Destructuring_assignment) to unpack values in an Array (or Object, see below) into distinct variables.  Consider each of the following methods, both of which accomplish the same goal:
+
+```js
+// Co-ordinates for Seneca's Newnham Campus
+let position = [43.7960, -79.3486];
+
+// Separate the two values into their own unique variables.
+
+// Version 1 - index notation
+let lat = position[0];
+let lng = position[1];
+
+// Version 2 - destructure
+let [lat, lng] = position;
+```
+
+This technique is useful when working with structured data, where you know exactly how many elements are in an array, and need to access them:
+
+```js
+let dateString = `17/02/2001`;
+let [day, month, year] = dateString.split('/');
+console.log(`The day is ${day}, month is ${month}, and year is ${year}`);
+```
+
+Here we `.split()` the string `'17/02/2001'` at the `'/'` character, which will produce the Array `['17', '02', '2001']`.  Next, we destructure this Array's values into the variables `day`, `month`, `year`.
+
+You can also ignore values (i.e., only unpack the one or ones you want):
+
+```js
+let dateString = `17/02/2001`;
+// Ignore the first index in the array, unpack only position 1 and 2
+let [, month, year] = dateString.split('/');
+console.log(`The month is ${month}, and year is ${year}`);
+
+let emailAddress = `jsmith@myseneca.ca`;
+// Only unpack the first position, ignoring the second
+let [username] = emailAddress.split('@');
+console.log(`The username for ${emailAddress} is ${username}`);
+```
 
 ### `Array` Properties and Methods
 
@@ -165,7 +218,7 @@ arr[5] = 56;   // element 5 now contains 56, and arr's length is now 6
 
 #### Methods that modify the original array
 
-* [`arr.push(element)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) - a method to add one (or more) element to the end of the array.  Using `push()` modifies the array (increasing its size). You can also use [`arr.unshift(element)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift) to add one (or more) element to the *start* of the array.
+* [`arr.push(element)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/push) - a method to add one (or more) element(s) to the end of the array.  Using `push()` modifies the array (increasing its size). You can also use [`arr.unshift(element)`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/unshift) to add one (or more) element to the *start* of the array.
 * [`arr.pop()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/pop) - a method to remove the last element in the array and return it.  Using `pop()` modifies the array (reducing its size). You can also use [`arr.shift()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/shift) to remove the *first* element in the array and return it.
 
 #### Methods that do not modify the original array
@@ -217,8 +270,7 @@ Now the same code using the `Array`'s `forEach()` method:
 let listCopy = [];
 
 list.forEach(function(element) {
-    element += 3;
-    listCopy.push(element);
+    listCopy.push(element + 3);
 });
 ```
 
@@ -243,7 +295,7 @@ Here are some of the `Array` methods you should work on learning:
 
 * [`arr.forEach()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/forEach) - calls the provided function on each element in the array.
 * [`arr.map()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/map) - creates and returns a new array constructed by calling the provided function on each element of the original array.
-* [`arr.find()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) - finds and returns an element from the array which matches a condition you define.
+* [`arr.find()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/find) - finds and returns an element from the array which matches a condition you define. See also [`arr.findLast()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLast), [`arr.findIndex()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findIndex), and [`arr.findLastIndex()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/findLastIndex), which all work in similar ways.
 * [`arr.filter()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/filter) - creates and returns a new array containing only those elements that match a condition you define in your function.
 * [`arr.every()`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Global_Objects/Array/every) - returns `true` if all of the elements in the array meet a condition you define in your function.
 
@@ -254,9 +306,9 @@ There are more [`Array` methods](https://developer.mozilla.org/en-US/docs/Web/Ja
 The most familiar way to iterate over a `String` or `Array` works as you'd expect:
 
 ```js
-var s = 'Hello World!';
-for(var i = 0; i < s.length; i++) {
-    var char = s.charAt(i);
+let s = 'Hello World!';
+for(let i = 0; i < s.length; i++) {
+    let char = s.charAt(i);
     console.log(i, char);
     // Prints:
     // 0, H
@@ -265,9 +317,9 @@ for(var i = 0; i < s.length; i++) {
     // ...
 }
 
-var arr = [10, 20, 30, 40];
-for(var i = 0; i < arr.length; i++) {
-    var elem = arr[i];
+let arr = [10, 20, 30, 40];
+for(let i = 0; i < arr.length; i++) {
+    let elem = arr[i];
     console.log(i, elem);
     // Prints:
     // 0, 10
@@ -284,8 +336,8 @@ requires extra code to convert an index counter into an element.
 An alternative approach is available in ES6, [`for...of`](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Reference/Statements/for...of):
 
 ```js
-var s = 'Hello World!';
-for(var char of s) {
+let s = 'Hello World!';
+for(let char of s) {
     console.log(char);
     // Prints:
     // H
@@ -294,8 +346,8 @@ for(var char of s) {
     // ...
 }
 
-var arr = [10, 20, 30, 40];
-for(var elem of arr) {
+let arr = [10, 20, 30, 40];
+for(let elem of arr) {
     console.log(elem);
     // Prints:
     // 10
@@ -352,8 +404,8 @@ There are many [special characters](https://developer.mozilla.org/en-US/docs/Web
 Like `String` or `Array`, we can declare a `RegExp` using either a literal or the `RegExp` constructor:
 
 ```js
-var regex = /colou?r/;              // regex literal uses /.../
-var regex2 = new RegExp("colou?r");
+let regex = /colou?r/;              // regex literal uses /.../
+let regex2 = new RegExp("colou?r");
 ```
 
 Regular expressions can also have [advanced search flags](https://developer.mozilla.org/en-US/docs/Web/JavaScript/Guide/Regular_Expressions#Advanced_searching_with_flags_2),
@@ -362,8 +414,8 @@ These flags include `g` (globally match all occurrences vs. only matching once),
 `i` (ignore case when matching), and `m` (match across line breaks, multi-line matching) among others.
 
 ```js
-var regex = /pattern/gi;                  // find all matches (global) and ignore case
-var regex2 = new RegExp("pattern", "gi"); // same thing using the constructor instead
+let regex = /pattern/gi;                  // find all matches (global) and ignore case
+let regex2 = new RegExp("pattern", "gi"); // same thing using the constructor instead
 ```
 
 ### Understanding Regular Expression Patterns

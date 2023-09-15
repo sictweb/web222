@@ -33,7 +33,7 @@
 */
 
 // Multi-Line Template Literal to wrap the CSV data
-var csvData = `0134134,John Smith,555-567-2341,62 inches
+let csvData = `0134134,John Smith,555-567-2341,62 inches
 0134135   ,    June    Lee    ,  5554126347 ,        149 cm
 0134136,       Kim Thomas       , 5324126347, 138cm`;
 
@@ -43,5 +43,5 @@ function processCSV(csv) {
 }
 
 // Log output of processing
-var processed = processCSV(csvData);
+let processed = processCSV(csvData);
 console.log(processed);
