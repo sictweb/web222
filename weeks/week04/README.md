@@ -590,11 +590,11 @@ We can even use other OOP features like inheritance:
 
 ```js
 class Student extends User {
-    email
+    email;
 
     constructor(id, name, email) {
         // Call the User() constructor to set the inherited properties
-        super(id, name)
+        super(id, name);
         this.email = email;
     }
 
