@@ -1,13 +1,13 @@
 // Morse Code character map (format is LETTER=MORSE,LETTER=MORSE,...)
-var characters = 'A=.-,B=...,C=-.-.,D=-..,E=.,F=..-.,G=--.,H=....,I=..,J=.---,K=-.-,L=.-..,M=--,N=-.,O=--,P=.--.,Q=--.-,R=.-.,S=...,T=-,U=..-,V=...-,W=.--,X=-..-,Y=-.--,Z=--.., =/';
+let characters = 'A=.-,B=...,C=-.-.,D=-..,E=.,F=..-.,G=--.,H=....,I=..,J=.---,K=-.-,L=.-..,M=--,N=-.,O=--,P=.--.,Q=--.-,R=.-.,S=...,T=-,U=..-,V=...-,W=.--,X=-..-,Y=-.--,Z=--.., =/';
 
 // Object to provide lookup of morse code (value) for a given letter (key).
-var alpha = {
+let alpha = {
     // define the mapping here as a literal
 };
 
 // Object to provide lookup of letter (value) for a given morse code (key).
-var morse = {};
+let morse = {};
 // Hint: use the [] operator to specify these special key values rather than a literal.
 
 // Return `true` if all characters are morse code.  Use a RegExp. 
@@ -35,27 +35,29 @@ function morseToText(morse) {
 }
 
 
-// Constructor function that takes a `message` (String), which can be either morse or alpha.
+// Message class that takes a `message` (String), which can be either morse or alpha.
 // Use your functions above to decide how to store a value for `any` on `this`  
-function Message(any) {
+class Message {
+    constructor(text) {
 
+    }
+
+    // Return the message as morse code, converting if necessary
+    toMorse() {
+
+    }
+
+    // Return the message as alpha characters, converting if necessary
+    toAlpha() {
+
+    }
 }
 
-// Return the message as morse code, converting if necessary
-Message.prototype.toMorse = function() {
 
-};
-
-// Return the message as alpha characters, converting if necessary
-Message.prototype.toAlpha = function() {
-
-};
-
-
-var msg1 = new Message('--- -... .--- . -.-. - .../.. -./.--- .- ...- .- ... -.-. .-. .. .--. -/.- .-. ./...- . .-. -.--/.--. --- .-- . .-. ..-. ..- .-..');
+let msg1 = new Message('--- -... .--- . -.-. - .../.. -./.--- .- ...- .- ... -.-. .-. .. .--. -/.- .-. ./...- . .-. -.--/.--. --- .-- . .-. ..-. ..- .-..');
 //console.log(msg1.toAlpha());
 //console.log(msg1.toMorse());
 
-var msg2 = new Message('I am learning how to use Objects in JavaScript');
+let msg2 = new Message('I am learning how to use Objects in JavaScript');
 //console.log(msg2.toMorse());
 //console.log(msg2.toAlpha());
