@@ -140,21 +140,21 @@ some of which contain a `monster`:
 let gameLevel = {
     name: 'Level 1',
     rooms: {
-        // Each room has a numeric ID
-        31343: {
+        // Each room has a unique ID
+        R31343: {
             name: 'Front Hallway'
         },
-        31344: {
+        R31344: {
             name: 'Kitchen',
             monster: {
                 name: 'Bear',
                 strength: 15
             } 
         },
-        31345: {
+        R31345: {
             name: 'Back Hallway'
         },
-        31346: {
+        R31346: {
             name: 'Sitting Room',
             monster: {
                 name: 'Dog',
@@ -169,27 +169,27 @@ When working this code, we can access a particular room by its `ID`:
 
 ```js
 // Get a reference to the Kitchen
-let room = gameLevel.rooms.31344;
+let room = gameLevel.rooms.R31344;
 ```
 
 However, we used an `ID` that doesn't exist, we'd get back `undefined`:
 
 ```js
 // Get a reference to the TV Room (no such room!)
-let room = gameLevel.rooms.31347; // <-- room is `undefined`
+let room = gameLevel.rooms.R31347; // <-- room is `undefined`
 ```
 
 If we then try to access the `monster` in that room, our program will crash:
 
 ```js
-let room = gameLevel.rooms.31347; // <-- room is `undefined`
+let room = gameLevel.rooms.R31347; // <-- room is `undefined`
 console.log(room.monster); // <-- crash! room is `undefined` so we can't access `monster within it
 ```
 
 JavaScript provides a few ways to deal with this problem.  Consider:
 
 ```js
-let room = gameLevel.rooms.31347;
+let room = gameLevel.rooms.R31347;
 
 // Version 1
 if(room) {
