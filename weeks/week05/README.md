@@ -13,7 +13,7 @@ Developing for the web requires at least 3 things pieces of software:
 
 1. a proper code editor which, is aware of HTML, JavaScript, and CSS
 1. a web client (i.e., browser), with developer and debugging tools
-1. a web server
+1. a web server, to serve your web pages over HTTP to a browser
 
 ### Code Editor
 
@@ -38,41 +38,41 @@ There are many more, and you are highly encouraged to install as many as possibl
 ### Web Server
 
 We will also need a **web server** to host our web pages and applications.  Installing
-and running a web server can be complicated.  Industry grade web servers like
+and running a web server can be complicated.  Industry-grade web servers like
 [Apache](http://httpd.apache.org/) and [nginx](https://www.nginx.com/) are free
 and can be installed and run on your local computer; however, they
 are much more complicated and powerful than anything we will need for hosting
 our initial web pages.
 
-For our purposes, we will use a simple node.js based http servers.  In order to
+For our purposes, we will use one of the many simple node.js based HTTP servers.  In order to
 use them, do the following:
 
 1. Make sure you have installed [node.js](https://nodejs.org/en/) on your computer.
 1. In a terminal window, navigate to the directory that you want your web server to host. For example `cd my-website`
-1. Now start the web server by running the following command: `npx lite-server`.
+1. Now download and run a web server using the [npx](https://docs.npmjs.com/cli/v7/commands/npx) command.
 
-This will download and run the necessary software, and show you a message like the following:
+For example, you can use the [serve](https://github.com/vercel/serve) web server like this:
 
+```sh
+cd my-website
+npx serve
+Need to install the following packages:
+  serve@14.2.1
+Ok to proceed? (y)
+
+   ┌──────────────────────────────────────────┐
+   │                                          │
+   │   Serving!                               │
+   │                                          │
+   │   - Local:    http://localhost:3000      │
+   │   - Network:  http://10.7.133.229:3000   │
+   │                                          │
+   │   Copied local address to clipboard!     │
+   │                                          │
+   └──────────────────────────────────────────┘
 ```
-Did not detect a `bs-config.json` or `bs-config.js` override file. Using lite-server defaults...
-** browser-sync config **
-{ injectChanges: false,
-  files: [ './**/*.{html,htm,css,js}' ],
-  watchOptions: { ignored: 'node_modules' },
-  server: { baseDir: './', middleware: [ [Function], [Function] ] } }
-[Browsersync] Access URLs:
- --------------------------------------
-       Local: http://localhost:3000
-    External: http://192.168.1.110:3000
- --------------------------------------
-          UI: http://localhost:3001
- UI External: http://localhost:3001
- --------------------------------------
-[Browsersync] Serving files from: ./
-[Browsersync] Watching files...
-```
 
-You can now open your web browser to `http://127.0.0.1:3000` and load your files.
+You can now open your web browser to `http://localhost:3000` and browser your files.
 This uses the `http` protocol, and connects you to the special IP address
 `127.0.0.1`, also known as [localhost](https://en.wikipedia.org/wiki/Localhost)
 (i.e., you can also use `http://localhost:3000`).  The localhost IP address always
@@ -83,30 +83,27 @@ machine.  The final `:3000` portion of the URL is a port number.  Together,
 *NOTE: the second External IP address will be different than the above, but 127.0.0.1 will always be correct.*
 
 When you are done testing your web site, stop the web server by pressing `CTRL-C`
-in your terminal window.  To run the server again, use `npx lite-server`.
-
-NOTE: a previous version of this document recommended using the command
-`npx http-server`.  This works well on macOS and Linux, but recently started to
-fail on Windows, see [this bug](https://github.com/http-party/http-server/issues/525).
+in your terminal window.  To run the server again, use `npx serve`.
 
 ## HTML
 
 HTML is the [HyperText Markup Language](https://en.wikipedia.org/wiki/HTML).  It
-allows us to write *content* in a document, just as we would in a file created by 
+allows us to write *content* in a document, just as we would in a file created by
 a word processor.  Unlike a regular text file, it also includes structural and
 layout information about this content.  We literally *mark up* the text of our
 document with extra information.
 
 When talking about HTML's markup, we'll often refer to the following terms:
 
-* [tag](https://developer.mozilla.org/en-US/docs/Glossary/Tag): separated from regular content, tags are special text (names) wrapped in `<` and `>` characters, for example the image tag `<img>`.
-* [element](https://developer.mozilla.org/en-US/docs/Glossary/Element): everything from an opening tag to the closing tag, for example: `<h1>Chapter 1</h1>`.  Here an element is made up of an `<h1>` tag (i.e., opening Heading 1 tag), the text content `Chapter 1`, and a closing `</h1>` tag.  These three together create an `h1` element in the document.
+* content: any text content you want to include can usually be written as-is.
+* [tag](https://developer.mozilla.org/en-US/docs/Glossary/Tag): separated from regular content, tags are special text (names) wrapped in `<` and `>` characters, for example the paragraph tab `<p>` or the image tag `<img>`.
+* [element](https://developer.mozilla.org/en-US/docs/Glossary/Element): everything from the beginning of an opening tag to the closing tag, for example: `<h1>Chapter 1</h1>`.  Here an element is made up of an `<h1>` tag (i.e., opening Heading 1 tag), the text content `Chapter 1`, and a closing `</h1>` tag.  These three components taken together create an `h1` element in the document.
 * [attribute](https://developer.mozilla.org/en-US/docs/Glossary/Attribute): optional characteristics of an element defined using the style `name` or `name="value"`, for example `<p id="error-message" hidden>There was an error downloading the file</p>`.  Here two attributes are included with the `p` element: an `id` with value `"error-message"` (in quotes), and the `hidden` attribute (note: not all attributes need to have a value).  [Full list of common attributes](https://developer.mozilla.org/en-US/docs/Web/HTML/Attributes).
 * [entity](https://developer.mozilla.org/en-US/docs/Glossary/Entity): special text that should not be confused for HTML markup.  Entities begin with `&` and end with `;`.  For example, if you need to use the `<` character in your document, you need to use `&lt;` instead, since `<` would be interpreted as part of an HTML tag. `&nbsp;` is a single whitespace and `&amp;` is the `&` symbol.  [Full list of named entities](https://dev.w3.org/html5/html-author/charref).
 
 ## HTML Document
 
-First [HTML page ever created](http://info.cern.ch/hypertext/WWW/TheProject.html) was
+The first [HTML page ever created](http://info.cern.ch/hypertext/WWW/TheProject.html) was
 built by [Tim Berners-Lee](https://en.wikipedia.org/wiki/Tim_Berners-Lee) on August 6, 1991.
 
 Since then, the web has gone through many versions:
@@ -136,10 +133,10 @@ Here's a basic HTML5 web page:
 
 Let's break this down and look at what's happening.
 
-1. [`<!doctype html>`](https://developer.mozilla.org/en-US/docs/Glossary/Doctype) tells the browser what kind of document this is, and how to interpret/render it
-2.  [`<html>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/html) the root element of our document: all other elements will be included with `<html>...</html>`.
-3. [`<head>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head) provides various information *about* the document as opposed to providing its content.  This is metadata that describes the document.
-4. [`<meta>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta) an example of some piece of metadata, in this case defining the [character set](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#Attributes) used in the document: [utf-8](https://en.wikipedia.org/wiki/UTF-8)
+1. [`<!doctype html>`](https://developer.mozilla.org/en-US/docs/Glossary/Doctype) tells the browser what kind of document this is (HTML5), and how to interpret/render it
+2.  [`<html>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/html) the root element of our document: all other elements will be included within `<html>...</html>`.
+3. [`<head>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head) provides various information *about* the document as opposed to providing its content.  This is metadata that describes the document to search engines, web browsers, and other tools.
+4. [`<meta>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta) an example of metadata, in this case defining the [character set](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta#Attributes) used in the document: [utf-8](https://en.wikipedia.org/wiki/UTF-8)
 5. [`<title>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/title) an example of a specific (named) metadata element: the document's title, shown in the browser's title bar.  There are a number of specific named metadata elements like this.
 6. [`<body>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/body) the content of the document is contained within `<body>...</body>`.
 7. `<!-- ... -->` a comment, similar to using `/* ... */` in C or JavaScript
@@ -148,13 +145,13 @@ Let's break this down and look at what's happening.
 Now let's try creating and loading this file in our browser:
 
 1. Make a directory on your computer called `my-website`
-1. Create a new file in `my-website` named `index.html`
+1. Create a new file in `my-website` named `index.html` (the `index.html` name is important, as it represents the main entry point to a directory of HTML files and other web resources)
 1. Use Visual Studio Code to open your `my-website/index.html` file
 1. Copy the HTML we just discussed above, and paste it into your editor
 1. Save your `index.html` file 
 1. In a terminal, navigate to your `my-website` directory
-1. Start a web server by typing `npx http-server`
-1. Open your web browser (Chrome, Firefox, etc) and enter `http://localhost:8080` in the URL bar
+1. Start a web server by typing `npx serve` (you must do this from **within** the `my-website` directory)
+1. Open your web browser (Chrome, Firefox, etc) and enter `http://localhost:3000` in the URL bar
 1. Make sure you can see a new page with `Hello World!` in black text.
 
 Now let's make a change to our document:
@@ -166,12 +163,13 @@ Now let's make a change to our document:
 
 Every time we update anything in our web page, we have to refresh the web page in our browser.
 The web server will serve the most recent version of the file on disk when it is
-requested.
+requested.  Web browsers and servers disconnect from one another after processing a request/response.
 
 ## Common HTML Elements
 
-There are dozens of [HTML elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) you'll learn
-and use, but the following is a good set to get you started.
+There are many [HTML elements](https://developer.mozilla.org/en-US/docs/Web/HTML/Element) you'll learn and use, but the following is a good initial set to get you started.
+
+You can see an example page that uses every HTML element [here](https://www.patrickweaver.net/blog/a-blog-post-with-every-html-element/).
 
 ### Metadata
 
@@ -180,6 +178,12 @@ Information *about* the document vs. the document's content goes in various [met
 * [`<link>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/link) - links from this document to external resources, such as CSS stylesheets
 * [`<meta>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta) - metadata that can't be included via other elements
 * [`<title>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/meta) - the document's title
+
+### Major Document Sections
+
+* [`<html>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/html) - the document's root element, containing all other elements
+* [`<head>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/head) - machine-readable metadata about the document
+* [`<body>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/body) - the document's content
 
 ### Content Sections
 
@@ -227,7 +231,7 @@ We create dynamic web content and applications through the use of scripting:
 
 * [`<script>`](https://developer.mozilla.org/en-US/docs/Web/HTML/Element/script) - used to embed executable code in a document, typically JavaScript.
 
-## Examples:
+## Examples
 
 * [Lists: ordered and unordered](list-example.html)
 * [Anchors: creating hyperlinks](anchor-example.html)
