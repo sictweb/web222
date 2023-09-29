@@ -233,7 +233,7 @@ function initGame(options = {}) {
 }
 
 // Define our options: we have a score and level, but no inventory 
-var options = {
+let options = {
     score: 25,
     level: 2
 };
