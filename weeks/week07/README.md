@@ -115,7 +115,7 @@ which is how we access the DOM in our code:
 
 ```js
 // Access the document object for our web page, which is in the current window
-var document = window.document;
+let document = window.document;
 ```
 
 > NOTE: since properties like `document` are available on the global `window` object, it is common to simply write `document` instead of `window.document`, since the global object is implied if no other scope is given.
@@ -125,16 +125,16 @@ well-known elements by name, for example:
 
 ```js
 // Get the value of the document's <title>
-var title = document.title;
+let title = document.title;
 
 // Return a reference to the document's <body> element
-var body = document.body;
+let body = document.body;
 
 // Return a list of all <a> elements in the document
-var hyperlinks = document.links;
+let hyperlinks = document.links;
 
 // Return a list of all the <img> elements in the document
-var images = document.images;
+let images = document.images;
 ```
 
 There are lots more.  We can easily experiment with these in the dev tools web console,
@@ -152,7 +152,7 @@ elements in our document:
     ```html
     <div id="menu">...</div>
     <script>
-        var menuDiv = document.getElementById('menu');
+        let menuDiv = document.getElementById('menu');
     </script>
     ```
 * [`document.querySelector(selectors)`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelector) - similar to `document.getElementById(id)`, but also allows querying the DOM using [CSS selectors](https://developer.mozilla.org/en-US/docs/Web/CSS/CSS_Selectors) for an element that doesn't have a unique id:
@@ -162,9 +162,9 @@ elements in our document:
     </div>
     <script>
         // We can specify we want to query by ID using a leading #
-        var menuDiv = document.querySelector('#menu');
+        let menuDiv = document.querySelector('#menu');
         // We can specify we want to query by CLASS name using a leading .
-        var para = document.querySelector('.formatted');
+        let para = document.querySelector('.formatted');
     </script>
     ```
 * [`document.querySelectorAll(selectors)`](https://developer.mozilla.org/en-US/docs/Web/API/Document/querySelectorAll) - similar to `document.querySelector(selector)`, but returns *all* elements that match the selectors as a [`NodeList`](https://developer.mozilla.org/en-US/docs/Web/API/NodeList):
@@ -176,7 +176,7 @@ elements in our document:
     </div>
     <script>
         // Get all <p> elements in the document as a list
-        var pElements = document.querySelectorAll('p');
+        let pElements = document.querySelectorAll('p');
         // Loop through all returned <p> elements in our list
         pElements.forEach(function(p) { 
             // p is one of the returned <p> elements
@@ -192,8 +192,8 @@ DOM methods:
 ```js
 // The following two lines of code do exactly the same thing.
 // NOTE the use of # to indicate `demo` is an id in the second example.
-var elem = document.getElementById('demo');
-var elem = document.querySelector('#demo');
+let elem = document.getElementById('demo');
+let elem = document.querySelector('#demo');
 ```
 
 ### Creating elements and Modifying the DOM with JavaScript
@@ -203,30 +203,30 @@ of methods that allow use to create new content:
 
 * [`document.createElement(name)`](https://developer.mozilla.org/en-US/docs/Web/API/Document/createElement) - creates and returns a new element of the type specified by `name`.
     ```js
-    var paragraphElement = document.createElement('p');
-    var imageElement = document.createElement('img');
+    let paragraphElement = document.createElement('p');
+    let imageElement = document.createElement('img');
     ```
 * [`document.createTextNode(text)`](https://developer.mozilla.org/en-US/docs/Web/API/Document/createTextNode) - creates a text node (the text within an element vs. the element itself).
     ```js
-    var textNode = document.createTextNode('This is some text to show in an element');
+    let textNode = document.createTextNode('This is some text to show in an element');
     ```
 
 These methods create the new nodes, but do not place them into the page.  To do that, we first need to find
-the correct position within the exsting DOM tree, and then add our new node.  We have to be clear *where* we want
+the correct position within the existing DOM tree, and then add our new node.  We have to be clear *where* we want
 the new element to get placed in the DOM.
 
 For example, if we want to place a node at the end of the `<body>`, we could use `.appendChild()`:
 
 ```js
-var paragraphElement = document.createElement('p');
+let paragraphElement = document.createElement('p');
 document.body.appendChild(paragraphElement);
 ```
 
 If we instead wanted to place it within an existing `<div id="content">`, we'd do this:
 
 ```js
-var paragraphElement = document.createElement('p');
-var contentDiv = document.querySelector('#content');
+let paragraphElement = document.createElement('p');
+let contentDiv = document.querySelector('#content');
 contentDiv.appendChild(paragraphElement);
 ```
 
@@ -237,9 +237,9 @@ We can also use `.insertBefore(new, old)` to accomplish something similar: add o
 the `old` (existing) node in the DOM:
 
 ```js
-var paragraphElement = document.createElement('p');
-var contentDiv = document.querySelector('#content');
-var firstDivParagraph = contentDiv.querySelector('p');
+let paragraphElement = document.createElement('p');
+let contentDiv = document.querySelector('#content');
+let firstDivParagraph = contentDiv.querySelector('p');
 contentDiv.insertBefore(paragraphElement, firstDivParagraph);
 ```
 
@@ -247,9 +247,9 @@ Removing a node is similar, and uses `removeChild()`:
 
 ```js
 // Remove a loading spinner
-var loadingSpinner = document.querySelector('#loading-spinner');
+let loadingSpinner = document.querySelector('#loading-spinner');
 // Get a reference to the loading spinner's parent element
-var parent = loadingSpinner.parentNode;
+let parent = loadingSpinner.parentNode;
 parent.removeChild(loadingSpinner);
 ```
 
@@ -258,11 +258,11 @@ parent.removeChild(loadingSpinner);
 1. Add a new heading to a document
     ```js
     // Create a new <h2> element
-    var newHeading = document.createElement('h2');
+    let newHeading = document.createElement('h2');
 
     // Add some text to the <h2> element we just created.
     // Similar to doing <h2>This is a heading</h2>.
-    var textNode = document.createTextNode('This is a heading');
+    let textNode = document.createTextNode('This is a heading');
     // Add the textNode to the heading's child list
     newHeading.appendChild(textNode);
 
@@ -274,13 +274,13 @@ parent.removeChild(loadingSpinner);
     <div id="demo"></div>
     <script>
         // Create a <p> element
-        var pElem = document.createElement('p');
+        let pElem = document.createElement('p');
 
         // Use .innerHTML to create text nodes inside our <p>...</p>
         pElem.innerHTML = 'This is a paragraph.';
 
         // Get a reference to our <div> with id = demo
-        var demoDiv = document.querySelector('#demo');
+        let demoDiv = document.querySelector('#demo');
 
         // Append our <p> element to the <div>
         demoDiv.appendChild(pElem);
@@ -297,8 +297,8 @@ work with it.
 * `element.id` - the `id` of the element.  For example: `<p id="intro"></p>` has an `id` of `"intro"`. 
 * `element.innerHTML` - gets or sets the markup contained within the element, which could be text, but could also include other HTML tags.
 * `element.parentNode` - gets a reference to the parent `node` of this element in the DOM.
-* `element.nextSibling` - gets a refernce to the sibling element of this element, if any.
-* `element.className` - gets or sets the value of the `class` attribute for the elmenet.
+* `element.nextSibling` - gets a reference to the sibling element of this element, if any.
+* `element.className` - gets or sets the value of the `class` attribute for the element.
 
 ### [Element Methods](https://developer.mozilla.org/en-US/docs/Web/API/Element#Methods)
 
@@ -321,9 +321,9 @@ work with it.
     </div>
     <script>
         // Try to save the file, and 
-        var error = saveFile(); 
+        let error = saveFile(); 
         if(error) {
-            var elem = document.querySelector('#error-message');
+            let elem = document.querySelector('#error-message');
             elem.removeAttribute('hidden');
         }
     </script>
@@ -331,7 +331,7 @@ work with it.
 1. Insert a user's profile picture into the page
     ```js
     // Insert the user's picture (e.g., in response to hovering over a username)
-    var profilePic = document.createElement('img');
+    let profilePic = document.createElement('img');
 
     // Set attributes via getters/setters on the element vs. attributes
     profilePic.id = 'user-' + username;
@@ -347,7 +347,7 @@ work with it.
 1. Add new paragraph elements to a div
     ```js
     // Use .innerHTML as a getter and setter to update some text
-    var elem = document.querySelector('#text');
+    let elem = document.querySelector('#text');
 
     elem.innerHTML = '<p>This is a paragraph</p>';
     elem.innerHTML = elem.innerHTML + '<p>This is another paragraph</p>';
@@ -379,7 +379,7 @@ action to occur.  DOM events have a `name` we use to refer to them in code.
 We can register a DOM event handler for a given event in one of two ways: 
 
 1. `element.onevent = function(e) {...};`
-1. `element.addEventListener('event', function(e) {...})` and `element.removEventListener('event', function(e) {...})`
+1. `element.addEventListener('event', function(e) {...})` and `element.removeEventListener('event', function(e) {...})`
 
 In both cases above, we first need an HTML element.  Events are emitted to a *target* element.
 Elements in the DOM can trigger one or more events, and we must know the name of the event we want
@@ -397,7 +397,7 @@ exist.
 Consider the following code:
 
 ```js
-var body = document.body;
+let body = document.body;
 
 function handleClick(e) {
     // Process the click event
@@ -427,7 +427,7 @@ work when she clicks it.
 <button id='btn-save'>Save</button>
 <script>
     // Get a reference to our Save <button>
-    var saveBtn = document.querySelector('#btn-save');
+    let saveBtn = document.querySelector('#btn-save');
 
     function save() {
         // Save the user's work
@@ -452,7 +452,7 @@ it gets clicked):
 <button id='btn-save'>Save</button>
 <script>
     // Get a reference to our Save <button>
-    var saveBtn = document.querySelector('#btn-save');
+    let saveBtn = document.querySelector('#btn-save');
 
     // Register first event handler on the save button's click event
     saveBtn.addEventListener('click', function(e) {
@@ -506,7 +506,7 @@ For example, if we wanted to use the `mouseout` event on an element:
 ```html
 <div id="map">...</div>
 <script>
-    var map = document.querySelector('map');
+    let map = document.querySelector('map');
 
     // Method 1: register a single event handler via the on* property
     map.onmouseout = function(e) {
@@ -552,7 +552,7 @@ Here's an example showing how to use these:
         e.stopPropagation();
 
         // Get a reference to the <button> element
-        var btn = e.target;
+        let btn = e.target;
         
         // Change the text of the button
         btn.innerHTML = "You clicked Me!"
@@ -569,8 +569,8 @@ gives extra detail whenever a click, mouse move, etc. event occurs:
 <script>
     document.body.addEventListener('click', function(e) {
         // Get extra info about this mouse event so we know where the pointer was
-        var x = e.screenX;
-        var y = e.screenY;
+        let x = e.screenX;
+        let y = e.screenY;
 
         // Display co-ordinates where the mouse was clicked: "Position (300, 342)"
         document.querySelector('#position').innerHTML = `Position (${x}, ${y})`
@@ -594,9 +594,9 @@ Here's an example of using an `interval` to update a web page with the current d
 <button id="btn-start">Start Timer</button>
 <button id="btn-end">End Timer</button>
 <script>
-    var startButton = document.querySelector('#btn-start');
-    var endButton = document.querySelector('#btn-end');
-    var timerId;
+    let startButton = document.querySelector('#btn-start');
+    let endButton = document.querySelector('#btn-end');
+    let timerId;
 
     // When the user clicks Start, start our timer
     startButton.onclick = function(e) {
@@ -605,12 +605,12 @@ Here's an example of using an `interval` to update a web page with the current d
             return;
         }
 
-        var currentDate = document.querySelector('#current-date');
+        let currentDate = document.querySelector('#current-date');
         currentDate.removeAttribute('hidden');
 
         // Start our timer to update every 1000ms (1s), showing the current date/time.
         timerId = setInterval(function() {
-            var now = new Date();
+            let now = new Date();
             currentDate.innerHTML = now.toLocaleString();
         }, 1000);
     };
@@ -663,7 +663,7 @@ events, and JavaScript to create an interactive web page.
 
     ```js
     window.onload = function() {
-        var img = document.getElementById('cat-picture');
+        let img = document.getElementById('cat-picture');
         img.src = 'https://upload.wikimedia.org/wikipedia/commons/c/c1/Six_weeks_old_cat_%28aka%29.jpg';
     };
     ```
@@ -673,7 +673,7 @@ events, and JavaScript to create an interactive web page.
 
     ```js
     function loadCatPicture() {
-        var img = document.getElementById('cat-picture');
+        let img = document.getElementById('cat-picture');
         img.src = 'https://cataas.com/cat';
     }
 
@@ -683,22 +683,22 @@ events, and JavaScript to create an interactive web page.
 
     ```js
     function loadCatPicture() {
-        var img = document.getElementById('cat-picture');
+        let img = document.getElementById('cat-picture');
         img.src = 'https://cataas.com/cat';
     }
 
     window.onload = function() {
         loadCatPicture();
 
-        // Call the loadCatPicture function again in 5000ms
-        setTimeout(loadCatPicture, 5 * 1000 /* 5s = 5000ms */);
+        // Call the loadCatPicture function again in 5s
+        setTimeout(loadCatPicture, 5 * 1_000 /* 5s = 5000ms */);
     };
     ```
 1. Rewrite `script.js` to update the picture every 15 seconds, forever:
 
     ```js
     function loadCatPicture() {
-        var img = document.getElementById('cat-picture');
+        let img = document.getElementById('cat-picture');
         img.src = 'https://cataas.com/cat';
     }
 
@@ -706,14 +706,14 @@ events, and JavaScript to create an interactive web page.
         loadCatPicture();
 
         // Call the loadCatPicture function every 15000ms
-        setInterval(loadCatPicture, 15 * 1000 /* 15s = 15000ms */);
+        setInterval(loadCatPicture, 15 * 1_000 /* 15s = 15000ms */);
     };
     ```
 1. Rewrite `script.js` to update the picture only when the user clicks somewhere in the window:
 
     ```js
     function loadCatPicture() {
-        var img = document.getElementById('cat-picture');
+        let img = document.getElementById('cat-picture');
         img.src = 'https://cataas.com/cat';
     }
 
@@ -735,26 +735,26 @@ events, and JavaScript to create an interactive web page.
 
     ```js
     function loadCatPicture() {
-        var img = document.getElementById('cat-picture');
+        let img = document.getElementById('cat-picture');
         img.src = 'https://cataas.com/cat';
     }
 
-    var poemText = document.getElementById('poem-text');
+    let poemText = document.getElementById('poem-text');
     poemText.onclick = loadCatPicture;
     ```
 1. Rewrite `script.js` to also load the picture only when the user presses a key on the keyboard:
 
     ```js
     function loadCatPicture() {
-        var img = document.getElementById('cat-picture');
+        let img = document.getElementById('cat-picture');
         img.src = 'https://cataas.com/cat';
     }
 
-    var poemText = document.getElementById('poem-text');
+    let poemText = document.getElementById('poem-text');
     poemText.onclick = loadCatPicture;
 
     window.onkeypress = function(event) {
-        var keyName = event.key;
+        let keyName = event.key;
         console.log('Key Press event', keyName);
         loadCatPicture();
     };
@@ -763,15 +763,15 @@ events, and JavaScript to create an interactive web page.
 
     ```js
     function loadCatPicture() {
-        var img = document.getElementById('cat-picture');
+        let img = document.getElementById('cat-picture');
         img.src = 'https://cataas.com/cat';
     }
 
-    var poemText = document.getElementById('poem-text');
+    let poemText = document.getElementById('poem-text');
     poemText.onclick = loadCatPicture;
 
     window.onkeypress = function(event) {
-        var keyName = event.key;
+        let keyName = event.key;
         console.log('Key Press event', keyName);
 
         switch(keyName) { 
@@ -792,25 +792,25 @@ events, and JavaScript to create an interactive web page.
 
     ```js
     function loadCatPicture(filter) {
-        var url = 'https://cataas.com/cat';
-        var img = document.getElementById('cat-picture');
+        let url = 'https://cataas.com/cat';
+        let img = document.getElementById('cat-picture');
 
         // If the function is called with a filter argument, add that to URL
         if (filter) {
             console.log('Using cat picture filter', filter);
-            url += '?filter=' + filter
+            url += `?filter=${filter}`
         }
 
         img.src = url;
     }
 
-    var poemText = document.getElementById('poem-text');
+    let poemText = document.getElementById('poem-text');
     poemText.onclick = function() {
         loadCatPicture();
     };
 
     window.onkeypress = function(event) {
-        var keyName = event.key;
+        let keyName = event.key;
         console.log('Key Press event', keyName);
 
         switch(keyName) { 
@@ -837,8 +837,8 @@ events, and JavaScript to create an interactive web page.
     // Demonstrate using a closure, and use an immediately executing function to hide
     // an `isLoading` variable (i.e., not global), which will keep track of whether
     // or not an image is being loaded, so we can ignore repeated requests.
-    var loadCatPicture = (function() {
-        var isLoading = false;
+    let loadCatPicture = (function() {
+        let isLoading = false;
 
         // This is the function that will be bound to loadCatPicture in the end.
         return function(filter) {
@@ -847,7 +847,7 @@ events, and JavaScript to create an interactive web page.
                 return;
             }
 
-            var img = document.getElementById('cat-picture');
+            let img = document.getElementById('cat-picture');
             
             function finishedLoading() {
                 isLoading = false;
@@ -861,7 +861,7 @@ events, and JavaScript to create an interactive web page.
             img.onerror = finishedLoading;
 
             // If the function is called with a filter argument, add that to URL
-            var url = 'https://cataas.com/cat';
+            let url = 'https://cataas.com/cat';
 
             // Add something unique (and meaningless) to the query string, so the browser
             // won't cache this URL, but always load it again
@@ -878,7 +878,7 @@ events, and JavaScript to create an interactive web page.
         };
     })();
 
-    var poemText = document.getElementById('poem-text');
+    let poemText = document.getElementById('poem-text');
     poemText.onclick = function() {
         loadCatPicture();
     };
