@@ -7,17 +7,23 @@ function calculateArea(r) {
 function roll(sides = 6) {
   return Math.floor(Math.random() * sides) + 1;
 }
-
 // 3. Write a function that converts values in Celcius to Farenheit.
 function convert(temp, scale = "C") {
   if (scale === "C") {
-    return temp * 9/5 + 32 + " F";
-  } else if (scale === "F") {
-    return (temp - 32) * 5/9 + " C";
+    return (temp * 9) / 5 + 32 + " F";
   }
 }
 
-// 4. Function taking any number of arguments (`Number`s), returning `true` if they are all less than 50.
+// 4. Write a function that converts values between  Celcius and  Farenheit.
+function convert(temp, scale = "C") {
+  if (scale === "C") {
+    return (temp * 9) / 5 + 32 + " F";
+  } else if (scale === "F") {
+    return ((temp - 32) * 5) / 9 + " C";
+  }
+}
+
+// 5. Function taking any number of arguments (`Number`s), returning `true` if they are all less than 50.
 function isUnder50() {
   for (let i = 0; i < arguments.length; i++) {
     if (arguments[i] >= 50) {
@@ -27,7 +33,7 @@ function isUnder50() {
   return true;
 }
 
-// 5. Function allowing any number of arguments (`Number`s), returning their sum.
+// 6. Function allowing any number of arguments (`Number`s), returning their sum.
 function sum() {
   let total = 0;
   for (let i = 0; i < arguments.length; i++) {
@@ -36,7 +42,7 @@ function sum() {
   return total;
 }
 
-// 6. Function allowing any number of arguments of any type, returns `true` only if none of the arguments is falsy.
+// 7. Function allowing any number of arguments of any type, returns `true` only if none of the arguments is falsy.
 function allExist() {
   for (let i = 0; i < arguments.length; i++) {
     if (!arguments[i]) {
@@ -46,32 +52,32 @@ function allExist() {
   return true;
 }
 
-// 7. Function to create a JavaScript library name generator.
+// 8. Function to create a JavaScript library name generator.
 function generateName(name) {
   return `${name}.js`;
 }
 
-// 8. Function to check if a number is a multiple of 3.
+// 9. Function to check if a number is a multiple of 3.
 function isMultipleOfThree(num) {
   return num % 3 === 0;
 }
 
-// 9. Check if a number is between two other numbers.
+// 10. Check if a number is between two other numbers.
 function checkBetween(num, lower, upper, inclusive = false) {
   return inclusive ? num >= lower && num <= upper : num > lower && num < upper;
 }
 
-// 10. Function to calculate the HST (13%) on a purchase amount.
+// 11. Function to calculate the HST (13%) on a purchase amount.
 function calculateHST(amount) {
   return amount * 0.13;
 }
 
-// 11. Function to subtract a discount % from a total.
+// 12. Function to subtract a discount % from a total.
 function applyDiscount(total, discount = 0) {
-  return total - (total * (discount / 100));
+  return total - total * (discount / 100);
 }
 
-// 12. Function that takes a number of seconds as a `Number`, returning a `String`.
+// 13. Function that takes a number of seconds as a `Number`, returning a `String`.
 function formatTime(seconds) {
   const days = Math.floor(seconds / (24 * 60 * 60));
   seconds %= 24 * 60 * 60;
@@ -81,7 +87,7 @@ function formatTime(seconds) {
   return `${days} Days, ${hours} Hours, ${minutes} Minutes`;
 }
 
-// 13. Modify your solution above to only include units that make sense.
+// 14. Modify your solution above to only include units that make sense.
 function formatTimeProperly(seconds) {
   const days = Math.floor(seconds / (24 * 60 * 60));
   seconds %= 24 * 60 * 60;
@@ -95,7 +101,7 @@ function formatTimeProperly(seconds) {
   return result;
 }
 
-// 14. Function that takes any number of arguments (`Number`s), and returns them in reverse order.
+// 15. Function that takes any number of arguments (`Number`s), and returns them in reverse order.
 function flip() {
   let result = "";
   for (let i = arguments.length - 1; i >= 0; i--) {
@@ -104,12 +110,12 @@ function flip() {
   return result;
 }
 
-// 15. Function that takes two `Number`s and returns their sum as an `Integer`.
+// 16. Function that takes two `Number`s and returns their sum as an `Integer`.
 function intSum(num1, num2) {
   return Math.floor(num1 + num2);
 }
 
-// 16. Function that returns the number of matches found for the first argument in the remaining arguments.
+// 17. Function that returns the number of matches found for the first argument in the remaining arguments.
 function findMatches(match) {
   let count = 0;
   for (let i = 1; i < arguments.length; i++) {
@@ -120,7 +126,7 @@ function findMatches(match) {
   return count;
 }
 
-// 17. Function to log all arguments larger than `255`.
+// 18. Function to log all arguments larger than `255`.
 function showOutsideByteRange() {
   for (let i = 0; i < arguments.length; i++) {
     if (arguments[i] > 255) {
@@ -129,12 +135,12 @@ function showOutsideByteRange() {
   }
 }
 
-// 18. Function that takes a `String` and returns its value properly encoded for use in a URL.
+// 19. Function that takes a `String` and returns its value properly encoded for use in a URL.
 function prepareString(str) {
   return encodeURIComponent(str);
 }
 
-// 19. Using the previous function, write an enclosing function that takes any number of `String` arguments.
+// 20. Using the previous function, write an enclosing function that takes any number of `String` arguments.
 function buildQueryString() {
   let result = "?";
   for (let i = 0; i < arguments.length; i++) {
@@ -146,7 +152,7 @@ function buildQueryString() {
   return result;
 }
 
-// 20. Function that takes a `Function` followed by any number of `Number`s, and applies the function to all the numbers.
+// 21. Function that takes a `Function` followed by any number of `Number`s, and applies the function to all the numbers.
 function applyFn(fn) {
   let total = 0;
   for (let i = 1; i < arguments.length; i++) {
